@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name" : "Get Your Facts Straight",
 	"version" : "1.0",
-	"permissions": ["activeTab","declarativeContent","storage"],
+	"permissions": ["activeTab","declarativeContent","storage","tabs","<all_urls>"],
 	"description": "Automated Fact Checker",
 	"browser_action": {
 	
