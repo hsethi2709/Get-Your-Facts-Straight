@@ -4,8 +4,17 @@ chrome.tabs.executeScript( {
 }, function(selection) {
 
 	url='http://localhost:5000/index?sentence='.concat(selection[0])
-	fetch(url);
-	document.getElementById("sentence").innerHTML = selection[0];
+	fetch(url)
+	.then(function(response) {
+		if (response.status !== 200) {
+			console.log(`Looks like there was a problem. Status code: ${response.status}`);
+			return;
+		}
+
+		response.json().then(function(data) {
+			document.getElementById("sentence").innerHTML = data['message'];
+		});
+	});
 });
 }
 
