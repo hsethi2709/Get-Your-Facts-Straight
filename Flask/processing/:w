@@ -1,0 +1,237 @@
+import sys
+import documentprocessing as docp
+import xapian
+import json
+import spacy
+from nltk.corpus import wordnet as wn
+from nltk.metrics import edit_distance
+
+# to clean the sentence and extract useful entities
+def get_cleaned_entities(doc):
+    print(doc)
+    entities = []
+    brackets = ['-RRB-', '-LRB-', '-LSB-','-RSB-','-COLON','-COLON-','COLON-']
+    for token in doc:
+        if token.is_stop or token.pos_ == 'PUNCT'or token.text in brackets:
+            continue
+        verbs = []
+        if token.pos_ == 'VERB':
+            for possible_subject in token.children:
+                if possible_subject.dep_ == 'nsubj'or 'nsubjpass':
+                    verbs.append(token.text)
+                    break
+        entities.extend(verbs)
+
+        if token.pos_ in ["NOUN", "PROPN"]:
+            comps = [j for j in token.children if j.dep_ == "compound"]
+            if comps:
+                ent = ''
+                for word in comps:
+                    if word.text in brackets:
+                        continue
+                    if word.text in entities:
+                        entities.remove(word.text)
+                    ent += word.text
+                    ent += ' '
+                ent = ent + token.text
+                entities.append(ent)
+            else:
+                entities.append(token.text)
+
+    return set(entities)
+
+# to check the similarity between two sentences
+
+def path(set1, set2):
+    return wn.path_similarity(set1, set2)
+
+
+def wup(set1, set2):
+    return wn.wup_similarity(set1, set2)
+
+
+def edit(word1, word2):
+    if float(edit_distance(word1, word2)) == 0.0:
+        return 0.0
+    return 1.0 / float(edit_distance(word1, word2))
+
+def computePath(q1, q2):
+
+    R = np.zeros((len(q1), len(q2)))
+
+    for i in range(len(q1)):
+        for j in range(len(q2)):
+            if q1[i][1] == None or q2[j][1] == None:
+                sim = edit(q1[i][0], q2[j][0])
+            else:
+                sim = path(wn.synset(q1[i][1]), wn.synset(q2[j][1]))
+
+            if sim == None:
+                sim = edit(q1[i][0], q2[j][0])
+
+            R[i, j] = sim
+
+    return R
+
+def overallSim(q1, q2, R):
+
+    sum_X = 0.0
+    sum_Y = 0.0
+
+    for i in range(len(q1)):
+        max_i = 0.0
+        for j in range(len(q2)):
+            if R[i, j] > max_i:
+                max_i = R[i, j]
+        sum_X += max_i
+
+    for i in range(len(q1)):
+        max_j = 0.0
+        for j in range(len(q2)):
+            if R[i, j] > max_j:
+                max_j = R[i, j]
+        sum_Y += max_j
+
+    if (float(len(q1)) + float(len(q2))) == 0.0:
+        return 0.0
+
+    overall = (sum_X + sum_Y) / (2 * (float(len(q1)) + float(len(q2))))
+
+    return overall
+
+def computeWup(q1, q2):
+
+    R = np.zeros((len(q1), len(q2)))
+
+    for i in range(len(q1)):
+        for j in range(len(q2)):
+            if q1[i][1] == None or q2[j][1] == None:
+                sim = edit(q1[i][0], q2[j][0])
+            else:
+                sim = wup(wn.synset(q1[i][1]), wn.synset(q2[j][1]))
+
+            if sim == None:
+                sim = edit(q1[i][0], q2[j][0])
+
+            R[i, j] = sim
+
+    return R
+def check_number(sent):
+    for token in sent:
+        if token.pos == 'NUM':
+            return True
+    return False
+
+def similar_sentence(claim, sent):
+    num_claim_flag = False
+    num_sent_flag = False
+    claim_doc = nlp(claim)
+    sent_doc = nlp(sent[0])
+    claim_tokens = {}
+    sent_tokens = {}
+
+    # checking for number
+    num_claim_flag = check_number(claim_doc)
+    num_sent_flag = check_number(sent_doc)
+    if num_claim_flag == True:
+        if not num_sent_flag:
+            return False
+    
+    claim_tokens = get_cleaned_entities(claim_doc)
+    sent_tokens = get_cleaned_entities(sent_doc)
+    print("Claim_tokens:",claim_tokens)
+    print("Sent_tokens:", sent_tokens)
+    claim_mean = []
+    for token in claim_tokens:
+        claim_mean.append([token,wn.synsets(token)[0]])
+    sent_mean = []
+    for token in sent_tokens:
+        sent_mean.append([token,wn.synsets(token)[0]])
+    
+    print(claim_mean)
+    print(sent_mean)
+
+    #R1 = computePath(claim_mean, sent_mean)
+    #R2 = computeWup(claim_mean, sent_mean)
+    
+
+    #R = (R1+R2) / 2
+    #print ( overallSim(claim_tokens, sent_tokens, R)
+
+    return True
+
+
+#initial set up for database, dataset
+
+nlp = spacy.load("en_core_web_sm") 
+source_file = open(sys.argv[1])
+dataset = json.load(source_file)
+keys_run=list(dataset.keys())
+database = xapian.Database(sys.argv[2])
+enquire = xapian.Enquire(database)
+
+# counter values
+count = 0
+total = 0
+total_evidence = 0
+total_filtered_evidence = 0
+filtered_count = 0 
+filtered_total = 0
+
+for dset in keys_run:
+    gold_label = dataset[dset]['label'] if 'label' in dataset[dset] else ''
+    gold_evidence = dataset[dset]['evidence'] if 'evidence' in dataset[dset] else ''
+    claim=dataset[dset]['claim']
+    print("$$$$$$$$$CLAIM: ", claim)
+    print("$$$$$$$$$KEY: ", dset)
+    if 'label' in dataset[dset]:
+        print("$$$$$$Label: ", gold_label)
+    else:
+        label='TEST SET'
+    doc = docp.DocumentProcessing(nlp)
+    pdoc=doc.process_text(claim)
+    best_sentence=pdoc.run_xapian_query(enquire, database)
+    print("Gold Evidence", gold_evidence, len(gold_evidence))
+
+    # Stats for best Sentences without filtering
+
+    print("Evidences", len(best_sentence))
+    total_evidence += len(best_sentence)
+    if (gold_label != "NOT ENOUGH INFO"):
+        check_gold = [item for item in best_sentence if item[1] in gold_evidence]
+        print("Evidence Length", len(check_gold))
+        if (len(check_gold) > 0):
+            count += 1
+            total +=1
+        else:
+            total +=1
+        print(count, total)
+        print("Average Evidences per claim", total_evidence/total)
+
+    #sending each sentence for filtering
+
+    filtered_best_sentences = []
+    for sentence in best_sentence:
+        result = similar_sentence(claim,sentence) 
+        if result:
+            filtered_best_sentences.append(sentence)
+
+    # Stats for filtered sentences
+
+    print("----------Filtered Sentences Stats---------")
+    print("Evidences", len(filtered_best_sentences))
+    
+    total_filtered_evidence += len(filtered_best_sentences)
+    if (gold_label != "NOT ENOUGH INFO"):
+        check_gold = [item for item in filtered_best_sentences if item[1] in gold_evidence]
+        print("Evidence Length", len(check_gold))
+        if (len(check_gold) > 0):
+            filtered_count += 1
+            filtered_total +=1
+        else:
+            filtered_total +=1
+        print(filtered_count, filtered_total)
+        print("Average Evidences per claim", total_filtered_evidence/filtered_total)
+
+
+
