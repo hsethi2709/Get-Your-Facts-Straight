@@ -2,15 +2,19 @@
 	"manifest_version": 2,
 	"name" : "Get Your Facts Straight",
 	"version" : "1.0",
-	"permissions": ["activeTab","declarativeContent","storage","tabs","<all_urls>"],
+	"permissions": ["contextMenus","activeTab","declarativeContent","storage","tabs","<all_urls>"],
 	"description": "Automated Fact Checker",
+	"background": { 
+		"scripts": ["eventPage.js"],
+		"persistent": false
+	},
 	"browser_action": {
 	
 		"default_icon": {
-			"16": "images/get_started16.png",
-			"32": "images/get_started32.png",
-			"48": "images/get_started48.png",
-			"128": "images/get_started128.png"},
+			"16": "images/icon.png",
+			"32": "images/icon.png",
+			"48": "images/icon.png",
+			"128": "images/icon.png"},
 				
 		"default_title" : "Get Your Facts Straight",
 		"default_popup" : "popup.html"
