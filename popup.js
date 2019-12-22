@@ -13,7 +13,7 @@ chrome.tabs.executeScript( {
 	document.body.appendChild(div);
 	// making fact check button invisible
 	document.getElementById("fact_check").style.visibility='hidden'
-	url='http://172.26.38.187/index?sentence='.concat(selection[0])
+	url='https://45.113.232.191//index?sentence='.concat(selection[0])
 	fetch(url)
 	.then(function(response) {
 		if (response.status !== 200) {
