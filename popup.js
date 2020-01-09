@@ -1,3 +1,33 @@
+function start(){
+	chrome.storage.local.get('signed_in', function(data){
+		console.log("The current value is:", data.signed_in)
+	});
+	chrome.storage.local.get('signed_in', function(data) {
+    if (data.signed_in) {
+		console.log("Inside Truth")
+		  // document.getElementById("main").innerHTML = document.getElementById("level").innerHTML;
+		document.getElementById('login').style.display = "none";
+		document.getElementById('level').style.display = "block";
+		
+    } else {
+		// document.getElementById("main").innerHTML = document.getElementById("login").innerHTML;
+		document.getElementById('login').style.display = "block";
+		document.getElementById('level').style.display = "none";
+
+    }
+  });
+}
+start();
+document.getElementById('login').addEventListener("click", function(){
+	chrome.storage.local.set({signed_in: true})
+	start();
+	
+  });
+document.getElementById("logout_button").addEventListener('click', function(){
+	chrome.storage.local.set({signed_in: false})
+	start();
+});
+// Retrieving Selected Text and calling the API for the response  
 function getText() {
 chrome.tabs.executeScript( {
 	code: "window.getSelection().toString();"
@@ -6,14 +36,16 @@ chrome.tabs.executeScript( {
 	document.getElementById("sentence").innerHTML = "Please select a sentence to fact check";
 	}
 	else{
+
 	// Add loading animation
 	const div = document.createElement('div');
 	div.setAttribute("id","loader");
 	div.setAttribute("class","loader");
 	document.body.appendChild(div);
+
 	// making fact check button invisible
 	document.getElementById("fact_check").style.visibility='hidden'
-	url='https://45.113.232.191//index?sentence='.concat(selection[0])
+	url='http://www.getfactcheck.me/index?sentence='.concat(selection[0])
 	fetch(url)
 	.then(function(response) {
 		if (response.status !== 200) {
@@ -45,5 +77,10 @@ chrome.tabs.executeScript( {
 	}});
 }
 
-document.getElementById('fact_check').addEventListener('click',getText);
 
+document.getElementById('fact_check').addEventListener('click',getText);
+document.getElementById('level1').addEventListener('click', function(){
+	document.getElementById('level').style.display = "none";
+	document.getElementById('experiment').style.display = "block";
+	document.getElementById('feedback').style.display = "block";
+});

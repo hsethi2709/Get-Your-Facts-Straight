@@ -48,23 +48,60 @@
 body {
     min-width:300px;
 }
-</style>
+#title
+{
+  text-align: center;
+}
 
+</style>
+<head>
+  <script src="https://kit.fontawesome.com/13b884fbe0.js" crossorigin="anonymous"></script>
+</head>
 <body>
 	<div>
-<h2 id="sentence">Welcome to the Fact Checker!</h2>
-<p id="claim"></p>
-<h3 id="evidence_head" style="visibility: hidden">Evidences</h3>
-<ul></ul>
-<div id="feedback" style="display:none">
-<p>How satisfied are you?</p>
-<div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-</div>
-</div>
-<button id="fact_check">Check the Fact</button>
+    <h2 id="title">Get Fact Check</h2>
+    <div id="login" style="display: none;">
+      Participant ID:<br>
+      <input type="text" name= "pid">
+      <br>
+      <br>
+      Age:<br>
+      <input type="number" name= "age">
+      <br>
+      <br>
+      <input type="submit" value="Login" id="login">
+      <i class="fas fa-arrow-circle-right"></i>
+    </div>
+    <div id="level" style="display: none;">
+      <h2 id="sentence">Select the level of experiment</h2>
+      <br>
+        <input type="button" id="level1" value="Level 1">
+        <input type="button" id="level2" value="Level 2">
+        <input type="button" id="level3" value="Level 3">
+        <input type="button" id="level4" value="Level 4">
+      <br>
+      <input type="submit" value="Logout" id="logout_button">
+      <br>
+    </div>
+    <div id="experiment" style="display: none;">
+      <h2 id="sentence"></h2>
+      <p id="claim"></p>
+      <h3 id="evidence_head" style="visibility: hidden">Evidences</h3>
+      <ul></ul>
+        <div id="feedback" style="display:none">
+          <p>How satisfied are you?</p>
+            <div class="slidecontainer">
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+            <i class="fas fa-thumbs-up"></i><i class="fas fa-thumbs-down"></i>
+        </div>
+        <button id="fact_check">Check the Fact</button>
+    </div>
+
+
 <script src="popup.js"></script>
-	</div>
+
+  </div>
 
 </body>
 

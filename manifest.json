@@ -8,6 +8,7 @@
 		"scripts": ["eventPage.js"],
 		"persistent": false
 	},
+	"content_security_policy": "script-src https://kit.fontawesome.com/13b884fbe0.js 'self' ; object-src 'self'",
 	"browser_action": {
 	
 		"default_icon": {
