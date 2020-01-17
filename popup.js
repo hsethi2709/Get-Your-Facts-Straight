@@ -1,16 +1,14 @@
+// dynamic changing of html content
 function start(){
-	chrome.storage.local.get('signed_in', function(data){
+	chrome.storage.sync.get('signed_in', function(data){
 		console.log("The current value is:", data.signed_in)
 	});
-	chrome.storage.local.get('signed_in', function(data) {
+	chrome.storage.sync.get('signed_in', function(data) {
     if (data.signed_in) {
-		console.log("Inside Truth")
-		  // document.getElementById("main").innerHTML = document.getElementById("level").innerHTML;
 		document.getElementById('login').style.display = "none";
 		document.getElementById('level').style.display = "block";
 		
     } else {
-		// document.getElementById("main").innerHTML = document.getElementById("login").innerHTML;
 		document.getElementById('login').style.display = "block";
 		document.getElementById('level').style.display = "none";
 
@@ -18,15 +16,7 @@ function start(){
   });
 }
 start();
-document.getElementById('login').addEventListener("click", function(){
-	chrome.storage.local.set({signed_in: true})
-	start();
-	
-  });
-document.getElementById("logout_button").addEventListener('click', function(){
-	chrome.storage.local.set({signed_in: false})
-	start();
-});
+console.log(pid)
 // Retrieving Selected Text and calling the API for the response  
 function getText() {
 chrome.tabs.executeScript( {
@@ -70,17 +60,47 @@ chrome.tabs.executeScript( {
 			}
 			document.getElementById("sentence").innerHTML = "Result: "+data.label;
 			document.getElementById("feedback").style.display='block';
-			//document.getElementById("sentence").innerHTML = "Message Received:"+data.evidence;
 
 		});
 	});
 	}});
 }
 
-
+// click events
 document.getElementById('fact_check').addEventListener('click',getText);
 document.getElementById('level1').addEventListener('click', function(){
 	document.getElementById('level').style.display = "none";
 	document.getElementById('experiment').style.display = "block";
 	document.getElementById('feedback').style.display = "block";
+});
+document.getElementById('login_button').addEventListener("click", function(){
+	chrome.storage.sync.set({signed_in: true})
+	pid = document.getElementById('pid').value;
+	age = document.getElementById('age').value;
+	console.log("PID and AGE are:", pid, age)
+	if (pid == "" || pid == null){
+		document.getElementById('pid').focus();
+	}
+	else if (age == "" || age == null){
+		document.getElementById('age').focus();
+	}
+	else{
+	chrome.storage.sync.set({p_id: pid})
+	chrome.storage.sync.set({p_age: age})
+	url='http://www.getfactcheck.me/addUser'
+	fetch(url, {
+		method:'post',
+		body: JSON.stringify({p_id: pid, p_age:age })
+	})
+	.then(function(response) {
+		if (response.status !== 200) {
+			console.log(`Looks like there was a problem. Status code: ${response.status}`);
+			return;
+		}
+	start();
+	}
+  });
+document.getElementById("logout_button").addEventListener('click', function(){
+	chrome.storage.sync.set({signed_in: false})
+	start();
 });
