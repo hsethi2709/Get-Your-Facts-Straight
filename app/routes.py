@@ -15,11 +15,12 @@ def index():
     return res
 
 @app.route('/addUser', methods=['POST'])
-def addUser(request):
+def addUser():
     client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
     db = client.afv
     myrecord = request.json
     col = db['participants']
     col.insert_one(myrecord)
+    return {"status": 200}
     
 
