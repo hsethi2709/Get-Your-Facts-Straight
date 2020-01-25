@@ -2,3 +2,4 @@
 *.tar.gz
 wikidb
 fndven
+.DS_Store
