@@ -60,6 +60,7 @@ body {
 <body>
 	<div>
     <h2 id="title">Get Fact Check</h2>
+    <div style="text-align: center;">
     <div id="login" style="display: block;">
       Participant ID:<br>
       <input type="text" id="pid">
@@ -72,6 +73,8 @@ body {
       <input type="submit" value="Login" id="login_button">
       <i class="fas fa-arrow-circle-right"></i>
     </div>
+  </div>
+    <div style="text-align: center;">
     <div id="level" style="display: none;">
       <h2 id="sentence">Select the level of experiment</h2>
       <br>
@@ -80,27 +83,32 @@ body {
         <br>
         <input type="button" id="level2" value="Level 2">
         <br>
+        <br>
         <input type="button" id="level3" value="Level 3">
         <br>
+        <br>
         <input type="button" id="level4" value="Level 4">
+        <br>
         <br>
       <br>
       <input type="submit" value="Logout" id="logout_button">
       <br>
     </div>
+  </div>
     <div id="experiment" style="display: none;">
-      <h2 id="sentence"></h2>
-      <p id="claim"></p>
-      <h3 id="evidence_head" style="visibility: hidden">Evidences</h3>
+      <h2 id="error"></h2>
+      <h3 id="claim"></h3>
+      <h3 id="evidence_head" style="display: none;">Evidences</h3>
       <ul></ul>
         <div id="feedback" style="display:none">
           <p>How satisfied are you?</p>
             <div class="slidecontainer">
               <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
             </div>
-            <i class="fas fa-thumbs-up"></i><i class="fas fa-thumbs-down"></i>
+            <div style="text-align: left;"><i style="display: inline-block;" class="fas fa-thumbs-up"></i></div>
+            <div style="text-align: right;"><i style="display: inline-block;" class="fas fa-thumbs-down"></i></div>
         </div>
-        <button id="fact_check">Check the Fact</button>
+        <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
     </div>
 
 
