@@ -35,10 +35,18 @@ chrome.tabs.executeScript( {
 
 	// making fact check button invisible
 	document.getElementById("fact_check").style.visibility='hidden'
-
-	// sending request to the server
+	chrome.storage.sync.get('level', function(data){
+	
+		// sending request to the server
+	var level_data = data.level;
 	url='http://www.getfactcheck.me/index?sentence='.concat(selection[0])
-	fetch(url)
+	fetch(url, {
+		method:'post',
+		headers: {
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify({level:level_data})
+	})
 	.then(function(response) {
 		if (response.status !== 200) {
 			console.log(`Looks like there was a problem. Status code: ${response.status}`);
@@ -54,17 +62,34 @@ chrome.tabs.executeScript( {
 			// evidence_div.setAttribute("id", "evidence")
 			document.getElementById("claim").innerHTML = "Claim: "+data.claim;
 			var ul = document.querySelector("ul");
-			for (var i = 0; i < data.evidence.length; i++) {
+			var evidence_count = 0;
+			if (level_data == 1 && data.evidence.length > 1){
+				evidence_count = 1;
+			}
+			else if (level_data == 2 && data.evidence.length >= 3){
+				evidence_count = 3;	
+			}
+			else 
+			{
+				evidence_count = data.evidence.length;
+			}
+			for (var i = 0; i < evidence_count; i++) {
 				var evidence_item = data.evidence[i];
 				var listItem = document.createElement("li");
 				listItem.textContent = evidence_item;
 				ul.appendChild(listItem);
 			}
+		
+			if (level_data != 4)
+		{
 			document.getElementById("error").innerHTML = "Result: "+data.label;
+		}
 			document.getElementById("feedback").style.display='inline-block';
 
 		});
 	});
+	});
+
 	}});
 }
 
@@ -79,21 +104,18 @@ document.getElementById('level1').addEventListener('click', function(){
 document.getElementById('level2').addEventListener('click', function(){
 	document.getElementById('level').style.display = "none";
 	document.getElementById('experiment').style.display = "block";
-	document.getElementById('feedback').style.display = "block";
 	chrome.storage.sync.set({level: 2})
 
 });
 document.getElementById('level3').addEventListener('click', function(){
 	document.getElementById('level').style.display = "none";
 	document.getElementById('experiment').style.display = "block";
-	document.getElementById('feedback').style.display = "block";
 	chrome.storage.sync.set({level: 3})
 
 });
 document.getElementById('level4').addEventListener('click', function(){
 	document.getElementById('level').style.display = "none";
 	document.getElementById('experiment').style.display = "block";
-	document.getElementById('feedback').style.display = "block";
 	chrome.storage.sync.set({level: 4})
 
 });
