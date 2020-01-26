@@ -7,14 +7,16 @@ from allennlp.predictors.predictor import Predictor
 from processing.process_evidence import ProcessEvidence
 from datasetreader import FeverReader
 import numpy as np
+from urllib.parse import unquote
 
 claim = sys.argv[1]
+claim = unquote(claim)
 logit_conv = {}
 logit_conv[1] = 'SUPPORTS'
 logit_conv[0] = 'NOT ENOUGH INFO'
 logit_conv[2] = 'REFUTES'
 
-def predict_label(claim):
+def predict_label(claim, level):
     
     logit_conv = {}
     logit_conv[1] = 'SUPPORTS'
@@ -46,7 +48,12 @@ def predict_label(claim):
             print("sentence: %s\nprediction_logits:%s\nprediction:%s\n"%(sent,str(pred['label_logits']),logit_conv[biggest]))
 
         process_evidence = ProcessEvidence()
-        final_label, f_evidence = process_evidence.process_evidence(evidence)
+        if level == 3:
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['SUPPORTS'], claim_output['REFUTES'] = process_evidence.process_evidence(evidence,level)
+            return claim_output
+        final_label, f_evidence = process_evidence.process_evidence(evidence,level)
 
         claim_output = {}
         claim_output["claim"] = claim
@@ -59,4 +66,4 @@ def predict_label(claim):
         print("Exception: %s" % str(e))
         sys.exit(1)
 
-predict_label(claim)
+#predict_label(claim,level)

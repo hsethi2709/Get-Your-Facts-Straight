@@ -6,10 +6,12 @@ import predict as p1
 import json
 
 @app.route('/')
-@app.route('/index', methods=['POST','GET'])
+@app.route('/index', methods=['POST'])
 def index():
     sentence = request.args.get('sentence')
-    response = p1.predict_label(sentence)
+    data = request.get_json()
+    print(data)
+    response = p1.predict_label(sentence, data['level'])
     res = jsonify(response)
     res.status_code = 200
     return res

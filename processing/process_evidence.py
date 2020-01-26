@@ -4,7 +4,7 @@ class ProcessEvidence:
     def __init__(self):
         self.evidence = 'NOT Processed'
     
-    def process_evidence(self, evidences, sort=False, threshold=False):
+    def process_evidence(self, evidences, level, sort=True, threshold=False):
         evidence_support = []
         evidence_refute = []
         if 'REFUTES' in evidences:
@@ -14,6 +14,7 @@ class ProcessEvidence:
         elif 'SUPPORTS' in evidences:
             evidence_support = evidences['SUPPORTS']
             if sort:
+                #evidence_support.sort(key = lambda x:x[1])
                 evidence_support = sorted(evidence_support, key=lambda x: x[1], reverse=True)
         print("Evidences: SUPPORTS:")
         for i in evidence_support:
@@ -22,6 +23,8 @@ class ProcessEvidence:
         for i in evidence_refute:
             print(i)
         final_label='NOT ENOUGH INFO'
+        if level == 3:
+            return evidence_support, evidence_refute
         evidence=[]
         if len(evidence_support) > 0 and len(evidence_refute) > 0:
             if evidence_support[1] > evidence_refute[1]:
