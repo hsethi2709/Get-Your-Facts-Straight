@@ -16,7 +16,7 @@ function start(){
   });
 }
 start();
-console.log(pid)
+
 // Retrieving Selected Text and calling the API for the response  
 function getText() {
 chrome.tabs.executeScript( {
@@ -26,7 +26,6 @@ chrome.tabs.executeScript( {
 	document.getElementById("error").innerHTML = "Please select a sentence to fact check";
 	}
 	else{
-
 	// Add loading animation
 	const div = document.createElement('div');
 	div.setAttribute("id","loader");
@@ -35,32 +34,63 @@ chrome.tabs.executeScript( {
 
 	// making fact check button invisible
 	document.getElementById("fact_check").style.visibility='hidden'
+	document.getElementById("fact_check_3").style.visibility='hidden'
 	chrome.storage.sync.get('level', function(data){
 	
-		// sending request to the server
+	// sending request to the server
 	var level_data = data.level;
-	url='http://www.getfactcheck.me/index?sentence='.concat(selection[0])
-	fetch(url, {
-		method:'post',
-		headers: {
-			'Content-Type': 'application/json'
-		  },
-		body: JSON.stringify({level:level_data})
-	})
+	var raw = JSON.stringify({"level":level_data});
+	var requestOptions = {
+  	method: 'POST',
+  	headers: {
+		"Content-Type": "application/json",
+	},
+  	body: raw
+	};
+	url='https://www.getfactcheck.me/index?sentence='.concat(selection[0])
+	fetch(url, requestOptions)
 	.then(function(response) {
-		if (response.status !== 200) {
+		if (response.status != 200) {
 			console.log(`Looks like there was a problem. Status code: ${response.status}`);
+			document.getElementById("loader").remove();
+			document.getElementById("error").innerHTML = "Oops! Something went wrong!";
 			return;
 		}
 
 		response.json().then(function(data) {
+			if (level_data == 3){
+				document.getElementById("loader").remove();
+				document.getElementById("fact_check_3").style.visibility='visible';
+				document.getElementById("claim_3").innerHTML = "Claim: "+data.claim;
+				document.getElementById("evidence_support").style.display='block';
+				ul = document.getElementById("support")
+				for (var i = 0; i < data.SUPPORTS.length; i++) {
+					var evidence_item = data.SUPPORTS[i][2];
+					var prediction_score = data.SUPPORTS[i][1];
+					var listItem = document.createElement("li");
+					listItem.style.marginBottom = "6px";
+					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + Math.round(prediction_score * 100) / 100;
+					ul.appendChild(listItem);
+				}
+				document.getElementById("evidence_refutes").style.display='block';
+				ul = document.getElementById("refutes")
+				for (var i = 0; i < data.REFUTES.length; i++) {
+					var evidence_item = data.REFUTES[i][2];
+					var prediction_score = data.REFUTES[i][1];
+					var listItem = document.createElement("li");
+					listItem.style.marginBottom = "6px";
+					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + Math.round(prediction_score * 100) / 100;
+					ul.appendChild(listItem);
+				}
+				
+			}
+			else{
 			document.getElementById("loader").remove();
 			document.getElementById("fact_check").style.visibility='visible'
 			document.getElementById("evidence_head").style.display='inline-block'
-
-			// const evidence_div = document.createElement('ul')
-			// evidence_div.setAttribute("id", "evidence")
 			document.getElementById("claim").innerHTML = "Claim: "+data.claim;
+
+			// Populating Evidences List
 			var ul = document.querySelector("ul");
 			var evidence_count = 0;
 			if (level_data == 1 && data.evidence.length > 1){
@@ -86,7 +116,7 @@ chrome.tabs.executeScript( {
 		}
 			document.getElementById("feedback").style.display='inline-block';
 
-		});
+		}});
 	});
 	});
 
@@ -95,6 +125,8 @@ chrome.tabs.executeScript( {
 
 // click events
 document.getElementById('fact_check').addEventListener('click',getText);
+document.getElementById('fact_check_3').addEventListener('click',getText);
+
 document.getElementById('level1').addEventListener('click', function(){
 	document.getElementById('level').style.display = "none";
 	document.getElementById('experiment').style.display = "block";
@@ -109,7 +141,7 @@ document.getElementById('level2').addEventListener('click', function(){
 });
 document.getElementById('level3').addEventListener('click', function(){
 	document.getElementById('level').style.display = "none";
-	document.getElementById('experiment').style.display = "block";
+	document.getElementById("level3experiment").style.display='block'
 	chrome.storage.sync.set({level: 3})
 
 });
