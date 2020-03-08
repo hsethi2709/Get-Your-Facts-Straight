@@ -129,4 +129,3 @@ def wikipediaSearch(claim):
         sys.exit(1)
 
 
-predict_label(claim, 1)

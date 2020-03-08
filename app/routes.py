@@ -6,11 +6,15 @@ import predict as p1
 import json
 import copy
 
-#@app.route('/home')
-#def start():
-#    return render_template("start.html", title="Pre-Experiment Questionnaire")
+@app.route('/home')
+def start():
+    return render_template("start.html", title="Pre-Experiment Questionnaire")
 
-@app.route('/')
+@app.route('/post')
+def end():
+    return render_template("post.html", title="Post-Experiment Questionnaire")
+
+
 @app.route('/index', methods=['POST'])
 def index():
     sentence = request.args.get('sentence')
