@@ -15,36 +15,6 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 15px;
-  border-radius: 5px;
-  background: #d3d3d3;
-  outline: none;
-  margin-bottom: 20px;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #4CAF50;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #4CAF50;
-  cursor: pointer;
-}
 body {
     min-width:300px;
 }
@@ -100,14 +70,14 @@ body {
       <h3 id="claim"></h3>
       <h3 id="evidence_head" style="display: none;">Evidences</h3>
       <ul></ul>
-        <div id="feedback" style="display:none">
-          <p>How satisfied are you?</p>
-            <div class="slidecontainer">
-              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-            </div>
-            <div style="text-align: left;"><i style="display: inline-block;" class="fas fa-thumbs-up"></i></div>
-            <div style="text-align: right;"><i style="display: inline-block;" class="fas fa-thumbs-down"></i></div>
-        </div>
+      <div id="feedback" style="display: none;text-align: center;">
+        <p>How satisfied are you?</p>
+        <br>
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange"><label id="sliderValue">50</label>
+          <div style="text-align: left;"><button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>          
+          <div style="text-align: right;"><button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
+          <div style="text-align: center;"><p id="thanks"></p></div>
+      </div>
         <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
     </div>
     <div id="level3experiment" style="display: none;">
@@ -119,11 +89,11 @@ body {
       <ul></ul>
       <div id="feedback_3" style="display:none">
         <p>How satisfied are you?</p>
-          <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-          </div>
-          <div style="text-align: left;"><i style="display: inline-block;" class="fas fa-thumbs-up"></i></div>
-          <div style="text-align: right;"><i style="display: inline-block;" class="fas fa-thumbs-down"></i></div>
+        <br>
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange_3"><label id="sliderValue_3">50</label>
+          <div style="text-align: left;"><button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>
+          <div style="text-align: right;"><button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
+          <p id="thanks_3"></p>
       </div>
       <div style="text-align: center;"><button id="fact_check_3">Check the Fact</button></div>
     </div>
@@ -136,3 +106,87 @@ body {
 </body>
 
 </html>
+<!-- 
+<!DOCTYPE html>
+<html style="width: 300px;height: 300px;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GetFactCheck</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark-1.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div id="login" class="login-dark" style="width: 300px;height: 300px;">
+        <form method="post">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="form-group"><input class="form-control" type="number" id="pid" placeholder="Participant ID"></div>
+            <div class="form-group"><input class="form-control" type="number" id="age" placeholder="Age"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" id="login_button" type="submit">Log In</button></div>
+        </form>
+    </div>
+  </div>
+  <div style="text-align: center;">
+  <div id="level" class="login-dark" style="display: none; width: 300px;">
+    <h2 id="sentence">Select the level of experiment</h2>
+    <br>
+      <input type="button" id="level1" value="Level 1">
+      <br>
+      <br>
+      <input type="button" id="level2" value="Level 2">
+      <br>
+      <br>
+      <input type="button" id="level3" value="Level 3">
+      <br>
+      <br>
+      <input type="button" id="level4" value="Level 4">
+      <br>
+      <br>
+    <br>
+    <input type="submit" class="btn btn-primary btn-block" value="Logout" id="logout_button">
+    <br>
+  </div>
+</div>
+  <div id="experiment" class="login-dark" style="display: none;">
+    <h2 id="error"></h2>
+    <h3 id="claim"></h3>
+    <h3 id="evidence_head" style="display: none;">Evidences</h3>
+    <ul></ul>
+    <div id="feedback" style="display: none;text-align: center;">
+      <p>How satisfied are you?</p>
+      <br>
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange"><label id="sliderValue">50</label>
+        <div style="text-align: left;"><button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>          
+        <div style="text-align: right;"><button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
+        <div style="text-align: center;"><p id="thanks"></p></div>
+    </div>
+      <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
+  </div>
+  <div id="level3experiment" style="display: none;">
+    <h3 id="claim_3"></h3>
+    <h3 id="evidence_support" style="display: none;">Supporting Evidence:</h3>
+    <ul id="support"></ul id="support">
+    <h3 id="evidence_refutes" style="display: none;">Refuting Evidence:</h3>
+    <ul id="refutes"></ul id="refutes">
+    <ul></ul>
+    <div id="feedback_3" style="display:none">
+      <p>How satisfied are you?</p>
+      <br>
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange_3"><label id="sliderValue_3">50</label>
+        <div style="text-align: left;"><button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>
+        <div style="text-align: right;"><button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
+        <p id="thanks_3"></p>
+    </div>
+    <div style="text-align: center;"><button id="fact_check_3">Check the Fact</button></div>
+  </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html> -->

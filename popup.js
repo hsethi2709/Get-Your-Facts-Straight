@@ -16,7 +16,12 @@ function start(){
   });
 }
 start();
-
+document.getElementById('myRange').addEventListener("change", function() {
+    document.getElementById("sliderValue").textContent = document.getElementById('myRange').value;
+}, false);
+document.getElementById('myRange_3').addEventListener("change", function() {
+    document.getElementById("sliderValue_3").textContent = document.getElementById('myRange_3').value;
+}, false);
 // Retrieving Selected Text and calling the API for the response  
 function getText() {
 chrome.tabs.executeScript( {
@@ -69,7 +74,7 @@ chrome.tabs.executeScript( {
 					var prediction_score = data.SUPPORTS[i][1];
 					var listItem = document.createElement("li");
 					listItem.style.marginBottom = "6px";
-					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + Math.round(prediction_score * 100) / 100;
+					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + (Math.exp(prediction_score) / (Math.exp(prediction_score)+1)*100).toFixed(2) +"%";
 					ul.appendChild(listItem);
 				}
 				document.getElementById("evidence_refutes").style.display='block';
@@ -79,9 +84,11 @@ chrome.tabs.executeScript( {
 					var prediction_score = data.REFUTES[i][1];
 					var listItem = document.createElement("li");
 					listItem.style.marginBottom = "6px";
-					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + Math.round(prediction_score * 100) / 100;
+					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + (Math.exp(prediction_score) / (Math.exp(prediction_score)+1)*100).toFixed(2);
 					ul.appendChild(listItem);
 				}
+				document.getElementById("feedback_3").style.display='inline-block';
+
 				
 			}
 			else{
@@ -122,7 +129,97 @@ chrome.tabs.executeScript( {
 
 	}});
 }
-
+function sendUpFeedback(){
+	chrome.storage.sync.get(['level','p_id','p_age'], function(data){
+		if (data.level == 3) {
+			var payload = {}
+	payload = {
+		id: data.p_id,
+		p_age: data.p_age,
+		sentence:document.getElementById('claim_3').innerHTML,
+		level: data.level,
+		"feedback_thumb": 1,
+		"satisfaction_value": document.getElementById('myRange').value
+	};
+}
+else{
+	payload = {
+		id: data.p_id,
+		p_age: data.p_age,
+		sentence:document.getElementById('claim').innerHTML,
+		level: data.level,
+		"feedback_thumb": 1,
+		"satisfaction_value": document.getElementById('myRange').value
+	};
+}
+	url='https://www.getfactcheck.me/sendFeedback'
+	fetch(url, {
+		method:'post',
+		headers: {
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify(payload)
+	}).then(function(response) {
+		if (response.status == 200) {
+			if (data.level ==3) {
+			document.getElementById('thanks_3').innerHTML = "Thanks for the feedback!"		
+			}
+		else{
+			document.getElementById('thanks').innerHTML = "Thanks for the feedback!"		
+		}
+		}
+	
+		}
+		);
+});
+}
+function sendDownFeedback(){
+	chrome.storage.sync.get(['level','p_id','p_age'], function(data){
+		if (data.level == 3) {
+			var payload = {}
+	payload = {
+		id: data.p_id,
+		p_age: data.p_age,
+		sentence:document.getElementById('claim_3').innerHTML,
+		level: data.level,
+		"feedback_thumb": -1,
+		"satisfaction_value": document.getElementById('myRange').value
+	};
+}
+else{
+	payload = {
+		id: data.p_id,
+		p_age: data.p_age,
+		sentence:document.getElementById('claim').innerHTML,
+		level: data.level,
+		"feedback_thumb": -1,
+		"satisfaction_value": document.getElementById('myRange').value
+	};
+}
+	url='https://www.getfactcheck.me/sendFeedback'
+	fetch(url, {
+		method:'post',
+		headers: {
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify(payload)
+	}).then(function(response) {
+		if (response.status == 200) {
+			if (data.level ==3){
+			document.getElementById('thanks_3').innerHTML = "Thanks for the feedback!"		}
+			else {
+				document.getElementById('thanks').innerHTML = "Thanks for the feedback!"
+			}
+		}
+	
+		}
+		);
+});
+}
+document.getElementById('thumbsUp').addEventListener('click', sendUpFeedback);
+document.getElementById('thumbsDown').addEventListener('click', sendDownFeedback);
+document.getElementById('thumbsUp_3').addEventListener('click', sendUpFeedback);
+document.getElementById('thumbsDown_3').addEventListener('click', sendDownFeedback);
 // click events
 document.getElementById('fact_check').addEventListener('click',getText);
 document.getElementById('fact_check_3').addEventListener('click',getText);
