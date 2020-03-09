@@ -6,7 +6,7 @@ import predict as p1
 import json
 import copy
 
-@app.route('/home')
+@app.route('/pre')
 def start():
     return render_template("start.html", title="Pre-Experiment Questionnaire")
 
@@ -14,6 +14,13 @@ def start():
 def end():
     return render_template("post.html", title="Post-Experiment Questionnaire")
 
+@app.route("/login")
+def login():
+    return render_template("login.html", title="Get Fact Check")
+
+@app.route("/home")
+def home():
+    return render_template("index.html", title="Get Fact Check")
 
 @app.route('/index', methods=['POST'])
 def index():
@@ -52,3 +59,75 @@ def sendFeedback():
         return {"status": 200}
     else:
         return {"status": 500}
+
+@app.route("/addSentences", methods=['POST'])
+def addSentences():
+    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    db = client.afv
+    collection = db['MasterList_Sentences']
+    requestJson = request.json
+    cursor = collection.find_one({'_id': requestJson['level']})
+    if cursor == None:
+        final = {"_id": requestJson['level'], "Sentences": [requestJson['sentence']]}
+        if collection.insert_one(final):
+            return "Inserted Successfully"
+        else:
+            return "Insertion Failed"
+    else:
+        final = copy.deepcopy(cursor)
+        final['Sentences'].append(requestJson['sentence'])
+        if collection.update(cursor, final, upsert=False):
+            return {"status": 200}
+        else:
+            return {"status": 500}
+
+@app.route("/addSentenceToClient", methods=['POST'])
+def addSentenceToClient():
+    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    db = client.afv
+    collection = db['clientList_Sentences']
+    requestJson = request.json
+    cursor = collection.find_one({'_id': requestJson['pid']})
+    if cursor == None:
+        final = {
+                "_id":requestJson['pid'],
+                "Sentences":{requestJson['sentence'] : requestJson['label']}
+                }
+        if collection.insert_one(final):
+            return "Inserted Successfully"
+        else:
+            return "Insertion Failed"
+    else:
+        final = copy.deepcopy(cursor)
+        final['Sentences'][requestJson['sentence']] = requestJson['label']
+        if collection.update(cursor, final, upsert=False):
+            return {'status':200}
+        else:
+            return {'status': 500}
+
+@app.route("/readClientSentences", methods=['POST'])
+def readSentences():
+    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    db = client.afv
+    collection = db['clientList_Sentences']
+    requestJson = request.json
+    cursor = collection.find_one({"_id":requestJson['pid']})
+    if cursor == None:
+        return "Error"
+    else:
+        return cursor['Sentences']
+
+@app.route("/readMasterSentences", methods=['POST'])
+def readMasterSentence():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['MasterList_Sentences']
+        requestJson = request.json
+        cursor = collection.find_one({"_id": requestJson['level']})
+        if cursor == None:
+            return "Error"
+        else:
+            return json.dumps(cursor['Sentences'])
+    except Exception as e:
+        return (e)
