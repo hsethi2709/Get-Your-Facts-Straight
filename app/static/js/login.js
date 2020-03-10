@@ -130,7 +130,7 @@ function getSentences(){
 						document.getElementById('alreadyKnow').addEventListener('click', function(){
 							notClicked = false
 						});
-						while (notClicked){}
+						while (notClicked){console.log("Waiting")}
 						count += 1;
 
 					}
