@@ -55,10 +55,11 @@ function checkCookie() {
 	  }
 	}
   }
-
-var notClicked = true
-function getSentences(){
-	for (level = 1; level < 5; level++) {
+sentences = []
+count = 0
+final_count = 0
+global_level = 1
+function getSentences(level){
 		var payload = {
 			'level': level
 		};
@@ -73,75 +74,104 @@ function getSentences(){
 			if (response.status == 200) {
 				response.json().then(function(data){
 					console.log(data)
-					count = 0
-					final_count = 0
-					while (final_count != 1 && count < data.length){
-						notClicked = true;
-						document.getElementById('sentences').innerHTML = data[count];
-						console.log(data[count])
-						document.getElementById('true').addEventListener('click', function(){
-							var payload = {
-								"pid": pid,
-								"Sentence":data[count],
-								"label": "True"
-
-							};
-							url='https://www.getfactcheck.me/addSentenceToClient'
-							fetch(url, {
-								method:'post',
-								headers: {
-									'Content-Type': 'application/json'
-								  },
-								body: JSON.stringify(payload)
-							}).then(function(response) {
-								if (response.status == 200) {
-									notClicked = false
-									final_count += 1					
-								}
-									
-								}
-								);
-						
-						});
-						document.getElementById('fake').addEventListener('click', function(){
-							var payload = {
-								"pid": pid,
-								"Sentence":data[count],
-								"label": "Fake"
-
-							};
-							url='https://www.getfactcheck.me/addSentenceToClient'
-							fetch(url, {
-								method:'post',
-								headers: {
-									'Content-Type': 'application/json'
-								  },
-								body: JSON.stringify(payload)
-							}).then(function(response) {
-								if (response.status == 200) {
-									notClicked = false
-									final_count += 1					
-								}
-									
-								}
-								);
-						
-						});
-						document.getElementById('alreadyKnow').addEventListener('click', function(){
-							notClicked = false
-						});
-						while (notClicked){console.log("Waiting")}
-						count += 1;
-
+					sentences = data
+					document.getElementById("sentences").innerHTML = sentences[count]
 					}
-				}
-				
 				);
-				console.log("Got all the sentences required");
-			}
-				
-			}
-			);
 	
+		}
 	}
-}
+		)}
+// Button Click Events
+document.getElementById('true').addEventListener('click', function(){
+	var payload = {
+		"pid": pid,
+		"Sentence":document.getElementById("sentences").innerHTML,
+		"label": "True"
+
+	};
+	url='https://www.getfactcheck.me/addSentenceToClient'
+	fetch(url, {
+		method:'post',
+		headers: {
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify(payload)
+	}).then(function(response) {
+		if (response.status == 200) {
+			count += 1
+			final_count += 1
+			if (final_count == 1){
+				console.log("Moving to next level")
+				global_level += 1
+				if (global_level<5){
+				getSentences(global_level)
+				count = 0
+				final_count = 0	
+			}
+				else{
+				console.log("All levels completed")
+				}
+			document.getElementById("sentences").innerHTML = sentences[count]
+		}
+			
+		}}
+		);
+
+});
+
+document.getElementById('fake').addEventListener('click', function(){
+	var payload = {
+		"pid": pid,
+		"Sentence":document.getElementById("sentences").innerHTML,
+		"label": "Fake"
+
+	};
+	url='https://www.getfactcheck.me/addSentenceToClient'
+	fetch(url, {
+		method:'post',
+		headers: {
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify(payload)
+	}).then(function(response) {
+		if (response.status == 200) {
+			count += 1
+			final_count += 1
+			if (final_count == 1){
+				console.log("Moving to next level")
+				global_level += 1
+				if (global_level<5){
+				getSentences(global_level)
+				count = 0
+				final_count = 0	
+			}
+				else{
+				console.log("All levels completed")
+				}
+			document.getElementById("sentences").innerHTML = sentences[count]
+		}
+			
+		}}
+		);
+
+});
+
+document.getElementById('alreadyKnow').addEventListener('click', function(){
+		count += 1
+		if (final_count == 1){
+			console.log("Moving to next level")
+			global_level += 1
+			if (global_level<5){
+			getSentences(global_level)
+			count = 0
+			final_count = 0	
+		}
+			else{
+			console.log("All levels completed")
+			}
+		document.getElementById("sentences").innerHTML = sentences[count]
+	}
+		
+	
+});
