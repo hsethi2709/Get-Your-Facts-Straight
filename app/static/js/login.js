@@ -62,6 +62,7 @@ count = 0
 final_count = 0
 global_level = 1
 function getSentences(level){
+	console.log("Getting Sentences for Level:", level)
 		var payload = {
 			'level': level
 		};
@@ -102,6 +103,7 @@ document.getElementById('true').addEventListener('click', function(){
 	}).then(function(response) {
 		if (response.status == 200) {
 			count += 1
+			console.log("Count:", count)
 			final_count += 1
 			if (final_count == 1){
 				console.log("Moving to next level")
@@ -139,6 +141,7 @@ document.getElementById('fake').addEventListener('click', function(){
 	}).then(function(response) {
 		if (response.status == 200) {
 			count += 1
+			console.log("Count:", count)
 			final_count += 1
 			if (final_count == 1){
 				console.log("Moving to next level")
@@ -161,6 +164,8 @@ document.getElementById('fake').addEventListener('click', function(){
 
 document.getElementById('alreadyKnow').addEventListener('click', function(){
 		count += 1
+		console.log("Count:", count)
+		console.log("Already Know")
 		if (final_count == 1){
 			console.log("Moving to next level")
 			global_level += 1
