@@ -177,8 +177,8 @@ document.getElementById('alreadyKnow').addEventListener('click', function(){
 			else{
 			console.log("All levels completed")
 			}
-		document.getElementById("sentences").innerHTML = sentences[count]
 	}
+	document.getElementById("sentences").innerHTML = sentences[count]
 		
 	
 });
