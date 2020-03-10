@@ -99,6 +99,8 @@ def addSentenceToClient():
             return "Insertion Failed"
     else:
         final = copy.deepcopy(cursor)
+        if requestJson['level'] not in final:
+            final[requestJson['level']] = {}
         final[requestJson['level']][requestJson['sentence']] = requestJson['label']
         if collection.update(cursor, final, upsert=False):
             return {'status':200}
