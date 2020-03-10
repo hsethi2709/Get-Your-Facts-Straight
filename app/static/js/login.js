@@ -56,5 +56,26 @@ function checkCookie() {
 	}
   }
 
-                                    
-        
+function getSentences(){
+	for (level = 1; level < 5; level++) {
+		var payload = {
+			'level': level
+		};
+		url='https://www.getfactcheck.me/readMasterSentences'
+		fetch(url, {
+			method:'post',
+			headers: {
+				'Content-Type': 'application/json'
+			  },
+			body: JSON.stringify(payload)
+		}).then(function(response) {
+			if (response.status == 200) {
+				console.log(response)
+	
+			}
+				
+			}
+			);
+	
+	}
+}
