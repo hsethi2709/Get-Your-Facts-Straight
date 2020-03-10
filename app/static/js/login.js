@@ -56,6 +56,7 @@ function checkCookie() {
 	}
   }
 
+var notClicked = true
 function getSentences(){
 	for (level = 1; level < 5; level++) {
 		var payload = {
@@ -72,8 +73,71 @@ function getSentences(){
 			if (response.status == 200) {
 				response.json().then(function(data){
 					console.log(data)
+					count = 0
+					final_count = 0
+					while (final_count != 1 && count < data.length){
+						notClicked = true;
+						document.getElementById('sentences').innerHTML = data[count];
+						console.log(data[count])
+						document.getElementById('true').addEventListener('click', function(){
+							var payload = {
+								"pid": pid,
+								"Sentence":data[count],
+								"label": "True"
+
+							};
+							url='https://www.getfactcheck.me/addSentenceToClient'
+							fetch(url, {
+								method:'post',
+								headers: {
+									'Content-Type': 'application/json'
+								  },
+								body: JSON.stringify(payload)
+							}).then(function(response) {
+								if (response.status == 200) {
+									notClicked = false
+									final_count += 1					
+								}
+									
+								}
+								);
+						
+						});
+						document.getElementById('false').addEventListener('click', function(){
+							var payload = {
+								"pid": pid,
+								"Sentence":data[count],
+								"label": "False"
+
+							};
+							url='https://www.getfactcheck.me/addSentenceToClient'
+							fetch(url, {
+								method:'post',
+								headers: {
+									'Content-Type': 'application/json'
+								  },
+								body: JSON.stringify(payload)
+							}).then(function(response) {
+								if (response.status == 200) {
+									notClicked = false
+									final_count += 1					
+								}
+									
+								}
+								);
+						
+						});
+						document.getElementById('false').addEventListener('click', function(){
+							notClicked = false
+						});
+						while (notClicked){}
+						count += 1;
+
+					}
 				}
+				
 				);
+				console.log("Got all the sentences required");
 			}
 				
 			}
