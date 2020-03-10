@@ -90,7 +90,8 @@ document.getElementById('true').addEventListener('click', function(){
 	var payload = {
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
-		"label": "True"
+		"label": "True",
+		"level": global_level
 
 	};
 	url='https://www.getfactcheck.me/addSentenceToClient'
@@ -128,7 +129,8 @@ document.getElementById('fake').addEventListener('click', function(){
 	var payload = {
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
-		"label": "Fake"
+		"label": "Fake",
+		"level": global_level
 
 	};
 	url='https://www.getfactcheck.me/addSentenceToClient'

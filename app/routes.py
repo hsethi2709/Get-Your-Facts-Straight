@@ -91,7 +91,7 @@ def addSentenceToClient():
     if cursor == None:
         final = {
                 "_id":requestJson['pid'],
-                "Sentences":{requestJson['sentence'].replace('.','_') : requestJson['label']}
+                requestJson['level']:{requestJson['sentence'].replace('.','_') : requestJson['label']}
                 }
         if collection.insert_one(final):
             return "Inserted Successfully"
@@ -99,7 +99,7 @@ def addSentenceToClient():
             return "Insertion Failed"
     else:
         final = copy.deepcopy(cursor)
-        final['Sentences'][requestJson['sentence']] = requestJson['label']
+        final[requestJson['level']][requestJson['sentence']] = requestJson['label']
         if collection.update(cursor, final, upsert=False):
             return {'status':200}
         else:
