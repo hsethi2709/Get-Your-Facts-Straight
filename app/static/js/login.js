@@ -1,3 +1,4 @@
+var pid = 0
 function log_in(){
 	pid = document.getElementById('pid').value;
 	document.cookie = "pid="+pid;
@@ -45,13 +46,13 @@ function getCookie(name) {
 }
 
 function checkCookie() {
-	var username = getCookie("pid");
-	if (username != "") {
-	 document.getElementById('pidLabel').innerHTML = username
+	pid = getCookie("pid");
+	if (pid != "") {
+	 document.getElementById('pidLabel').innerHTML = pid
 	} else {
-	  username = prompt("Please enter your Participant ID:", "");
-	  if (username != "" && username != null) {
-		setCookie("pid", username, 365);
+	  pid = prompt("Please enter your Participant ID:", "");
+	  if (pid != "" && pid != null) {
+		setCookie("pid", pid, 365);
 	  }
 	}
   }
