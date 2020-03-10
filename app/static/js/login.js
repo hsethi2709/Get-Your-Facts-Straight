@@ -1,10 +1,4 @@
 var pid = 10;
-
-function getPID()
-{
-    return (pid);
-}
-
 function log_in(){
 	pid = document.getElementById('pid').value;
 	age = document.getElementById('age').value;
@@ -39,5 +33,12 @@ function log_in(){
 		);
         }
 }
+
+function setPID()
+{
+document.getElementById('pidLabel').innerHTML = pid;
+console.log("PID",pid);
+}
+
                                     
         
