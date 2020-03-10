@@ -52,7 +52,8 @@ function checkCookie() {
 	} else {
 	  pid = prompt("Please enter your Participant ID:", "");
 	  if (pid != "" && pid != null) {
-		setCookie("pid", pid, 365);
+		document.cookie = "pid="+pid;
+		document.getElementById('pidLabel').innerHTML = pid
 	  }
 	}
   }
