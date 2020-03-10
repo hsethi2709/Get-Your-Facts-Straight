@@ -89,7 +89,7 @@ function getSentences(level){
 document.getElementById('true').addEventListener('click', function(){
 	var payload = {
 		"pid": pid,
-		"Sentence":document.getElementById("sentences").innerHTML,
+		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "True"
 
 	};
@@ -127,7 +127,7 @@ document.getElementById('true').addEventListener('click', function(){
 document.getElementById('fake').addEventListener('click', function(){
 	var payload = {
 		"pid": pid,
-		"Sentence":document.getElementById("sentences").innerHTML,
+		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "Fake"
 
 	};
