@@ -264,24 +264,25 @@ document.getElementById('login_button').addEventListener("click", function(){
 
 	chrome.storage.sync.set({p_id: pid})
 	chrome.storage.sync.set({p_age: age})
-	var payload = {
-		_id: pid,
-		p_age: age
-	};
-	url='https://www.getfactcheck.me/addUser'
-	fetch(url, {
-		method:'post',
-		headers: {
-			'Content-Type': 'application/json'
-		  },
-		body: JSON.stringify(payload)
-	}).then(function(response) {
-		if (response.status == 200) {
-			start();		
-		}
+	// var payload = {
+	// 	_id: pid,
+	// 	p_age: age
+	// };
+	start();
+	// url='https://www.getfactcheck.me/addUser'
+	// fetch(url, {
+	// 	method:'post',
+	// 	headers: {
+	// 		'Content-Type': 'application/json'
+	// 	  },
+	// 	body: JSON.stringify(payload)
+	// }).then(function(response) {
+	// 	if (response.status == 200) {
+	// 		start();		
+	// 	}
 	
-		}
-		);
+	// 	}
+	// 	);
 	}
 });
 document.getElementById("logout_button").addEventListener('click', function(){

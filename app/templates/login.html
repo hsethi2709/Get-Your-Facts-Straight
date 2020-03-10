@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="text-center">
 
 <head>
     <meta charset="utf-8">
@@ -24,13 +24,14 @@
         <form method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-            <div class="form-group"><input class="form-control" type="text" placeholder="Participant ID"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
+            <div class="form-group"><input class="form-control" type="text" id="pid" placeholder="Participant ID"><input class="form-control" type="text" id="age" placeholder="Age"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" id="login" type="button" onclick="log_in()">Log In</button></div>
         </form>
     </div>
     <!-- End: Login Form Dark -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/login.js"></script>
 </body>
 
 </html>
