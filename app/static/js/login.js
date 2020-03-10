@@ -70,8 +70,10 @@ function getSentences(){
 			body: JSON.stringify(payload)
 		}).then(function(response) {
 			if (response.status == 200) {
-				console.log(response)
-	
+				response.json().then(function(data){
+					console.log(data)
+				}
+				);
 			}
 				
 			}
