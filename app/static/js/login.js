@@ -47,7 +47,7 @@ function getCookie(name) {
 
 function checkCookie() {
 	pid = getCookie("pid");
-	if (pid != "") {
+	if (pid != null) {
 	 document.getElementById('pidLabel').innerHTML = pid
 	} else {
 	  pid = prompt("Please enter your Participant ID:", "");
