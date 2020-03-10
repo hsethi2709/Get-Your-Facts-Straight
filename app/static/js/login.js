@@ -103,11 +103,11 @@ function getSentences(){
 								);
 						
 						});
-						document.getElementById('false').addEventListener('click', function(){
+						document.getElementById('fake').addEventListener('click', function(){
 							var payload = {
 								"pid": pid,
 								"Sentence":data[count],
-								"label": "False"
+								"label": "Fake"
 
 							};
 							url='https://www.getfactcheck.me/addSentenceToClient'
@@ -127,7 +127,7 @@ function getSentences(){
 								);
 						
 						});
-						document.getElementById('false').addEventListener('click', function(){
+						document.getElementById('alreadyKnow').addEventListener('click', function(){
 							notClicked = false
 						});
 						while (notClicked){}
