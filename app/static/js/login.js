@@ -31,7 +31,7 @@ function log_in(){
 		body: JSON.stringify(payload)
 	}).then(function(response) {
 		if (response.status == 200) {
-            window.location.replace("http://getfactcheck.me/pre");
+            window.location.replace("https://www.getfactcheck.me/pre");
 
 		}
 	        
