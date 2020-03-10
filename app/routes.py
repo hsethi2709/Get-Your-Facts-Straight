@@ -91,7 +91,7 @@ def addSentenceToClient():
     if cursor == None:
         final = {
                 "_id":requestJson['pid'],
-                "Sentences":{requestJson['sentence'] : requestJson['label']}
+                "Sentences":{requestJson['sentence'].replace('.','_') : requestJson['label']}
                 }
         if collection.insert_one(final):
             return "Inserted Successfully"
