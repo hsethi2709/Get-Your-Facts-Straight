@@ -1,6 +1,6 @@
-var pid = 10;
 function log_in(){
 	pid = document.getElementById('pid').value;
+	document.cookie = "pid="+pid;
 	age = document.getElementById('age').value;
 	console.log("PID and AGE are:", pid, age);
 
@@ -33,12 +33,28 @@ function log_in(){
 		);
         }
 }
-
-function setPID()
-{
-document.getElementById('pidLabel').innerHTML = pid;
-console.log("PID",pid);
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
 }
+
+function checkCookie() {
+	var username = getCookie("pid");
+	if (username != "") {
+	 document.getElementById('pidLabel').innerHTML = username
+	} else {
+	  username = prompt("Please enter your Participant ID:", "");
+	  if (username != "" && username != null) {
+		setCookie("pid", username, 365);
+	  }
+	}
+  }
 
                                     
         
