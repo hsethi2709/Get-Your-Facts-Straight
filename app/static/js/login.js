@@ -1,4 +1,4 @@
-var pid = 0;
+var pid = 10;
 
 function getPID()
 {
