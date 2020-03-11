@@ -22,6 +22,7 @@ function checkCookie() {
 	  }
 	}
   }
+checkCookie();
 sentences = []
 count = 0
 global_level = 0
