@@ -47,7 +47,7 @@ function getClientSentences(level){
 				response.json().then(function(data){
 					console.log(data)
 					sentences = data
-					document.getElementById("sentences").innerHTML = sentences[count]
+					document.getElementById("experimentSentences").innerHTML = sentences[count]
 					}
 				);
 	
@@ -87,7 +87,7 @@ document.getElementById('next').addEventListener('click', function(){
 				window.location.replace("https://www.getfactcheck.me/post");
 
 				}
-			document.getElementById("sentences").innerHTML = sentences[count]
+			document.getElementById("experimentSentences").innerHTML = sentences[count]
 		}
 			
 		}
