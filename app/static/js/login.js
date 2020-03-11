@@ -131,6 +131,8 @@ document.getElementById('true').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
+				window.location.replace("https://www.getfactcheck.me/experiment");
+
 				}
 			document.getElementById("sentences").innerHTML = sentences[count]
 		}
@@ -172,6 +174,8 @@ document.getElementById('fake').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
+				window.location.replace("https://www.getfactcheck.me/experiment");
+
 				}
 			document.getElementById("sentences").innerHTML = sentences[count]
 		}
@@ -197,6 +201,7 @@ document.getElementById('alreadyKnow').addEventListener('click', function(){
 			console.log("All levels completed")
 			experiment_level = shuffleArray(experiment_level)
 			console.log(experiment_level)
+			window.location.replace("https://www.getfactcheck.me/experiment");
 			}
 	}
 	document.getElementById("sentences").innerHTML = sentences[count]

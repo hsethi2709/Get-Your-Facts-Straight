@@ -22,6 +22,10 @@ def login():
 def home():
     return render_template("index.html", title="Get Fact Check")
 
+@app.route("/experiment")
+def home():
+    return render_template("experiment.html", title="Get Fact Check")
+
 @app.route('/index', methods=['POST'])
 def index():
     sentence = request.args.get('sentence')
