@@ -35,7 +35,7 @@ function getClientSentences(level){
 	console.log(pid)
 		var payload = {
 			'pid': pid,
-			'level': level
+			'level': level.toString()
 		};
 		url='https://www.getfactcheck.me/readClientSentences'
 		fetch(url, {
