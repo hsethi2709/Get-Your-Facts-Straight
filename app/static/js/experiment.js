@@ -12,7 +12,6 @@ function getCookie(name) {
 
 function checkCookie() {
 	pid = getCookie("pid");
-	console.log(pid)
 	if (pid != null) {
 	 document.getElementById('pidLabel').innerHTML = pid
 	} else {
@@ -32,6 +31,7 @@ getClientSentences(experiment_level[global_level])
 changeLevelDisplay()
 function getClientSentences(level){
 	console.log("Getting Client Sentences for Level:", level)
+	console.log(pid)
 		var payload = {
 			'pid': pid,
 			'level': level
