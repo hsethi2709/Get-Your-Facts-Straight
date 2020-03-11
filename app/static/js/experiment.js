@@ -35,7 +35,7 @@ function getClientSentences(level){
 			'pid': pid,
 			'level': level
 		};
-		url='https://www.getfactcheck.me/readMasterSentences'
+		url='https://www.getfactcheck.me/readClientSentences'
 		fetch(url, {
 			method:'post',
 			headers: {
