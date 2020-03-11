@@ -12,6 +12,7 @@ function getCookie(name) {
 
 function checkCookie() {
 	pid = getCookie("pid");
+	console.log(pid)
 	if (pid != null) {
 	 document.getElementById('pidLabel').innerHTML = pid
 	} else {
