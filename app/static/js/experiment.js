@@ -56,7 +56,7 @@ function getClientSentences(level){
 		)}
 
 function changeLevelDisplay(){
-	document.getElementById("levelDisplay").innerHTML = experiment_level[global_level]
+	document.getElementById("levelDisplay").innerHTML = "Level "+experiment_level[global_level];
 }
 
 // Function to shuffle the levels
