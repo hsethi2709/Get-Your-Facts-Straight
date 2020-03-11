@@ -118,7 +118,7 @@ def readSentences():
     collection = db['clientList_Sentences']
     requestJson = request.json
     cursor = collection.find_one({"_id":requestJson['pid']})
-    sentences = cursor[requestJson['level']].keys()
+    sentences = list(cursor[requestJson['level']].keys())
     if cursor == None:
         return "Error"
     else:
