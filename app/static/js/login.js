@@ -61,6 +61,7 @@ sentences = []
 count = 0
 final_count = 0
 global_level = 1
+experiment_level = [1,2,3,4]
 function getSentences(level){
 	console.log("Getting Sentences for Level:", level)
 		var payload = {
@@ -85,6 +86,18 @@ function getSentences(level){
 		}
 	}
 		)}
+
+// Function to shuffle the levels
+function shuffleArray(array) {
+			for (var i = array.length - 1; i > 0; i--) {
+				var j = Math.floor(Math.random() * (i + 1));
+				var temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+			return (array)
+		}
+
 // Button Click Events
 document.getElementById('true').addEventListener('click', function(){
 	var payload = {
@@ -116,6 +129,8 @@ document.getElementById('true').addEventListener('click', function(){
 			}
 				else{
 				console.log("All levels completed")
+				experiment_level = shuffleArray(experiment_level)
+				console.log(experiment_level)
 				}
 			document.getElementById("sentences").innerHTML = sentences[count]
 		}
@@ -155,6 +170,8 @@ document.getElementById('fake').addEventListener('click', function(){
 			}
 				else{
 				console.log("All levels completed")
+				experiment_level = shuffleArray(experiment_level)
+				console.log(experiment_level)
 				}
 			document.getElementById("sentences").innerHTML = sentences[count]
 		}
@@ -178,9 +195,12 @@ document.getElementById('alreadyKnow').addEventListener('click', function(){
 		}
 			else{
 			console.log("All levels completed")
+			experiment_level = shuffleArray(experiment_level)
+			console.log(experiment_level)
 			}
 	}
 	document.getElementById("sentences").innerHTML = sentences[count]
 		
 	
 });
+
