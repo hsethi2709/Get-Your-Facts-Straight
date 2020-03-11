@@ -23,7 +23,7 @@ def home():
     return render_template("index.html", title="Get Fact Check")
 
 @app.route("/experiment")
-def home():
+def experiment():
     return render_template("experiment.html", title="Get Fact Check")
 
 @app.route('/index', methods=['POST'])
