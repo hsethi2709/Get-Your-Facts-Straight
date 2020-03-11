@@ -118,10 +118,13 @@ def readSentences():
     collection = db['clientList_Sentences']
     requestJson = request.json
     cursor = collection.find_one({"_id":requestJson['pid']})
-    sentences = list(cursor[requestJson['level']].keys())
     if cursor == None:
         return "Error"
     else:
+        sentences = []
+        for sentence in cursor[requestJson['level']].keys():
+            sentences.append(sentence.replace('_','.'))
+    
         return json.dumps(sentences)
 
 @app.route("/readMasterSentences", methods=['POST'])
