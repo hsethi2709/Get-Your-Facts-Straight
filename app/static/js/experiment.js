@@ -77,6 +77,20 @@ document.getElementById('next').addEventListener('click', function(){
 			count += 1
 			console.log("Count:", count)
 			if (count == 1){
+				console.log('Moving to Feedback Page')
+				if (experiment_level[global_level] == 1){
+					window.open("https://harshitsethi.typeform.com/to/DyauDC");
+				}
+				else if (experiment_level[global_level] == 2){
+					window.open("https://harshitsethi.typeform.com/to/g2wikq");
+				}
+				else if (experiment_level[global_level] == 3){
+					window.open("https://harshitsethi.typeform.com/to/UwkUPV");
+				}
+				else {
+					window.open("https://harshitsethi.typeform.com/to/T5HCPC");
+
+				}
 				console.log("Moving to next level")
 				global_level += 1
 				if (global_level<4){
