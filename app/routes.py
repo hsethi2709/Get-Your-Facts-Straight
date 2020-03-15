@@ -23,7 +23,7 @@ def home():
     return render_template("index.html", title="Get Fact Check")
 
 @app.route("/training")
-def home():
+def train():
     return render_template("training.html", title="Get Fact Check")
 
 @app.route("/experiment")

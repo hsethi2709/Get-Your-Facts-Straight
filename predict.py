@@ -102,8 +102,8 @@ def getResponse(claim,level):
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['label'] = 'SUPPORTS'
-            claim_output['SUPPORTS'] = ['From the evidence so far, the COVID-19 virus can be transmitted in ALL AREAS, including areas with hot and humid weather.']
-            claim_output['REFUTES'] = ['A group of U.S. and Iranian researchers concluded that the places Covid-19 infection has mostly taken hold so far -- such as Wuhan in central China, Milan and Seattle -- share similarly mild humidity and temperatures ranging from about 5 to 11 degrees Celsius (41 to 52 degrees Fahrenheit) in winter.']
+            claim_output['SUPPORTS'] = [['', 3.541804552078247,'From the evidence so far, the COVID-19 virus can be transmitted in ALL AREAS, including areas with hot and humid weather.']]
+            claim_output['REFUTES'] = [['',3,'A group of U.S. and Iranian researchers concluded that the places Covid-19 infection has mostly taken hold so far -- such as Wuhan in central China, Milan and Seattle -- share similarly mild humidity and temperatures ranging from about 5 to 11 degrees Celsius (41 to 52 degrees Fahrenheit) in winter.']]
             return claim_output
     elif level == 4:
         if claim == "Taking a hot bath does not prevent the new coronavirus disease":
