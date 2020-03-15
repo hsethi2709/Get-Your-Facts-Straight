@@ -184,7 +184,11 @@ document.getElementById('fake').addEventListener('click', function(){
 		);
 
 });
+document.getElementById("done").addEventListener('click', function(){
 
+	window.location.replace("https://www.getfactcheck.me/home")
+
+});
 document.getElementById('alreadyKnow').addEventListener('click', function(){
 		count += 1
 		console.log("Count:", count)

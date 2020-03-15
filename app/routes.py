@@ -22,6 +22,10 @@ def login():
 def home():
     return render_template("index.html", title="Get Fact Check")
 
+@app.route("/training")
+def home():
+    return render_template("training.html", title="Get Fact Check")
+
 @app.route("/experiment")
 def experiment():
     return render_template("experiment.html", title="Get Fact Check")
