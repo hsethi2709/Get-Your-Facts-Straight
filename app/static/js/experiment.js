@@ -31,6 +31,7 @@ shuffleArray(experiment_level)
 getClientSentences(experiment_level[global_level])
 changeLevelDisplay()
 function getClientSentences(level){
+	document.cookie = "level="+level;
 	console.log("Getting Client Sentences for Level:", level)
 	console.log(pid)
 		var payload = {
@@ -94,7 +95,6 @@ document.getElementById('next').addEventListener('click', function(){
 				console.log("Moving to next level")
 				global_level += 1
 				if (global_level<4){
-				document.cookie = "level="+experiment_level[global_level];
 				getClientSentences(experiment_level[global_level])
 				count = 0
 				changeLevelDisplay()
