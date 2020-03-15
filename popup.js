@@ -1,4 +1,14 @@
 // dynamic changing of html content
+var level_value;
+function getCookies(domain, name) 
+    {
+        chrome.cookies.get({"url": "www.getfactcheck.me", "name": "level"}, function(cookie) {
+			level_value = cookie.value;
+			chrome.storage.sync.set({level: level_value})
+			console.log("Level Value set as", level_value)
+        });
+	}
+	
 function start(){
 	chrome.storage.sync.get('signed_in', function(data){
 		console.log("The current value is:", data.signed_in)
@@ -6,11 +16,13 @@ function start(){
 	chrome.storage.sync.get('signed_in', function(data) {
     if (data.signed_in) {
 		document.getElementById('login').style.display = "none";
-		document.getElementById('level').style.display = "inline-block";
+		// document.getElementById('level').style.display = "inline-block";
+		document.getElementById('experiment').style.display = "block";
+
 		
     } else {
 		document.getElementById('login').style.display = "inline-block";
-		document.getElementById('level').style.display = "none";
+		document.getElementById('experiment').style.display = "none";
 
     }
   });

@@ -94,6 +94,7 @@ document.getElementById('next').addEventListener('click', function(){
 				console.log("Moving to next level")
 				global_level += 1
 				if (global_level<4){
+				document.cookie = "level="+experiment_level[global_level];
 				getClientSentences(experiment_level[global_level])
 				count = 0
 				changeLevelDisplay()
