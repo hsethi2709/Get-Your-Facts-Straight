@@ -29,6 +29,7 @@ global_level = 0
 experiment_level = [1,2,3,4]
 shuffleArray(experiment_level)
 getClientSentences(experiment_level[global_level])
+document.cookie = "level="+experiment_level[global_level];
 changeLevelDisplay()
 function getClientSentences(level){
 	document.cookie = "level="+level;

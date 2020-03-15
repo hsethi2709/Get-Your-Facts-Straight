@@ -1,8 +1,8 @@
 // dynamic changing of html content
 var level_value;
-function getCookies(domain, name) 
+function getCookies() 
     {
-        chrome.cookies.get({"url": "www.getfactcheck.me", "name": "level"}, function(cookie) {
+        chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "level"}, function(cookie) {
 			level_value = cookie.value;
 			chrome.storage.sync.set({level: level_value})
 			console.log("Level Value set as", level_value)
@@ -18,6 +18,7 @@ function start(){
 		document.getElementById('login').style.display = "none";
 		// document.getElementById('level').style.display = "inline-block";
 		document.getElementById('experiment').style.display = "block";
+		getCookies();
 
 		
     } else {
