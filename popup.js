@@ -6,6 +6,15 @@ function getCookies()
 			level_value = cookie.value;
 			chrome.storage.sync.set({level: level_value})
 			console.log("Level Value set as", level_value)
+			document.getElementById('login').style.display = "none";
+			if (level_value == 3)
+				{
+				document.getElementById('level3experiment').style.display = "block";
+				}
+			else
+				{
+				document.getElementById('experiment').style.display = "block";
+				}	
         });
 	}
 	
@@ -15,15 +24,13 @@ function start(){
 	});
 	chrome.storage.sync.get('signed_in', function(data) {
     if (data.signed_in) {
-		document.getElementById('login').style.display = "none";
-		// document.getElementById('level').style.display = "inline-block";
-		document.getElementById('experiment').style.display = "block";
 		getCookies();
-
 		
-    } else {
+	} 
+	else {
 		document.getElementById('login').style.display = "inline-block";
 		document.getElementById('experiment').style.display = "none";
+		document.getElementById('level3experiment').style.display = "none";
 
     }
   });
@@ -51,13 +58,14 @@ chrome.tabs.executeScript( {
 	document.body.appendChild(div);
 
 	// making fact check button invisible
-	document.getElementById("fact_check").style.visibility='hidden'
-	document.getElementById("logout_button").style.visibility='hidden'
+	document.getElementById("fact_check").style.display='none'
+	document.getElementById("logout_button").style.display='none'
 	document.getElementById("fact_check_3").style.visibility='hidden'
 	chrome.storage.sync.get('level', function(data){
 	
 	// sending request to the server
 	var level_data = data.level;
+	console.log("Sending request for level", level_data)
 	var raw = JSON.stringify({"level":level_data});
 	var requestOptions = {
   	method: 'POST',
@@ -108,8 +116,8 @@ chrome.tabs.executeScript( {
 			}
 			else{
 			document.getElementById("loader").remove();
-			document.getElementById("fact_check").style.visibility='visible';
-			document.getElementById("logout_button").style.visibility='visible';
+			// document.getElementById("fact_check").style.visibility='visible';
+			// document.getElementById("logout_button").style.visibility='visible';
 			document.getElementById("evidence_head").style.display='inline-block';
 			document.getElementById("claim").innerHTML = "Claim: "+data.claim;
 

@@ -2,6 +2,12 @@
 <html>
 
 <style>
+  .footer-dark {
+    margin: auto;
+    padding: 5%;
+  color: #f0f9ff;
+  background-color: #282d32;
+}
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
@@ -26,6 +32,7 @@ body {
 </style>
 <head>
   <script src="https://kit.fontawesome.com/13b884fbe0.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div>
@@ -60,9 +67,9 @@ body {
         <input type="button" id="level4" value="Level 4">
         <br>
         <br>
-      <br>
+      <!-- <br>
       <input type="submit" value="Logout" id="logout_button">
-      <br>
+      <br> -->
     </div>
   </div>
     <div id="experiment" style="display: none;">
@@ -70,14 +77,25 @@ body {
       <h3 id="claim"></h3>
       <h3 id="evidence_head" style="display: none;">Evidences</h3>
       <ul></ul>
-      <div id="feedback" style="display: none;text-align: center;">
+      <!-- <div id="feedback" style="display: none;text-align: center;">
         <p>How satisfied are you?</p>
         <br>
           <input type="range" min="1" max="100" value="50" class="slider" id="myRange"><label id="sliderValue">50</label>
-          <div style="text-align: left;"><button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>          
-          <div style="text-align: right;"><button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
+          <div style="text-align: left;"><button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></i></button></div>          
+          <div style="text-align: right;"><button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></i></button></div>
           <div style="text-align: center;"><p id="thanks"></p></div>
-      </div>
+      </div> -->
+      <div id ="feedback" style="display: none;text-align: center;" class="footer-dark">
+        <h2>Feedback</h2>
+        <div>
+            <p><span style="text-decoration: underline;">Please indicate your satisfaction</span></p><small>Not Satisfied</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="myRange"/><small>Satisfied</small></div>
+        <div>
+            <p><span style="text-decoration: underline;">Please indicate your likeness</span></p>
+            <button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></i></button>
+            <button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></i></button>
+            <div style="text-align: center;"><p id="thanks"></p></div>
+        </div>
+    </div>
         <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
         <br>
         <div style="text-align: center;"><input type="submit" value="Logout" id="logout_button"></div>

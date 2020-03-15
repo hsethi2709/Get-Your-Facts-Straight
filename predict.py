@@ -22,8 +22,9 @@ logit_conv[1] = 'SUPPORTS'
 logit_conv[0] = 'NOT ENOUGH INFO'
 logit_conv[2] = 'REFUTES'
 
-def predict_label(claim, level):
+def predict_label(claim, level=2):
     print("LEVEL", level)
+    level = int(level)
     logit_conv = {}
     level = int(level)
     logit_conv[1] = 'SUPPORTS'
