@@ -52,6 +52,7 @@ chrome.tabs.executeScript( {
 
 	// making fact check button invisible
 	document.getElementById("fact_check").style.visibility='hidden'
+	document.getElementById("logout_button").style.visibility='hidden'
 	document.getElementById("fact_check_3").style.visibility='hidden'
 	chrome.storage.sync.get('level', function(data){
 	
@@ -82,6 +83,7 @@ chrome.tabs.executeScript( {
 				document.getElementById("claim_3").innerHTML = "Claim: "+data.claim;
 				document.getElementById("evidence_support").style.display='block';
 				ul = document.getElementById("support")
+				console.log(data)
 				for (var i = 0; i < data.SUPPORTS.length; i++) {
 					var evidence_item = data.SUPPORTS[i][2];
 					var prediction_score = data.SUPPORTS[i][1];
@@ -106,8 +108,9 @@ chrome.tabs.executeScript( {
 			}
 			else{
 			document.getElementById("loader").remove();
-			document.getElementById("fact_check").style.visibility='visible'
-			document.getElementById("evidence_head").style.display='inline-block'
+			document.getElementById("fact_check").style.visibility='visible';
+			document.getElementById("logout_button").style.visibility='visible';
+			document.getElementById("evidence_head").style.display='inline-block';
 			document.getElementById("claim").innerHTML = "Claim: "+data.claim;
 
 			// Populating Evidences List
