@@ -149,7 +149,8 @@ document.getElementById('fake').addEventListener('click', function(){
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "Fake",
-		"level": global_level.toString()
+		"level": global_level.toString(),
+		"stage":"pre"
 
 	};
 	url='https://www.getfactcheck.me/addSentenceToClient'
@@ -187,11 +188,7 @@ document.getElementById('fake').addEventListener('click', function(){
 		);
 
 });
-document.getElementById("done").addEventListener('click', function(){
 
-	window.location.replace("https://www.getfactcheck.me/home")
-
-});
 document.getElementById('alreadyKnow').addEventListener('click', function(){
 		count += 1
 		console.log("Count:", count)

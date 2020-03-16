@@ -149,7 +149,8 @@ document.getElementById('fake').addEventListener('click', function(){
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "Fake",
-		"level": global_level.toString()
+        "level": global_level.toString(),
+        "stage":"post"
 
 	};
 	url='https://www.getfactcheck.me/addSentenceToClient'
