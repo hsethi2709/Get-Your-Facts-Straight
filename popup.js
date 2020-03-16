@@ -3,7 +3,13 @@ var level_value;
 function getCookies() 
     {
         chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "level"}, function(cookie) {
+			if (cookie == null){
+				level_value = 2;
+			}
+			else
+			{
 			level_value = cookie.value;
+			}
 			chrome.storage.sync.set({level: level_value})
 			console.log("Level Value set as", level_value)
 			document.getElementById('login').style.display = "none";

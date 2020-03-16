@@ -134,8 +134,9 @@ document.getElementById('true').addEventListener('click', function(){
 				window.location.replace("https://www.getfactcheck.me/experiment");
 
 				}
-			document.getElementById("sentences").innerHTML = sentences[count]
 		}
+		document.getElementById("sentences").innerHTML = sentences[count]
+
 			
 		}}
 		);
@@ -177,8 +178,9 @@ document.getElementById('fake').addEventListener('click', function(){
 				window.location.replace("https://www.getfactcheck.me/experiment");
 
 				}
-			document.getElementById("sentences").innerHTML = sentences[count]
 		}
+		document.getElementById("sentences").innerHTML = sentences[count]
+
 			
 		}}
 		);
