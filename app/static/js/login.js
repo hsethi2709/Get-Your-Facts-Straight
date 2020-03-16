@@ -119,7 +119,7 @@ document.getElementById('true').addEventListener('click', function(){
 			count += 1
 			console.log("Count:", count)
 			final_count += 1
-			if (final_count == 1){
+			if (final_count == 5){
 				console.log("Moving to next level")
 				global_level += 1
 				if (global_level<5){
@@ -162,7 +162,7 @@ document.getElementById('fake').addEventListener('click', function(){
 			count += 1
 			console.log("Count:", count)
 			final_count += 1
-			if (final_count == 1){
+			if (final_count == 5){
 				console.log("Moving to next level")
 				global_level += 1
 				if (global_level<5){
@@ -193,7 +193,7 @@ document.getElementById('alreadyKnow').addEventListener('click', function(){
 		count += 1
 		console.log("Count:", count)
 		console.log("Already Know")
-		if (final_count == 1){
+		if (final_count == 5){
 			console.log("Moving to next level")
 			global_level += 1
 			if (global_level<5){

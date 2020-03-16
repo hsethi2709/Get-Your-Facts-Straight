@@ -78,7 +78,7 @@ function shuffleArray(array) {
 document.getElementById('next').addEventListener('click', function(){
 			count += 1
 			console.log("Count:", count)
-			if (count == 1){
+			if (count == 5){
 				console.log('Moving to Feedback Page')
 				if (experiment_level[global_level] == 1){
 					window.open("https://harshitsethi.typeform.com/to/DyauDC");
