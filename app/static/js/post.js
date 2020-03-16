@@ -65,7 +65,8 @@ experiment_level = [1,2,3,4]
 function getSentences(level){
 	console.log("Getting Sentences for Level:", level)
 		var payload = {
-            'level': level
+            'pid': pid,
+            "level":level
 		};
 		url='https://www.getfactcheck.me/readClientSentences'
 		fetch(url, {
