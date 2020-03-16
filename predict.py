@@ -104,6 +104,22 @@ def getResponse(claim,level):
             claim_output['label'] = 'SUPPORTS'
             claim_output['SUPPORTS'] = [['', 3.541804552078247,'From the evidence so far, the COVID-19 virus can be transmitted in ALL AREAS, including areas with hot and humid weather.']]
             claim_output['REFUTES'] = [['',3,'A group of U.S. and Iranian researchers concluded that the places Covid-19 infection has mostly taken hold so far -- such as Wuhan in central China, Milan and Seattle -- share similarly mild humidity and temperatures ranging from about 5 to 11 degrees Celsius (41 to 52 degrees Fahrenheit) in winter.']]
+        elif claim == "Arsonists are responsible for Australia’s Bushfire Crisis":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['label'] = "NOT ENOUGH INFO"
+            claim_output['SUPPORTS'] = [['', 2.54, 'it is true that every year a handful of fire bugs start fires - all mostly very small - less than 1 per cent of the land burned in NSW this year is the result of the work of arsonists.']]
+            claim_output['REJECTS'] = [['', 3.7,'The vast majority of the 2019/2020 Australian bushfires were all started by dry lightning strikes including the largest mega-blazes in NSW.']]
+        elif claim == "Euthanasia should be illegal all around the world":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['REFUTES'] = [['',2.9, "Death is a private matter and the state should not interfere with the individual's right to die."]]
+            claim_output['SUPPORTS'] = [['',2.5, 'it would discourage the search for new cures and treatments for the terminally ill']]
+        elif claim == "Abortion is a women's right":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['SUPPORTS'] = [['', 3.8,'women have a moral right to decide what to do with their bodies'],['',3,6,'the right to abortion is vital for individual women to achieve their full potential']]
+            claim_output['REFUTES'] = [['',3.4,"We believe in a woman's right to control her body, and she deserves this right no matter where she lives, even if she is still living inside her mother womb."]]
             return claim_output
     elif level == 4:
         if claim == "Taking a hot bath does not prevent the new coronavirus disease":
