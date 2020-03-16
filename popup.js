@@ -66,7 +66,7 @@ chrome.tabs.executeScript( {
 	// making fact check button invisible
 	document.getElementById("fact_check").style.display='none'
 	document.getElementById("logout_button").style.display='none'
-	document.getElementById("fact_check_3").style.visibility='hidden'
+	document.getElementById("fact_check_3").style.display='none'
 	chrome.storage.sync.get('level', function(data){
 	
 	// sending request to the server
@@ -93,7 +93,7 @@ chrome.tabs.executeScript( {
 		response.json().then(function(data) {
 			if (level_data == 3){
 				document.getElementById("loader").remove();
-				document.getElementById("fact_check_3").style.visibility='visible';
+				// document.getElementById("fact_check_3").style.visibility='visible';
 				document.getElementById("claim_3").innerHTML = "Claim: "+data.claim;
 				document.getElementById("evidence_support").style.display='block';
 				ul = document.getElementById("support")
@@ -108,6 +108,12 @@ chrome.tabs.executeScript( {
 				}
 				document.getElementById("evidence_refutes").style.display='block';
 				ul = document.getElementById("refutes")
+				if (data.REFUTES.length == 0){
+					var listItem = document.createElement("li");
+					listItem.style.marginBottom = "6px";
+					listItem.innerHTML = "NONE";
+					ul.appendChild(listItem);
+				}
 				for (var i = 0; i < data.REFUTES.length; i++) {
 					var evidence_item = data.REFUTES[i][2];
 					var prediction_score = data.REFUTES[i][1];
