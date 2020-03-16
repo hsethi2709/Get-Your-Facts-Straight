@@ -102,7 +102,7 @@ document.getElementById('next').addEventListener('click', function(){
 			}
 				else{
 				console.log("All levels completed")
-				window.location.replace("https://www.getfactcheck.me/post");
+				window.location.replace("https://www.getfactcheck.me/postExperiment");
 
 				}
 		}

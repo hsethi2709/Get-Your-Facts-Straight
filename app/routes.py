@@ -30,6 +30,11 @@ def train():
 def experiment():
     return render_template("experiment.html", title="Get Fact Check")
 
+@app.route("/postExperiment")
+def postExperiment():
+    return render_template("postExperiment.html", title="Get Fact Check")
+
+
 @app.route('/index', methods=['POST'])
 def index():
     sentence = request.args.get('sentence')
@@ -96,24 +101,35 @@ def addSentenceToClient():
     collection = db['clientList_Sentences']
     requestJson = request.json
     cursor = collection.find_one({'_id': requestJson['pid']})
-    if cursor == None:
-        final = {
-                "_id":requestJson['pid'],
-                requestJson['level']:{requestJson['sentence'].replace('.','_') : requestJson['label']}
-                }
-        if collection.insert_one(final):
-            return "Inserted Successfully"
+    if requestJson['stage'] == 'pre':
+        if cursor == None:
+            final = {
+                    "_id":requestJson['pid'],
+                    requestJson['level']:{"pre":{requestJson['sentence'].replace('.','_') : requestJson['label']}}
+                    }
+            if collection.insert_one(final):
+                return "Inserted Successfully"
+            else:
+                return "Insertion Failed"
         else:
-            return "Insertion Failed"
-    else:
-        final = copy.deepcopy(cursor)
-        if requestJson['level'] not in final:
-            final[requestJson['level']] = {}
-        final[requestJson['level']][requestJson['sentence']] = requestJson['label']
-        if collection.update(cursor, final, upsert=False):
-            return {'status':200}
-        else:
-            return {'status': 500}
+            final = copy.deepcopy(cursor)
+            if requestJson['level'] not in final:
+                final[requestJson['level']] = {'pre':{}}
+            final[requestJson['level']]['pre'][requestJson['sentence']] = requestJson['label']
+            if collection.update(cursor, final, upsert=False):
+                return {'status':200}
+            else:
+                return {'status': 500}
+    elif requestJson['stage'] == 'post':
+
+            final = copy.deepcopy(cursor)
+            if requestJson['level'] not in final:
+                final[requestJson['level']] = {'post':{}}
+            final[requestJson['level']]['post'][requestJson['sentence']] = requestJson['label']
+            if collection.update(cursor, final, upsert=False):
+                return {'status':200}
+            else:
+                return {'status': 500}
 
 @app.route("/readClientSentences", methods=['POST'])
 def readSentences():
@@ -126,7 +142,7 @@ def readSentences():
         return "Error"
     else:
         sentences = []
-        for sentence in cursor[requestJson['level']].keys():
+        for sentence in cursor[requestJson['level']]['pre'].keys():
             sentences.append(sentence.replace('_','.'))
     
         return json.dumps(sentences)

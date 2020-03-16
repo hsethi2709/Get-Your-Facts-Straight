@@ -65,9 +65,9 @@ experiment_level = [1,2,3,4]
 function getSentences(level){
 	console.log("Getting Sentences for Level:", level)
 		var payload = {
-			'level': level
+            'level': level
 		};
-		url='https://www.getfactcheck.me/readMasterSentences'
+		url='https://www.getfactcheck.me/readClientSentences'
 		fetch(url, {
 			method:'post',
 			headers: {
@@ -104,8 +104,8 @@ document.getElementById('true').addEventListener('click', function(){
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "True",
-		"level": global_level.toString(),
-		"stage": "pre"
+        "level": global_level.toString(),
+        "stage":"post"
 
 	};
 	url='https://www.getfactcheck.me/addSentenceToClient'
@@ -132,7 +132,7 @@ document.getElementById('true').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
-				window.location.replace("https://www.getfactcheck.me/experiment");
+				window.location.replace("https://www.getfactcheck.me/post");
 
 				}
 		}
@@ -176,7 +176,7 @@ document.getElementById('fake').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
-				window.location.replace("https://www.getfactcheck.me/experiment");
+				window.location.replace("https://www.getfactcheck.me/post");
 
 				}
 		}
@@ -187,32 +187,5 @@ document.getElementById('fake').addEventListener('click', function(){
 		);
 
 });
-document.getElementById("done").addEventListener('click', function(){
 
-	window.location.replace("https://www.getfactcheck.me/home")
-
-});
-document.getElementById('alreadyKnow').addEventListener('click', function(){
-		count += 1
-		console.log("Count:", count)
-		console.log("Already Know")
-		if (final_count == 5){
-			console.log("Moving to next level")
-			global_level += 1
-			if (global_level<5){
-			getSentences(global_level)
-			count = 0
-			final_count = 0	
-		}
-			else{
-			console.log("All levels completed")
-			experiment_level = shuffleArray(experiment_level)
-			console.log(experiment_level)
-			window.location.replace("https://www.getfactcheck.me/experiment");
-			}
-	}
-	document.getElementById("sentences").innerHTML = sentences[count]
-		
-	
-});
 
