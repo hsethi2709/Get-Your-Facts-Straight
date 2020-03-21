@@ -28,6 +28,33 @@ body {
 {
   text-align: center;
 }
+output { 
+  position: absolute;
+  background-image: linear-gradient(top, #444444, #999999);
+  width: 40px; 
+  height: 30px; 
+  text-align: center; 
+  color: white; 
+  border-radius: 10px; 
+  display: inline-block; 
+  font: bold 15px/30px Georgia;
+  bottom: 175%;
+  left: 0;
+  margin-left: -1%;
+}
+output:after { 
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #999999;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -1px;
+}
 
 </style>
 <head>
@@ -90,9 +117,11 @@ body {
         <div>
             <p><span style="text-decoration: underline;">Please indicate your satisfaction</span></p><small>Not Satisfied</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="myRange"/><small>Satisfied</small></div>
         <div>
-            <p><span style="text-decoration: underline;">Please indicate your likeness</span></p>
+            <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p><small>0</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="trustRange"/><small>100</small></div>
+            <button id="submitFeedback">Submit</button>
+            <!-- <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p>
             <button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></i></button>
-            <button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></i></button>
+            <button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></i></button> -->
             <div style="text-align: center;"><p id="thanks"></p></div>
         </div>
     </div>
@@ -113,20 +142,22 @@ body {
         <div>
             <p><span style="text-decoration: underline;">Please indicate your satisfaction</span></p><small>Not Satisfied</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="myRange_3"/><small>Satisfied</small></div>
         <div>
-            <p><span style="text-decoration: underline;">Please indicate your likeness</span></p>
+            <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p><small>0</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="trustRange_3"/><small>100</small></div>
+            <button id="submitFeedback_3" value="Submit"></button>
+            <!-- <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p>
             <button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></i></button>
-            <button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></i></button>
+            <button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></i></button> -->
             <div style="text-align: center;"><p id="thanks_3"></p></div>
         </div>
-    </div>
+  
       <!-- <div id="feedback_3" style="display:none">
         <p>How satisfied are you?</p>
         <br>
           <input type="range" min="1" max="100" value="50" class="slider" id="myRange_3"><label id="sliderValue_3">50</label>
           <div style="text-align: left;"><button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>
           <div style="text-align: right;"><button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
-          <p id="thanks_3"></p>
-      </div> -->
+          <p id="thanks_3"></p> -->
+      <!-- </div> -->
       <div style="text-align: center;"><button id="fact_check_3">Check the Fact</button></div>
     </div>
 

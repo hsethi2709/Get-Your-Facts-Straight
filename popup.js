@@ -165,7 +165,8 @@ chrome.tabs.executeScript( {
 
 	}});
 }
-function sendUpFeedback(){
+
+function sendFeedback(){
 	chrome.storage.sync.get(['level','p_id','p_age'], function(data){
 		if (data.level == 3) {
 			var payload = {}
@@ -174,8 +175,8 @@ function sendUpFeedback(){
 		p_age: data.p_age,
 		sentence:document.getElementById('claim_3').innerHTML,
 		level: data.level,
-		"feedback_thumb": 1,
-		"satisfaction_value": document.getElementById('myRange').value
+		"satisfaction_value": document.getElementById('myRange_3').value,
+		"trust_value": document.getElementById('trustRange_3').value
 	};
 }
 else{
@@ -184,52 +185,8 @@ else{
 		p_age: data.p_age,
 		sentence:document.getElementById('claim').innerHTML,
 		level: data.level,
-		"feedback_thumb": 1,
-		"satisfaction_value": document.getElementById('myRange').value
-	};
-}
-	url='https://www.getfactcheck.me/sendFeedback'
-	fetch(url, {
-		method:'post',
-		headers: {
-			'Content-Type': 'application/json'
-		  },
-		body: JSON.stringify(payload)
-	}).then(function(response) {
-		if (response.status == 200) {
-			if (data.level ==3) {
-			document.getElementById('thanks_3').innerHTML = "Thanks for the feedback!"		
-			}
-		else{
-			document.getElementById('thanks').innerHTML = "Thanks for the feedback!"		
-		}
-		}
-	
-		}
-		);
-});
-}
-function sendDownFeedback(){
-	chrome.storage.sync.get(['level','p_id','p_age'], function(data){
-		if (data.level == 3) {
-			var payload = {}
-	payload = {
-		id: data.p_id,
-		p_age: data.p_age,
-		sentence:document.getElementById('claim_3').innerHTML,
-		level: data.level,
-		"feedback_thumb": -1,
-		"satisfaction_value": document.getElementById('myRange').value
-	};
-}
-else{
-	payload = {
-		id: data.p_id,
-		p_age: data.p_age,
-		sentence:document.getElementById('claim').innerHTML,
-		level: data.level,
-		"feedback_thumb": -1,
-		"satisfaction_value": document.getElementById('myRange').value
+		"satisfaction_value": document.getElementById('myRange').value,
+		"trust_value": document.getElementById('trustRange').value
 	};
 }
 	url='https://www.getfactcheck.me/sendFeedback'
@@ -252,10 +209,13 @@ else{
 		);
 });
 }
-document.getElementById('thumbsUp').addEventListener('click', sendUpFeedback);
-document.getElementById('thumbsDown').addEventListener('click', sendDownFeedback);
-document.getElementById('thumbsUp_3').addEventListener('click', sendUpFeedback);
-document.getElementById('thumbsDown_3').addEventListener('click', sendDownFeedback);
+
+document.getElementById('submitFeedback').addEventListener('click', sendFeedback)
+document.getElementById('submitFeedback_3').addEventListener('click', sendFeedback)
+// document.getElementById('thumbsUp').addEventListener('click', sendUpFeedback);
+// document.getElementById('thumbsDown').addEventListener('click', sendDownFeedback);
+// document.getElementById('thumbsUp_3').addEventListener('click', sendUpFeedback);
+// document.getElementById('thumbsDown_3').addEventListener('click', sendDownFeedback);
 // click events
 document.getElementById('fact_check').addEventListener('click',getText);
 document.getElementById('fact_check_3').addEventListener('click',getText);
@@ -325,3 +285,5 @@ document.getElementById("logout_button").addEventListener('click', function(){
 	chrome.storage.sync.set({signed_in: false})
 	start();
 });
+
+

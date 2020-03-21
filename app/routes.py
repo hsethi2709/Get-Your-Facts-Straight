@@ -66,7 +66,7 @@ def sendFeedback():
     final = copy.deepcopy(cursor)
     level = str(requestJson['level'])
     final['experiments'][level][requestJson['sentence']] = {}
-    final['experiments'][level][requestJson['sentence']]['feedback'] = requestJson['feedback_thumb'] 
+    final['experiments'][level][requestJson['sentence']]['trustScore'] = requestJson['trust_value'] 
     final["experiments"][level][requestJson['sentence']]['satisfaction_value'] = requestJson['satisfaction_value']
     if col.update(cursor, final, upsert=False):
         return {"status": 200}
