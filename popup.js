@@ -23,6 +23,22 @@ function getCookies()
 				}	
         });
 	}
+function getLoginCookies() 
+    {
+        chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "pid"}, function(cookie) {
+			pid = cookie.value;
+			chrome.storage.sync.set({p_id: pid})
+			console.log("PID set as", pid)
+
+	});
+		chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "age"}, function(cookie) {
+			age = cookie.value;
+			chrome.storage.sync.set({p_age: age})
+			console.log("AGE set as", age)
+			chrome.storage.sync.set({signed_in: true})
+
+});
+}
 	
 function start(){
 	chrome.storage.sync.get('signed_in', function(data){
@@ -41,6 +57,7 @@ function start(){
     }
   });
 }
+getLoginCookies();
 start();
 document.getElementById('myRange').addEventListener("change", function() {
     document.getElementById("sliderValue").textContent = document.getElementById('myRange').value;
@@ -244,43 +261,25 @@ document.getElementById('level4').addEventListener('click', function(){
 	chrome.storage.sync.set({level: 4})
 
 });
-document.getElementById('login_button').addEventListener("click", function(){
-	chrome.storage.sync.set({signed_in: true})
-	pid = document.getElementById('pid').value;
-	age = document.getElementById('age').value;
-	console.log("PID and AGE are:", pid, age);
+// document.getElementById('login_button').addEventListener("click", function(){
+// 	chrome.storage.sync.set({signed_in: true})
+// 	pid = document.getElementById('pid').value;
+// 	age = document.getElementById('age').value;
+// 	console.log("PID and AGE are:", pid, age);
 
-	if (pid == "" || pid == null){
-		document.getElementById('pid').focus();
-	}
-	else if (age == "" || age == null){
-		document.getElementById('age').focus();
-	}
-	else{
+// 	if (pid == "" || pid == null){
+// 		document.getElementById('pid').focus();
+// 	}
+// 	else if (age == "" || age == null){
+// 		document.getElementById('age').focus();
+// 	}
+// 	else{
 
-	chrome.storage.sync.set({p_id: pid})
-	chrome.storage.sync.set({p_age: age})
-	// var payload = {
-	// 	_id: pid,
-	// 	p_age: age
-	// };
-	start();
-	// url='https://www.getfactcheck.me/addUser'
-	// fetch(url, {
-	// 	method:'post',
-	// 	headers: {
-	// 		'Content-Type': 'application/json'
-	// 	  },
-	// 	body: JSON.stringify(payload)
-	// }).then(function(response) {
-	// 	if (response.status == 200) {
-	// 		start();		
-	// 	}
-	
-	// 	}
-	// 	);
-	}
-});
+// 	chrome.storage.sync.set({p_id: pid})
+// 	chrome.storage.sync.set({p_age: age})
+// 	start();
+// 	}
+// });
 document.getElementById("logout_button").addEventListener('click', function(){
 	chrome.storage.sync.set({signed_in: false})
 	start();

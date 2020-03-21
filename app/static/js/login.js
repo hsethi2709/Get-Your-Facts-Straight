@@ -3,6 +3,7 @@ function log_in(){
 	pid = document.getElementById('pid').value;
 	document.cookie = "pid="+pid;
 	age = document.getElementById('age').value;
+	document.cookie = "age="+age;
 	console.log("PID and AGE are:", pid, age);
 
 	if (pid == "" || pid == null){
