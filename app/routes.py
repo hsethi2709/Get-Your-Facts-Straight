@@ -27,7 +27,7 @@ def train():
     return render_template("training.html", title="Get Fact Check")
 
 @app.route("/welcome")
-def train():
+def welcome():
     return render_template("welcome.html", title="Get Fact Check")
 
 @app.route("/experiment")
