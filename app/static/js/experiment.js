@@ -60,7 +60,18 @@ function getClientSentences(level){
 		)}
 
 function changeLevelDisplay(){
-	document.getElementById("levelDisplay").innerHTML = "Level "+experiment_level[global_level];
+	if (experiment_level[global_level] == 1){
+		document.getElementById("levelDisplay").innerHTML = "Single Evidence"
+	}
+	else if (experiment_level[global_level] == 2){
+		document.getElementById("levelDisplay").innerHTML = "Three Evidences"
+	}
+	else if (experiment_level[global_level] == 3){
+		document.getElementById("levelDisplay").innerHTML = "Both Supporting and Refuting Arguments without Label"
+	}
+	else if (experiment_level[global_level] == 4){
+		document.getElementById("levelDisplay").innerHTML = "No Label, Only Evidences"
+	}	
 }
 
 // Function to shuffle the levels
