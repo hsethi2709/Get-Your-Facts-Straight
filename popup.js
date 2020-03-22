@@ -36,6 +36,7 @@ function getLoginCookies()
 			chrome.storage.sync.set({p_age: age})
 			console.log("AGE set as", age)
 			chrome.storage.sync.set({signed_in: true})
+			start();
 
 });
 }
@@ -58,7 +59,7 @@ function start(){
   });
 }
 getLoginCookies();
-start();
+
 document.getElementById('myRange').addEventListener("change", function() {
     document.getElementById("sliderValue").textContent = document.getElementById('myRange').value;
 }, false);
@@ -82,7 +83,6 @@ chrome.tabs.executeScript( {
 
 	// making fact check button invisible
 	document.getElementById("fact_check").style.display='none'
-	document.getElementById("logout_button").style.display='none'
 	document.getElementById("fact_check_3").style.display='none'
 	chrome.storage.sync.get('level', function(data){
 	
@@ -110,7 +110,6 @@ chrome.tabs.executeScript( {
 		response.json().then(function(data) {
 			if (level_data == 3){
 				document.getElementById("loader").remove();
-				// document.getElementById("fact_check_3").style.visibility='visible';
 				document.getElementById("claim_3").innerHTML = "Claim: "+data.claim;
 				document.getElementById("evidence_support").style.display='block';
 				ul = document.getElementById("support")
@@ -145,8 +144,6 @@ chrome.tabs.executeScript( {
 			}
 			else{
 			document.getElementById("loader").remove();
-			// document.getElementById("fact_check").style.visibility='visible';
-			// document.getElementById("logout_button").style.visibility='visible';
 			document.getElementById("evidence_head").style.display='inline-block';
 			document.getElementById("claim").innerHTML = "Claim: "+data.claim;
 
@@ -227,13 +224,10 @@ else{
 });
 }
 
+
+// click events
 document.getElementById('submitFeedback').addEventListener('click', sendFeedback)
 document.getElementById('submitFeedback_3').addEventListener('click', sendFeedback)
-// document.getElementById('thumbsUp').addEventListener('click', sendUpFeedback);
-// document.getElementById('thumbsDown').addEventListener('click', sendDownFeedback);
-// document.getElementById('thumbsUp_3').addEventListener('click', sendUpFeedback);
-// document.getElementById('thumbsDown_3').addEventListener('click', sendDownFeedback);
-// click events
 document.getElementById('fact_check').addEventListener('click',getText);
 document.getElementById('fact_check_3').addEventListener('click',getText);
 
@@ -260,29 +254,6 @@ document.getElementById('level4').addEventListener('click', function(){
 	document.getElementById('experiment').style.display = "block";
 	chrome.storage.sync.set({level: 4})
 
-});
-// document.getElementById('login_button').addEventListener("click", function(){
-// 	chrome.storage.sync.set({signed_in: true})
-// 	pid = document.getElementById('pid').value;
-// 	age = document.getElementById('age').value;
-// 	console.log("PID and AGE are:", pid, age);
-
-// 	if (pid == "" || pid == null){
-// 		document.getElementById('pid').focus();
-// 	}
-// 	else if (age == "" || age == null){
-// 		document.getElementById('age').focus();
-// 	}
-// 	else{
-
-// 	chrome.storage.sync.set({p_id: pid})
-// 	chrome.storage.sync.set({p_age: age})
-// 	start();
-// 	}
-// });
-document.getElementById("logout_button").addEventListener('click', function(){
-	chrome.storage.sync.set({signed_in: false})
-	start();
 });
 
 

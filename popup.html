@@ -67,16 +67,6 @@ output:after {
     <div style="text-align: center;">
     <div id="login" style="display: block;">
       <h3>Please login <a href="https://www.getfactcheck.me/login" target="_blank">here</a> first.</h3>
-      <!-- Participant ID:<br>
-      <input type="text" id="pid">
-      <br>
-      <br>
-      Age:<br>
-      <input type="number" id="age">
-      <br>
-      <br>
-      <input type="submit" value="Login" id="login_button">
-      <i class="fas fa-arrow-circle-right"></i> -->
     </div>
   </div>
     <div style="text-align: center;">
@@ -95,9 +85,6 @@ output:after {
         <input type="button" id="level4" value="Level 4">
         <br>
         <br>
-      <!-- <br>
-      <input type="submit" value="Logout" id="logout_button">
-      <br> -->
     </div>
   </div>
     <div id="experiment" style="display: none;">
@@ -105,14 +92,6 @@ output:after {
       <h3 id="claim"></h3>
       <h3 id="evidence_head" style="display: none;">Evidences</h3>
       <ul></ul>
-      <!-- <div id="feedback" style="display: none;text-align: center;">
-        <p>How satisfied are you?</p>
-        <br>
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange"><label id="sliderValue">50</label>
-          <div style="text-align: left;"><button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></i></button></div>          
-          <div style="text-align: right;"><button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></i></button></div>
-          <div style="text-align: center;"><p id="thanks"></p></div>
-      </div> -->
       <div id ="feedback" style="display: none;text-align: center;" class="footer-dark">
         <h2>Feedback</h2>
         <div>
@@ -120,16 +99,10 @@ output:after {
         <div>
             <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p><small>0</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="trustRange"/><small>100</small></div>
             <button id="submitFeedback">Submit</button>
-            <!-- <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p>
-            <button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></i></button>
-            <button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></i></button> -->
             <div style="text-align: center;"><p id="thanks"></p></div>
         </div>
     
         <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
-        <br>
-        <div style="text-align: center;"><input type="submit" value="Logout" id="logout_button"></div>
-        <br>
     </div>
   </div>
     <div id="level3experiment" style="display: none;">
@@ -146,20 +119,8 @@ output:after {
         <div>
             <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p><small>0</small><input type="range" min="1" max="100" value="50" style="margin: 12px;" id="trustRange_3"/><small>100</small></div>
             <button id="submitFeedback_3" value="Submit"></button>
-            <!-- <p><span style="text-decoration: underline;">How much do you trust the evidences above?</span></p>
-            <button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></i></button>
-            <button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></i></button> -->
             <div style="text-align: center;"><p id="thanks_3"></p></div>
         </div>
-  
-      <!-- <div id="feedback_3" style="display:none">
-        <p>How satisfied are you?</p>
-        <br>
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange_3"><label id="sliderValue_3">50</label>
-          <div style="text-align: left;"><button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>
-          <div style="text-align: right;"><button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
-          <p id="thanks_3"></p> -->
-      <!-- </div> -->
       <div style="text-align: center;"><button id="fact_check_3">Check the Fact</button></div>
     </div>
 
@@ -171,87 +132,3 @@ output:after {
 </body>
 
 </html>
-<!-- 
-<!DOCTYPE html>
-<html style="width: 300px;height: 300px;">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>GetFactCheck</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Dark-1.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
-    <div id="login" class="login-dark" style="width: 300px;height: 300px;">
-        <form method="post">
-            <h2 class="sr-only">Login Form</h2>
-            <div class="form-group"><input class="form-control" type="number" id="pid" placeholder="Participant ID"></div>
-            <div class="form-group"><input class="form-control" type="number" id="age" placeholder="Age"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" id="login_button" type="submit">Log In</button></div>
-        </form>
-    </div>
-  </div>
-  <div style="text-align: center;">
-  <div id="level" class="login-dark" style="display: none; width: 300px;">
-    <h2 id="sentence">Select the level of experiment</h2>
-    <br>
-      <input type="button" id="level1" value="Level 1">
-      <br>
-      <br>
-      <input type="button" id="level2" value="Level 2">
-      <br>
-      <br>
-      <input type="button" id="level3" value="Level 3">
-      <br>
-      <br>
-      <input type="button" id="level4" value="Level 4">
-      <br>
-      <br>
-    <br>
-    <input type="submit" class="btn btn-primary btn-block" value="Logout" id="logout_button">
-    <br>
-  </div>
-</div>
-  <div id="experiment" class="login-dark" style="display: none;">
-    <h2 id="error"></h2>
-    <h3 id="claim"></h3>
-    <h3 id="evidence_head" style="display: none;">Evidences</h3>
-    <ul></ul>
-    <div id="feedback" style="display: none;text-align: center;">
-      <p>How satisfied are you?</p>
-      <br>
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange"><label id="sliderValue">50</label>
-        <div style="text-align: left;"><button><i id="thumbsUp" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>          
-        <div style="text-align: right;"><button><i id="thumbsDown" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
-        <div style="text-align: center;"><p id="thanks"></p></div>
-    </div>
-      <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
-  </div>
-  <div id="level3experiment" style="display: none;">
-    <h3 id="claim_3"></h3>
-    <h3 id="evidence_support" style="display: none;">Supporting Evidence:</h3>
-    <ul id="support"></ul id="support">
-    <h3 id="evidence_refutes" style="display: none;">Refuting Evidence:</h3>
-    <ul id="refutes"></ul id="refutes">
-    <ul></ul>
-    <div id="feedback_3" style="display:none">
-      <p>How satisfied are you?</p>
-      <br>
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange_3"><label id="sliderValue_3">50</label>
-        <div style="text-align: left;"><button><i id="thumbsUp_3" style="display: inline-block;" class="fas fa-thumbs-up"></button></i></div>
-        <div style="text-align: right;"><button><i id="thumbsDown_3" style="display: inline-block;" class="fas fa-thumbs-down"></button></i></div>
-        <p id="thanks_3"></p>
-    </div>
-    <div style="text-align: center;"><button id="fact_check_3">Check the Fact</button></div>
-  </div>
-
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="popup.js"></script>
-</body>
-
-</html> -->

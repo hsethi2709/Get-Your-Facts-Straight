@@ -101,14 +101,16 @@ function shuffleArray(array) {
 
 // Button Click Events
 document.getElementById('true').addEventListener('click', function(){
+	var checked = document.getElementById('noIdea').checked;
 	var payload = {
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "True",
 		"level": global_level.toString(),
-		"stage": "pre"
-
+		"stage": "pre",
+		"unaware": checked
 	};
+
 	url='https://www.getfactcheck.me/addSentenceToClient'
 	fetch(url, {
 		method:'post',
@@ -134,24 +136,23 @@ document.getElementById('true').addEventListener('click', function(){
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
 				window.location.replace("https://www.getfactcheck.me/experiment");
-
 				}
 		}
 		document.getElementById("sentences").innerHTML = sentences[count]
-
-			
 		}}
 		);
 
 });
 
 document.getElementById('fake').addEventListener('click', function(){
+	var checked = document.getElementById('noIdea').checked;
 	var payload = {
 		"pid": pid,
 		"sentence":document.getElementById("sentences").innerHTML,
 		"label": "Fake",
 		"level": global_level.toString(),
-		"stage":"pre"
+		"stage":"pre",
+		"unaware": checked
 
 	};
 	url='https://www.getfactcheck.me/addSentenceToClient'
@@ -188,29 +189,5 @@ document.getElementById('fake').addEventListener('click', function(){
 		}}
 		);
 
-});
-
-document.getElementById('alreadyKnow').addEventListener('click', function(){
-		count += 1
-		console.log("Count:", count)
-		console.log("Already Know")
-		if (final_count == 5){
-			console.log("Moving to next level")
-			global_level += 1
-			if (global_level<5){
-			getSentences(global_level)
-			count = 0
-			final_count = 0	
-		}
-			else{
-			console.log("All levels completed")
-			experiment_level = shuffleArray(experiment_level)
-			console.log(experiment_level)
-			window.location.replace("https://www.getfactcheck.me/experiment");
-			}
-	}
-	document.getElementById("sentences").innerHTML = sentences[count]
-		
-	
 });
 
