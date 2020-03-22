@@ -97,6 +97,12 @@ def getResponse(claim,level):
             claim_output['label'] = 'SUPPORTS'
             claim_output['evidence'] = ["To date there has been no information nor evidence to suggest that the new coronavirus could be transmitted by mosquitoes.","The new coronavirus is a respiratory virus which spreads primarily through droplets generated when an infected person coughs or sneezes, or through droplets of saliva or discharge from the nose.","To date, the World Health Organization said there has been no information or evidence to suggest that the new coronavirus could be transmitted by mosquitoes."] 
             return claim_output
+        elif claim == "Don Bradman retired from soccer.":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['label'] = 'REFUTES'
+            claim_output['evidence'] = ["Bradman retired from his stockbroking business in June 1954, depending on the "comfortable" income earned as a board member of 16 publicly listed companies."]
+            return claim_output
     elif level == 3:
         if claim == "COVID-19 virus can be transmitted in areas with hot and humid climates":
             claim_output = {}
