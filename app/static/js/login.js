@@ -139,6 +139,7 @@ document.getElementById('true').addEventListener('click', function(){
 				}
 		}
 		document.getElementById("sentences").innerHTML = sentences[count]
+		document.getElementById('noIdea').checked = false;
 		}}
 		);
 
@@ -184,6 +185,7 @@ document.getElementById('fake').addEventListener('click', function(){
 				}
 		}
 		document.getElementById("sentences").innerHTML = sentences[count]
+		document.getElementById('noIdea').checked = false;
 
 			
 		}}
