@@ -101,7 +101,7 @@ def getResponse(claim,level):
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['label'] = 'REFUTES'
-            claim_output['evidence'] = ["Bradman retired from his stockbroking business in June 1954, depending on the "comfortable" income earned as a board member of 16 publicly listed companies."]
+            claim_output['evidence'] = ["Sir Donald George Bradman, AC (27 August 1908 – 25 February 2001), nicknamed \"The Don\", was an Australian international cricketer, widely acknowledged as the greatest batsman of all time. Bradman's career Test batting average of 99.94 has been cited as the greatest achievement by any sportsman in any major sport."]
             return claim_output
     elif level == 3:
         if claim == "COVID-19 virus can be transmitted in areas with hot and humid climates":
