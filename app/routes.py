@@ -38,6 +38,10 @@ def experiment():
 def postExperiment():
     return render_template("postExperiment.html", title="Get Fact Check")
 
+@app.route("/preExperiment")
+def preExperiment():
+    return render_template("preExperiment.html", title="Get Fact Check")
+
 
 @app.route('/index', methods=['POST'])
 def index():
