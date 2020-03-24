@@ -34,6 +34,10 @@ def welcome():
 def experiment():
     return render_template("experiment.html", title="Get Fact Check")
 
+@app.route("/experimentInstruction")
+def experimentInstruction():
+    return render_template("experiment_instruction.html", title="Get Fact Check")
+
 @app.route("/postExperiment")
 def postExperiment():
     return render_template("postExperiment.html", title="Get Fact Check")
