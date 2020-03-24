@@ -1,5 +1,5 @@
 document.getElementById("start").addEventListener('click', function(){
 
-    window.location.replace("https://www.getfactcheck.me/home")
+    window.location.assign("https://www.getfactcheck.me/home")
 
 });

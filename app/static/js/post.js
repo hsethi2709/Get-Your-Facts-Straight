@@ -26,7 +26,7 @@ function log_in(){
 		body: JSON.stringify(payload)
 	}).then(function(response) {
 		if (response.status == 200) {
-            window.location.replace("https://www.getfactcheck.me/pre");
+            window.location.assign("https://www.getfactcheck.me/pre");
 
 		}
 	        
@@ -133,7 +133,7 @@ document.getElementById('true').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
-				window.location.replace("https://www.getfactcheck.me/post");
+				window.location.assign("https://www.getfactcheck.me/post");
 
 				}
 		}
@@ -178,7 +178,7 @@ document.getElementById('fake').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
-				window.location.replace("https://www.getfactcheck.me/post");
+				window.location.assign("https://www.getfactcheck.me/post");
 
 				}
 		}
