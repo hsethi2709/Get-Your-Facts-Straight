@@ -15,10 +15,9 @@
     <link rel="stylesheet" href="static/css/Login-Form-Dark.css">
     <link rel="stylesheet" href="static/css/Navigation-Clean.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="icon" href="icon.png">
 </head>
 
-<body class="text-dark" style="height: 698px;width: 898px;" onload="checkCookie();getSentences(1);">
+<body class="text-dark" style="height: 698px;width: 898px;" onload="checkCookie();">
     <!-- Start: Dark NavBar -->
     <div></div>
     <!-- End: Dark NavBar -->
@@ -32,7 +31,6 @@
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
-            </div><small class="text-dark">Participant ID:<label id="pidLabel">Label</label></small></div>
     </nav>
     <!-- End: Navigation Clean -->
     <!-- Start: Highlight Blue -->
@@ -40,12 +38,13 @@
         <div class="container d-inline">
             <!-- Start: Intro -->
             <div class="intro">
-                <h4 class="text-center">Please choose the appropriate option</h4>
-                <p class="lead text-center text-white" id="sentences">Harshit</p>
+                <h4 class="text-center">Experiment Instructions</h4>
+		<p class="lead text-center text-white">We will now begin with the experiment. In the following pages, you will be presented with a fact that you will need to highlight and fact check through the extension as we did in practise round. <br><br> There will be four different conditions which will be written on top of the sentence. <br><br> These conditions are different ways of presenting information about a fact. <br><br> You will be required to fill the feedback on the extension as well as a feedback form for each condition after it is completely done. <br><br> Press "Start" whenever you are ready. </p>
             </div>
             <!-- End: Intro -->
             <!-- Start: Buttons -->
-            <div class="buttons"><div class="form-check"><input type="checkbox" class="form-check-input" id="noIdea"/><label class="form-check-label" for="noIdea">I have no idea about this</label></div><a class="btn btn-primary" role="button" id="true">True</a><a class="btn btn-primary" role="button" id="fake">Fake</a></div>
+            <div class="buttons"><a class="btn btn-primary" role="button" id="start">Start</a></div>
+            <!-- <a class="btn btn-primary" role="button" id="alreadyKnow">I already know about this</a> -->
             <!-- End: Buttons -->
         </div>
     </div>
@@ -55,7 +54,7 @@
     <!-- End: Header Dark -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="static/js/login.js"></script>
+    <script src="static/js/experiment_instruction.js"></script>
 </body>
 
 </html>
