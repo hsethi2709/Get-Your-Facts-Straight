@@ -1,4 +1,4 @@
-document.getElementById("done").addEventListener('click', function(){
+document.getElementById("start").addEventListener('click', function(){
 
     window.location.assign("https://www.getfactcheck.me/experiment")
 
