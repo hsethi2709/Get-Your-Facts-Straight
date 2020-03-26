@@ -32,16 +32,7 @@ shuffleArray(experiment_level)
 getClientSentences(experiment_level[global_level])
 document.cookie = "level="+experiment_level[global_level];
 changeLevelDisplay()
-document.getElementById("next").disabled = true;
-checkFactCheck()
-function checkFactCheck(){
-while(fact_check){
-	check = getCookies("fact_check");
-	if (check == "true"){
-		fact_check = false;
-		document.getElementById("next").disabled = false;
-	}
-}}
+
 function getClientSentences(level){
 	document.cookie = "level="+level;
 	console.log("Getting Client Sentences for Level:", level)
@@ -98,6 +89,11 @@ function shuffleArray(array) {
 
 // Button Click Events
 document.getElementById('next').addEventListener('click', function(){
+			if (getCookie("fact_check") == "false"){
+				document.getElementById("error").style.display = "block";
+			}
+			else{
+				document.getElementById("error").style.display = "none";
 			count += 1
 			console.log("Count:", count)
 			if (count == 5){
@@ -121,7 +117,6 @@ document.getElementById('next').addEventListener('click', function(){
 				getClientSentences(experiment_level[global_level])
 				count = 0
 				changeLevelDisplay()
-				checkFactCheck()
 			}
 				else{
 				console.log("All levels completed")
@@ -133,5 +128,5 @@ document.getElementById('next').addEventListener('click', function(){
 		document.cookie = "fact_check="+false;
 
 			
-		}
+		}}
 		);
