@@ -1,4 +1,5 @@
 var pid = 0
+var fact_check = true;
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -31,6 +32,16 @@ shuffleArray(experiment_level)
 getClientSentences(experiment_level[global_level])
 document.cookie = "level="+experiment_level[global_level];
 changeLevelDisplay()
+document.getElementById("next").disabled = true;
+checkFactCheck()
+function checkFactCheck(){
+while(fact_check){
+	check = getCookies("fact_check");
+	if (check == "true"){
+		fact_check = false;
+		document.getElementById("next").disabled = false;
+	}
+}}
 function getClientSentences(level){
 	document.cookie = "level="+level;
 	console.log("Getting Client Sentences for Level:", level)
@@ -110,6 +121,7 @@ document.getElementById('next').addEventListener('click', function(){
 				getClientSentences(experiment_level[global_level])
 				count = 0
 				changeLevelDisplay()
+				checkFactCheck()
 			}
 				else{
 				console.log("All levels completed")
@@ -118,6 +130,7 @@ document.getElementById('next').addEventListener('click', function(){
 				}
 		}
 		document.getElementById("experimentSentences").innerHTML = sentences[count]
+		document.cookie = "fact_check="+false;
 
 			
 		}

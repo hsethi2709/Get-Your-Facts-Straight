@@ -1,5 +1,14 @@
 // dynamic changing of html content
 var level_value;
+function setCookie(){
+	chrome.cookies.set({
+		"name": "fact_check",
+		"url": "https://www.getfactcheck.me",
+		"value": "true"
+	}, function (cookie) {
+		console.log("fact_check", JSON.stringify(cookie));
+	});
+}
 function getCookies() 
     {
         chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "level"}, function(cookie) {
@@ -75,6 +84,7 @@ chrome.tabs.executeScript( {
 	document.getElementById("error").innerHTML = "Please select a sentence to fact check";
 	}
 	else{
+	setCookie();
 	// Add loading animation
 	const div = document.createElement('div');
 	div.setAttribute("id","loader");
