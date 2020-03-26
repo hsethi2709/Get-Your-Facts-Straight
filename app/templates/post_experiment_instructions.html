@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
 
-<body class="text-dark" style="height: 698px;width: 898px;">
+<body class="text-dark" style="height: 698px;width: 898px;" onload="checkCookie();">
     <!-- Start: Dark NavBar -->
     <div></div>
     <!-- End: Dark NavBar -->
@@ -31,7 +31,6 @@
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
-            </div><small class="text-dark">Participant ID:<label id="pidLabel">Label</label></small></div>
     </nav>
     <!-- End: Navigation Clean -->
     <!-- Start: Highlight Blue -->
@@ -39,12 +38,13 @@
         <div class="container d-inline">
             <!-- Start: Intro -->
             <div class="intro">
-                <h4 id="levelDisplay" class="text-center"></h4>
-                <p class="lead text-center text-white" id="experimentSentences">Harshit<br></p>
+                <h4 class="text-center">Post Experiment Fact Inclination Survey</h4>
+		<p class="lead text-center text-white">We will now present the sentences again to ask you for your opinion about them after using the tool.<br> You will have two options to choose from - True and Fake.<br> Press "Start" whenever you are ready.</p>
             </div>
             <!-- End: Intro -->
             <!-- Start: Buttons -->
-            <div class="buttons"><a class="btn btn-primary" role="button" id="next">Next</a><br><label id="error" style="display: none; background-color: #f44336;">Please highlight the sentence and fact check it!</label></div>
+            <div class="buttons"><a class="btn btn-primary" role="button" id="start">Start</a></div>
+            <!-- <a class="btn btn-primary" role="button" id="alreadyKnow">I already know about this</a> -->
             <!-- End: Buttons -->
         </div>
     </div>
@@ -54,7 +54,7 @@
     <!-- End: Header Dark -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="static/js/experiment.js"></script>
+    <script src="static/js/post_experiment_instruction.js"></script>
 </body>
 
 </html>

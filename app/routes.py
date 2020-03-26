@@ -38,6 +38,10 @@ def experiment():
 def experimentInstruction():
     return render_template("experiment_instruction.html", title="Get Fact Check")
 
+@app.route("/postExperimentInstruction")
+def postExperimentInstruction():
+    return render_template("post_experiment_instruction.html", title="Get Fact Check")
+
 @app.route("/postExperiment")
 def postExperiment():
     return render_template("postExperiment.html", title="Get Fact Check")
