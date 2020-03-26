@@ -139,6 +139,22 @@ def getResponse(claim,level):
             claim_output['label'] = 'SUPPORTS'
             claim_output['evidence'] = ["Taking a hot bath will not prevent you from catching COVID-19. Your normal body temperature remains around 36.5°C to 37°C, regardless of the temperature of your bath or shower."]
             return claim_output
+        elif claim == "Russia released more than 500 lions to make sure that people stay inside during the COVID-19 pandemic.":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['label'] = "REFUTES"
+            claim_output['evidence'] = ["According to BBC News, Putin has yet to announce any sort of lockdown or shelter-in-place measures and therefore has no need for this fictional lion brute squad. According to the Russian president, the outbreak of COVID-19 is currently “under control” in the country."]
+        elif claim == "A government shutdown in Australia in 1975 ended with the dismissal of the prime minister and all members of Parliament.":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['label'] = "SUPPORTS"
+            claim_output['evidence'] = ["Australia’s government was effectively shutdown due to a budget impasse in October 1975, the prime minister was dismissed, both houses of Parliament were dissolved, and a new election was held. Since then, Australia has not had another government shutdown."]
+        elif claim == "Amid a nationwide COVID-19 lockdown, Italians reported seeing wildlife such as swans and dolphins \"returning\" to newly tranquil waterways, ports, and canals.":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['label'] = "NOT ENOUGH INFO"
+            claim_output['evidence'] = ["Dolphins and swans were indeed spotted in some of Italy's waterways after the nationwide lockdown was imposed.", "Dolphins and swans swimming in Italy's waterways were not necessarily new phenomena related to reduced human activity during the COVID-19 lockdown."]
+
     return None
 
 
