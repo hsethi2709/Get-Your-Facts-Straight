@@ -53,7 +53,7 @@ function getClientSentences(level){
 				response.json().then(function(data){
 					console.log(data)
 					sentences = data
-					document.getElementById("experimentSentences").innerHTML = sentences[count]
+					document.getElementById("experimentSentences").innerHTML = sentences[count]+"<br>"
 					}
 				);
 	
@@ -124,7 +124,7 @@ document.getElementById('next').addEventListener('click', function(){
 
 				}
 		}
-		document.getElementById("experimentSentences").innerHTML = sentences[count]
+		document.getElementById("experimentSentences").innerHTML = sentences[count]+"<br>"
 		document.cookie = "fact_check="+false;
 
 			
