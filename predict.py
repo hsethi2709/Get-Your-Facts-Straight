@@ -119,18 +119,18 @@ def getResponse(claim,level):
             claim_output['REFUTES'] = [['', 3.7,'The vast majority of the 2019/2020 Australian bushfires were all started by dry lightning strikes including the largest mega-blazes in NSW.']]
             return claim_output
 
-        elif claim == "Euthanasia should be illegal all around the world":
+        elif claim == "Scientists have discovered a berry — found in only one region of Australia — that can cure cancer in 48 hours.":
             claim_output = {}
             claim_output['claim'] = claim
-            claim_output['REFUTES'] = [['',2.9, "Death is a private matter and the state should not interfere with the individual's right to die."]]
-            claim_output['SUPPORTS'] = [['',2.5, 'it would discourage the search for new cures and treatments for the terminally ill']]
+            claim_output['REFUTES'] = [['',2.9, "a specific chemical found in the Australian berry, isolated in a lab, have been shown to destroy some types of tumors in a variety of animals and laboratory settings; the berry itself would be of little medical value, and the chemical’s efficacy in treating tumors on humans has yet to be established."]]
+            claim_output['SUPPORTS'] = [['',2.5, 'Scientists have isolated a chemical from the berry of a Australian plant endemic only to one region of Australia and have demonstrated promising early results regarding the compound’s ability to destroy tumors in mice, cats, dogs, and horses through direct injections']]
             return claim_output
 
-        elif claim == "Abortion is a women's right":
+        elif claim == "Wombats are herding animals and inviting them into their burrows in order to escape the wildfires in Australia.":
             claim_output = {}
             claim_output['claim'] = claim
-            claim_output['SUPPORTS'] = [['', 3.8,'women have a moral right to decide what to do with their bodies'],['',3,6,'the right to abortion is vital for individual women to achieve their full potential']]
-            claim_output['REFUTES'] = [['',3.4,"We believe in a woman's right to control her body, and she deserves this right no matter where she lives, even if she is still living inside her mother womb."]]
+            claim_output['SUPPORTS'] = [['', 3.8,'Wombat burrows are extremely large, and it\'s possible that some animals have found refuge in them during the wildfires in Australia.']]
+            claim_output['REFUTES'] = [['',3.4,"Wombats are not actively rescuing animals from the flames and bringing them back to their burrows for safety."]]
             return claim_output
     elif level == 4:
         if claim == "Taking a hot bath does not prevent the new coronavirus disease":
