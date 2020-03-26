@@ -4,6 +4,7 @@ function log_in(){
 	document.cookie = "pid="+pid;
 	age = document.getElementById('age').value;
 	document.cookie = "age="+age;
+	document.cookie = "fact_check"+false;
 	console.log("PID and AGE are:", pid, age);
 
 	if (pid == "" || pid == null){
