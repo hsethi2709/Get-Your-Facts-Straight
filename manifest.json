@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name" : "Get Your Facts Straight",
 	"version" : "1.0",
-	"permissions": ["contextMenus","activeTab","declarativeContent","storage","tabs","<all_urls>","cookies","https://www.getfactcheck.me/"],
+	"permissions": ["contextMenus","declarativeContent","storage","cookies","https://www.getfactcheck.me/"],
 	"description": "Automated Fact Checker",
 	"background": { 
 		"scripts": ["eventPage.js"],
