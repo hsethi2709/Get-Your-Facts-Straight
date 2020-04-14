@@ -136,7 +136,7 @@ document.getElementById('true').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
-				window.location.assign("https://www.getfactcheck.me/experimentInstruction");
+				window.location.assign("https://www.getfactcheck.me/training");
 				}
 		}
 		document.getElementById("sentences").innerHTML = sentences[count]
@@ -181,7 +181,7 @@ document.getElementById('fake').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
-				window.location.assign("https://www.getfactcheck.me/experimentInstruction");
+				window.location.assign("https://www.getfactcheck.me/training");
 
 				}
 		}

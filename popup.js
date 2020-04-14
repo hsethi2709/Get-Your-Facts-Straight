@@ -25,13 +25,36 @@ function getCookies()
 			if (level_value == 3)
 				{
 				document.getElementById('level3experiment').style.display = "block";
-				}
+				chrome.tabs.executeScript( {
+					code: "window.getSelection().toString();"
+				}, function(selection) {
+					if (selection == "" || selection == null)
+					{
+						document.getElementById("error").innerHTML = "Please select a sentence to fact check";
+					}
+					else
+					{
+						document.getElementById("claim_3").innerHTML = "Claim: "+ selection;
+					}
+				});
+			}
 			else
 				{
 				document.getElementById('experiment').style.display = "block";
-				}	
-        });
+				chrome.tabs.executeScript( {
+					code: "window.getSelection().toString();"
+				}, function(selection) {
+					if (selection == "" || selection == null){
+					document.getElementById("error").innerHTML = "Please select a sentence to fact check";
+					}
+					else{
+						document.getElementById("claim").innerHTML = "Claim: "+ selection;
+					}
+				});
+			}
+		});
 	}
+
 function getLoginCookies() 
     {
         chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "pid"}, function(cookie) {
