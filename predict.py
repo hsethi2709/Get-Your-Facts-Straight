@@ -125,8 +125,15 @@ def getResponse(claim,level):
             claim_output['REFUTES'] = [['',2.9, "a specific chemical found in the Australian berry, isolated in a lab, have been shown to destroy some types of tumors in a variety of animals and laboratory settings; the berry itself would be of little medical value, and the chemical’s efficacy in treating tumors on humans has yet to be established."]]
             claim_output['SUPPORTS'] = [['',2.5, 'Scientists have isolated a chemical from the berry of a Australian plant endemic only to one region of Australia and have demonstrated promising early results regarding the compound’s ability to destroy tumors in mice, cats, dogs, and horses through direct injections']]
             return claim_output
+        
+        elif claim == "Medicare is paying hospitals $13,000 for patients admitted with COVID-19 diagnoses and $39,000 if those patients are placed on ventilators":
+            claim_output = {}
+            claim_output['claim'] = claim
+            claim_output['SUPPORTS'] = [['',2.9,"It is plausible that Medicare is paying hospital fees for some COVID-19 cases in the range of the figures given by Dr. Scott Jensen, a Minnesota state senator, during a Fox News interview."]]
+            claim_output['REFUTES'] = [['',3.4, "Medicare says it does not make standard, one-size-fits-all payments to hospitals for patients admitted with COVID-19 diagnoses and placed on ventilators. The $13,000 and $39,000 figures appear to be based on generic industry estimates for admitting and treating patients with similar conditions."]]
+            return claim_output
 
-        elif claim == "Wombats are herding animals and inviting them into their burrows in order to escape the wildfires in Australia":
+        elif claim == "Wombats are herding animals and inviting them into their burrows in order to escape them from the wildfires in Australia":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['SUPPORTS'] = [['', 3.8,'Wombat burrows are extremely large, and it\'s possible that some animals have found refuge in them during the wildfires in Australia.']]
