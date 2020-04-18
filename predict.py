@@ -91,7 +91,7 @@ def getResponse(claim,level):
             claim_output['evidence'] = ["A poll was released showing that 38% of American beer-drinkers have refused to drink Corona beer. This statistic was derived from the extrapolation of details, and not considered a reliable indication of an American belief that drinking the beer causes the virus. There is no link between the virus and the beer."]
             return claim_output
     elif level == 2:
-        if claim == "The new coronavirus cannot be transmitted through mosquito bites.":
+        if claim == "The new coronavirus cannot be transmitted through mosquito bites":
             claim_output = {}
             claim_output["claim"] = claim
             claim_output['label'] = 'SUPPORTS'
@@ -101,7 +101,7 @@ def getResponse(claim,level):
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['label'] = 'REFUTES'
-            claim_output['evidence'] = ["Sir Donald George Bradman, AC (27 August 1908 – 25 February 2001), nicknamed \"The Don\", was an Australian international cricketer, widely acknowledged as the greatest batsman of all time. Bradman's career Test batting average of 99.94 has been cited as the greatest achievement by any sportsman in any major sport."]
+            claim_output['evidence'] = ["Sir Donald George Bradman, AC (27 August 1908 – 25 February 2001), nicknamed \"The Don\", was an Australian international cricketer, widely acknowledged as the greatest batsman of all time. Bradman's career Test batting average of 99.94 has been cited as the greatest achievement by any sportsman in any major sport"]
             return claim_output
     elif level == 3:
         if claim == "COVID-19 virus can be transmitted in areas with hot and humid climates":
@@ -119,14 +119,14 @@ def getResponse(claim,level):
             claim_output['REFUTES'] = [['', 3.7,'The vast majority of the 2019/2020 Australian bushfires were all started by dry lightning strikes including the largest mega-blazes in NSW.']]
             return claim_output
 
-        elif claim == "Scientists have discovered a berry — found in only one region of Australia — that can cure cancer in 48 hours.":
+        elif claim == "Scientists have discovered a berry — found in only one region of Australia — that can cure cancer in 48 hours":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['REFUTES'] = [['',2.9, "a specific chemical found in the Australian berry, isolated in a lab, have been shown to destroy some types of tumors in a variety of animals and laboratory settings; the berry itself would be of little medical value, and the chemical’s efficacy in treating tumors on humans has yet to be established."]]
             claim_output['SUPPORTS'] = [['',2.5, 'Scientists have isolated a chemical from the berry of a Australian plant endemic only to one region of Australia and have demonstrated promising early results regarding the compound’s ability to destroy tumors in mice, cats, dogs, and horses through direct injections']]
             return claim_output
 
-        elif claim == "Wombats are herding animals and inviting them into their burrows in order to escape the wildfires in Australia.":
+        elif claim == "Wombats are herding animals and inviting them into their burrows in order to escape the wildfires in Australia":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['SUPPORTS'] = [['', 3.8,'Wombat burrows are extremely large, and it\'s possible that some animals have found refuge in them during the wildfires in Australia.']]
@@ -139,20 +139,20 @@ def getResponse(claim,level):
             claim_output['label'] = 'SUPPORTS'
             claim_output['evidence'] = ["Taking a hot bath will not prevent you from catching COVID-19. Your normal body temperature remains around 36.5°C to 37°C, regardless of the temperature of your bath or shower."]
             return claim_output
-        elif claim == "Russia released more than 500 lions to make sure that people stay inside during the COVID-19 pandemic.":
+        elif claim == "Russia released more than 500 lions to make sure that people stay inside during the COVID-19 pandemic":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['label'] = "REFUTES"
             claim_output['evidence'] = ["According to BBC News, Putin has yet to announce any sort of lockdown or shelter-in-place measures and therefore has no need for this fictional lion brute squad. According to the Russian president, the outbreak of COVID-19 is currently “under control” in the country."]
             return claim_output
-        elif claim == "A government shutdown in Australia in 1975 ended with the dismissal of the prime minister and all members of Parliament.":
+        elif claim == "A government shutdown in Australia in 1975 ended with the dismissal of the prime minister and all members of Parliament":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['label'] = "SUPPORTS"
             claim_output['evidence'] = ["Australia’s government was effectively shutdown due to a budget impasse in October 1975, the prime minister was dismissed, both houses of Parliament were dissolved, and a new election was held. Since then, Australia has not had another government shutdown."]
             return claim_output
 
-        elif claim == "Amid a nationwide COVID-19 lockdown, Italians reported seeing wildlife such as swans and dolphins \"returning\" to newly tranquil waterways, ports, and canals.":
+        elif claim == "Amid a nationwide COVID-19 lockdown, Italians reported seeing wildlife such as swans and dolphins \"returning\" to newly tranquil waterways, ports, and canals":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['label'] = "NOT ENOUGH INFO"
