@@ -107,7 +107,6 @@ chrome.tabs.executeScript( {
 	document.getElementById("error").innerHTML = "Please select a sentence to fact check";
 	}
 	else{
-	setCookie();
 	// Add loading animation
 	const div = document.createElement('div');
 	div.setAttribute("id","loader");
@@ -246,9 +245,12 @@ else{
 	}).then(function(response) {
 		if (response.status == 200) {
 			if (data.level ==3){
-			document.getElementById('thanks_3').innerHTML = "Thanks for the feedback!"		}
+			document.getElementById('thanks_3').innerHTML = "Thanks for the feedback!"
+			setCookie();
+		}
 			else {
 				document.getElementById('thanks').innerHTML = "Thanks for the feedback!"
+				setCookie();
 			}
 		}
 	
