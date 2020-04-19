@@ -99,16 +99,16 @@ document.getElementById('next').addEventListener('click', function(){
 			if (count == 5){
 				console.log('Moving to Feedback Page')
 				if (experiment_level[global_level] == 1){
-					window.open("https://harshitsethi.typeform.com/to/DyauDC");
+					window.open("https://harshitsethi.typeform.com/to/DyauDC?pid="+pid);
 				}
 				else if (experiment_level[global_level] == 2){
-					window.open("https://harshitsethi.typeform.com/to/g2wikq");
+					window.open("https://harshitsethi.typeform.com/to/g2wikq?pid="+pid);
 				}
 				else if (experiment_level[global_level] == 3){
-					window.open("https://harshitsethi.typeform.com/to/UwkUPV");
+					window.open("https://harshitsethi.typeform.com/to/UwkUPV?pid="+pid);
 				}
 				else {
-					window.open("https://harshitsethi.typeform.com/to/T5HCPC");
+					window.open("https://harshitsethi.typeform.com/to/T5HCPC?pid="+pid);
 
 				}
 				console.log("Moving to next level")
