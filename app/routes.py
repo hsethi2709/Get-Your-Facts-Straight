@@ -90,7 +90,7 @@ def sendFeedback():
     db = client.afv
     col = db["participants"]
     requestJson = request.json
-    cursor = col.find_one({'_id':requestJson['id'], "p_age": requestJson['p_age']})
+    cursor = col.find_one({'_id':requestJson['id']})
     final = copy.deepcopy(cursor)
     level = str(requestJson['level'])
     final['experiments'][level][requestJson['sentence']] = {}

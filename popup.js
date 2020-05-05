@@ -61,16 +61,10 @@ function getLoginCookies()
 			pid = cookie.value;
 			chrome.storage.sync.set({p_id: pid})
 			console.log("PID set as", pid)
-
-	});
-		chrome.cookies.get({"url": "https://www.getfactcheck.me", "name": "age"}, function(cookie) {
-			age = cookie.value;
-			chrome.storage.sync.set({p_age: age})
-			console.log("AGE set as", age)
 			chrome.storage.sync.set({signed_in: true})
 			start();
 
-});
+	});
 }
 	
 function start(){
@@ -219,12 +213,11 @@ chrome.tabs.executeScript( {
 }
 
 function sendFeedback(){
-	chrome.storage.sync.get(['level','p_id','p_age'], function(data){
+	chrome.storage.sync.get(['level','p_id'], function(data){
 		if (data.level == 3) {
 			var payload = {}
 	payload = {
 		id: data.p_id,
-		p_age: data.p_age,
 		sentence:document.getElementById('claim_3').innerHTML,
 		level: data.level,
 		"satisfaction_value": document.getElementById('myRange_3').value,
@@ -234,7 +227,6 @@ function sendFeedback(){
 else{
 	payload = {
 		id: data.p_id,
-		p_age: data.p_age,
 		sentence:document.getElementById('claim').innerHTML,
 		level: data.level,
 		"satisfaction_value": document.getElementById('myRange').value,
