@@ -201,6 +201,12 @@ chrome.tabs.executeScript( {
 		
 			if (level_data != 4)
 		{
+			if (data.label == "REFUTES") {
+				document.getElementById("error").style.color = "red"
+			}
+			else if (data.label == "SUPPORTS") {
+				document.getElementById("error").style.color = "green"
+			}
 			document.getElementById("error").innerHTML = "Result: "+data.label;
 		}
 			document.getElementById("feedback").style.display='inline-block';
@@ -246,10 +252,12 @@ else{
 		if (response.status == 200) {
 			if (data.level ==3){
 			document.getElementById('thanks_3').innerHTML = "Thanks for the feedback!"
+			document.getElementById('close_3').style.display = "inline-block"
 			setCookie();
 		}
 			else {
 				document.getElementById('thanks').innerHTML = "Thanks for the feedback!"
+				document.getElementById('close').style.display = "inline-block"
 				setCookie();
 			}
 		}
@@ -261,6 +269,12 @@ else{
 
 
 // click events
+document.getElementById('close').addEventListener('click', function(){
+	window.close()
+});
+document.getElementById('close_3').addEventListener('click', function(){
+	window.close()
+});
 document.getElementById('submitFeedback').addEventListener('click', sendFeedback)
 document.getElementById('submitFeedback_3').addEventListener('click', sendFeedback)
 document.getElementById('fact_check').addEventListener('click',getText);

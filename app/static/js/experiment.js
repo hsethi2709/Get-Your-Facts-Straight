@@ -22,6 +22,10 @@ function checkCookie() {
 		document.getElementById('pidLabel').innerHTML = pid
 	  }
 	}
+	fact_check = getCookie("fact_check")
+	if (fact_check == null){
+		document.cookie = "fact_check="+false;
+	}
   }
 checkCookie();
 sentences = []
