@@ -29,7 +29,7 @@ function checkPID(){
 
 function log_in(){
 	console.log(getCookie('pid'))
-	if (getCookie('pid') == 'null'){
+	if (getCookie('pid') == null){
 	document.cookie = "pid="+pid;
 	document.cookie = "fact_check="+false;
 	console.log("PID is:", pid);
