@@ -191,3 +191,18 @@ def readMasterSentence():
             return json.dumps(cursor['Sentences'])
     except Exception as e:
         return (e)
+
+@app.route("/checkDuplicatePID", methods=['POST'])
+def checkDuplicatePID():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['participants']
+        requestJson = request.json
+        cursor = collection.find_one({"_id": requestJson['pid']})
+        if cursor == None:
+            return {'status': 'false'}
+        else:
+            return {'status': 'true'}
+    except Exception as e:
+        return (e)

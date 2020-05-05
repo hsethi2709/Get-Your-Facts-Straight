@@ -1,6 +1,31 @@
 var pid = Math.floor(Math.random() * 200) + 1;
-log_in();
+
+function checkPID(){
+	var payload = {
+		pid: pid
+	};
+	url='https://www.getfactcheck.me/checkDuplicatePID'
+	fetch(url, {
+		method:'post',
+		headers: {
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify(payload)
+	}).then(function(response) {
+		response.json().then(function(data) {
+		if (data['status'] == 'false') {
+            log_in();
+		}
+		else{
+			pid = Math.floor(Math.random() * 200) + 1;
+			checkPID();
+		}
+	})
+	})
+	}
+
 function log_in(){
+	if (getCookie('pid') == 'null'){
 	document.cookie = "pid="+pid;
 	document.cookie = "fact_check="+false;
 	console.log("PID is:", pid);
@@ -23,7 +48,12 @@ function log_in(){
 	        
 		}
 		);
-        }
+		}
+		else
+		{
+			window.location.assign("https://www.getfactcheck.me/pre");
+		}
+	}
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
