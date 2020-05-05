@@ -13,7 +13,7 @@ function checkPID(){
 		body: JSON.stringify(payload)
 	}).then(function(response) {
 		response.json().then(function(data) {
-		if (data['status'] == 'false') {
+		if (data.status == 'false') {
             log_in();
 		}
 		else{
