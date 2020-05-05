@@ -1,6 +1,7 @@
 var pid = Math.floor(Math.random() * 200) + 1;
 checkPID();
 function checkPID(){
+	console.log("PID", pid)
 	var payload = {
 		pid: pid
 	};
@@ -13,6 +14,7 @@ function checkPID(){
 		body: JSON.stringify(payload)
 	}).then(function(response) {
 		response.json().then(function(data) {
+			console.log(data)
 		if (data.status == 'false') {
             log_in();
 		}
@@ -45,14 +47,14 @@ function log_in(){
             window.location.assign("https://www.getfactcheck.me/pre");
 
 		}
-	        
+	    else
+		{
+			window.location.assign("https://www.getfactcheck.me/pre");
+		}    
 		}
 		);
 		}
-		else
-		{
-			window.location.assign("https://www.getfactcheck.me/pre");
-		}
+		
 	}
 function getCookie(name) {
     var nameEQ = name + "=";
