@@ -15,6 +15,7 @@ function checkPID(){
 	}).then(function(response) {
 		response.json().then(function(data) {
 			console.log(data)
+			
 		if (data.status == 'false') {
             log_in();
 		}
@@ -27,6 +28,7 @@ function checkPID(){
 	}
 
 function log_in(){
+	console.log(getCookie('pid'))
 	if (getCookie('pid') == 'null'){
 	document.cookie = "pid="+pid;
 	document.cookie = "fact_check="+false;
@@ -46,13 +48,13 @@ function log_in(){
 		if (response.status == 200) {
             window.location.assign("https://www.getfactcheck.me/pre");
 
-		}
-	    else
-		{
-			window.location.assign("https://www.getfactcheck.me/pre");
 		}    
 		}
 		);
+	}
+	else
+		{
+			window.location.assign("https://www.getfactcheck.me/pre");
 		}
 		
 	}
