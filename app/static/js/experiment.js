@@ -86,15 +86,20 @@ function getClientSentences(level){
 function changeLevelDisplay(){
 	if (experiment_level[global_level] == 1){
 		document.getElementById("levelDisplay").innerHTML = "Single Evidence"
+		document.getElementById("levelInstruction").innerHTML = "You will be shown a single supporting or refuting evidence along with a label in this condition for each claim."
 	}
 	else if (experiment_level[global_level] == 2){
 		document.getElementById("levelDisplay").innerHTML = "Three Evidences"
+		document.getElementById("levelInstruction").innerHTML = "You will be shown three supporting or refuting evidences along with a label in this condition for each claim."
+
 	}
 	else if (experiment_level[global_level] == 3){
 		document.getElementById("levelDisplay").innerHTML = "Both Supporting and Refuting Arguments without Label"
+		document.getElementById("levelInstruction").innerHTML = "You will be shown both supporting and refuting evidences without a label in this condition for each claim."
 	}
 	else if (experiment_level[global_level] == 4){
 		document.getElementById("levelDisplay").innerHTML = "No Label, Only Evidences"
+		document.getElementById("levelInstruction").innerHTML = "You will be shown only supporting or refuting evidences without a label in this condition for each claim."
 	}	
 }
 
@@ -117,6 +122,7 @@ document.getElementById('next').addEventListener('click', function(){
 			else{
 				document.getElementById("error").style.display = "none";
 			count += 1
+			document.getElementById("levelInstructions").style.display = "none";
 			console.log("Count:", count)
 			if (count == 5){
 				console.log('Moving to Feedback Page')
