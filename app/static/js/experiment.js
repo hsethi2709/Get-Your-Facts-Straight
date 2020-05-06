@@ -35,7 +35,7 @@ function checkCookie() {
 	}
 	global_level = getCookie('experiment_stage')
 	if (global_level == null){
-		document.cdocument.cookie = "experiment_stage="+global_level;
+		document.cookie = "experiment_stage="+global_level;
 	}
 	experiment_level = getCookie('experiment_array')
 	if (experiment_level == null){
