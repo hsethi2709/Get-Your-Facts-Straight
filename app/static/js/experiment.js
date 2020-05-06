@@ -143,7 +143,6 @@ document.getElementById('next').addEventListener('click', function(){
 			}
 				else{
 				console.log("All levels completed")
-				document.cookie = "experiment_status=1";
 				window.location.replace("https://www.getfactcheck.me/postExperimentInstruction");
 
 				}

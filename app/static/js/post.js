@@ -133,6 +133,7 @@ document.getElementById('true').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
+				document.cookie = "experiment_status=1";
 				window.location.assign("https://www.getfactcheck.me/post");
 
 				}
@@ -178,6 +179,7 @@ document.getElementById('fake').addEventListener('click', function(){
 				console.log("All levels completed")
 				experiment_level = shuffleArray(experiment_level)
 				console.log(experiment_level)
+				document.cookie = "experiment_status=1";
 				window.location.assign("https://www.getfactcheck.me/post");
 
 				}
