@@ -122,7 +122,7 @@ document.getElementById('next').addEventListener('click', function(){
 			else{
 				document.getElementById("error").style.display = "none";
 			count += 1
-			document.getElementById("levelInstructions").style.display = "none";
+			document.getElementById("levelInstruction").style.display = "none";
 			console.log("Count:", count)
 			if (count == 5){
 				console.log('Moving to Feedback Page')
