@@ -1,7 +1,7 @@
 var pid = 0
 var fact_check = true;
 var global_level = 0;
-experiment_level = [1,2,3,4]
+var experiment_level = [1,2,3,4]
 shuffleArray(experiment_level)
 function getCookie(name) {
     var nameEQ = name + "=";
@@ -35,10 +35,12 @@ function checkCookie() {
 	}
 	global_level = getCookie('experiment_stage')
 	if (global_level == null){
-		document.cookie = "experiment_stage="+global_level;
+		document.cookie = "experiment_stage="+0;
 	}
 	experiment_level = getCookie('experiment_array')
 	if (experiment_level == null){
+		experiment_level = [1,2,3,4]
+		shuffleArray(experiment_level)
 		document.cookie = "experiment_array="+experiment_level;
 	}
   }
