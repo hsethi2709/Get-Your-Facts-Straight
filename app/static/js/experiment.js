@@ -33,7 +33,7 @@ function checkCookie() {
 	if (fact_check == null){
 		document.cookie = "fact_check="+false;
 	}
-	global_level = getCookie('experiment_stage')
+	global_level = parseInt(getCookie('experiment_stage'))
 	if (global_level == null){
 		global_level = 0
 		document.cookie = "experiment_stage="+0;
