@@ -35,13 +35,14 @@ function checkCookie() {
 	}
 	global_level = getCookie('experiment_stage')
 	if (global_level == null){
+		global_level = 0
 		document.cookie = "experiment_stage="+0;
 	}
-	experiment_level = getCookie('experiment_array')
+	experiment_level = JSON.parse(getCookie('experiment_array'))
 	if (experiment_level == null){
 		experiment_level = [1,2,3,4]
 		shuffleArray(experiment_level)
-		document.cookie = "experiment_array="+experiment_level;
+		document.cookie = "experiment_array="+JSON.stringify(experiment_level);
 	}
   }
 checkCookie();
