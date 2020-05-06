@@ -15,6 +15,7 @@
   width: 60px;
   height: 60px;
   animation: spin 2s linear infinite;
+  display: inline-block;
   text-align: center;
 }
 
@@ -86,11 +87,11 @@ output:after {
         <br>
     </div>
   </div>
-    <div id="experiment" style="display: none;">
+    <div id="experiment" style="display: none; text-align: center;">
       <h2 id="error"></h2>
       <h3 id="claim"></h3>
-      <h3 id="evidence_head" style="display: none;">Evidences</h3>
-      <ul></ul>
+      <h3 id="evidence_head" style="display: none; text-align: left;">Evidences</h3>
+      <ul style="text-align: left;"></ul>
       <div id ="feedback" style="display: none;text-align: center;" class="footer-dark">
         <h2>Feedback</h2>
         <div>
@@ -106,12 +107,13 @@ output:after {
         <div style="text-align: center;"><button id="fact_check">Check the Fact</button></div>
     </div>
   </div>
-    <div id="level3experiment" style="display: none;">
+    <div id="level3experiment" style="display: none; text-align: center;">
+      <h2 id="error_3"></h2>
       <h3 id="claim_3"></h3>
-      <h3 id="evidence_support" style="display: none;">Supporting Evidence:</h3>
-      <ul id="support"></ul id="support">
-      <h3 id="evidence_refutes" style="display: none;">Refuting Evidence:</h3>
-      <ul id="refutes"></ul id="refutes">
+      <h3 id="evidence_support" style="display: none; text-align: left;">Supporting Evidence:</h3>
+      <ul id="support" style="text-align: left;"></ul id="support">
+      <h3 id="evidence_refutes" style="display: none; text-align: left;">Refuting Evidence:</h3>
+      <ul id="refutes" style="text-align: left;"></ul id="refutes">
       <ul></ul>
       <div id ="feedback_3" style="display: none;text-align: center;" class="footer-dark">
         <h2>Feedback</h2>

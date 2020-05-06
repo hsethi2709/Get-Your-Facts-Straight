@@ -52,11 +52,18 @@ function log_in(){
 		}
 		);
 	}
-	else
+	else if (getCookie('experiment_status') == null)
 		{
 			window.location.assign("https://www.getfactcheck.me/pre");
 		}
-		
+	else if (getCookie('experiment_status') == 0)
+	{
+		window.location.assign("https://www.getfactcheck.me/experiment")
+	}
+	else if (getCookie('experiment_status') == 1)
+	{
+		window.location.assign("https://www.getfactcheck.me/thankyou")
+	}
 	}
 function getCookie(name) {
     var nameEQ = name + "=";

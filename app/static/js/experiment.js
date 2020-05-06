@@ -1,5 +1,8 @@
 var pid = 0
 var fact_check = true;
+var global_level = 0;
+experiment_level = [1,2,3,4]
+shuffleArray(experiment_level)
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -12,6 +15,10 @@ function getCookie(name) {
 }
 
 function checkCookie() {
+	if (getCookie('experiment_status') == null)
+	{
+		document.cookie = "experiment_status=0";
+	}
 	pid = getCookie("pid");
 	if (pid != null) {
 	 document.getElementById('pidLabel').innerHTML = pid
@@ -26,13 +33,18 @@ function checkCookie() {
 	if (fact_check == null){
 		document.cookie = "fact_check="+false;
 	}
+	global_level = getCookie('experiment_stage')
+	if (global_level == null){
+		document.cdocument.cookie = "experiment_stage="+global_level;
+	}
+	experiment_level = getCookie('experiment_array')
+	if (experiment_level == null){
+		document.cookie = "experiment_array="+experiment_level;
+	}
   }
 checkCookie();
 sentences = []
 count = 0
-global_level = 0
-experiment_level = [1,2,3,4]
-shuffleArray(experiment_level)
 getClientSentences(experiment_level[global_level])
 document.cookie = "level="+experiment_level[global_level];
 changeLevelDisplay()
@@ -117,6 +129,7 @@ document.getElementById('next').addEventListener('click', function(){
 				}
 				console.log("Moving to next level")
 				global_level += 1
+				document.cookie = "experiment_stage="+global_level;
 				if (global_level<4){
 				getClientSentences(experiment_level[global_level])
 				count = 0
@@ -124,6 +137,7 @@ document.getElementById('next').addEventListener('click', function(){
 			}
 				else{
 				console.log("All levels completed")
+				document.cookie = "experiment_status=1";
 				window.location.replace("https://www.getfactcheck.me/postExperimentInstruction");
 
 				}

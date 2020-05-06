@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name" : "Get Your Facts Straight",
-	"version" : "1.0",
-	"permissions": ["contextMenus","declarativeContent","storage","cookies","https://www.getfactcheck.me/"],
+	"version" : "1.3",
+	"permissions": ["storage","cookies","https://www.getfactcheck.me/"],
 	"description": "Automated Fact Checker",
 	"background": { 
 		"scripts": ["eventPage.js"],

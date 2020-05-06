@@ -30,7 +30,7 @@ function getCookies()
 				}, function(selection) {
 					if (selection == "" || selection == null)
 					{
-						document.getElementById("error").innerHTML = "Please select a sentence to fact check";
+						document.getElementById("error_3").innerHTML = "Please select a sentence to fact check";
 					}
 					else
 					{
@@ -105,7 +105,7 @@ chrome.tabs.executeScript( {
 	const div = document.createElement('div');
 	div.setAttribute("id","loader");
 	div.setAttribute("class","loader");
-	document.body.appendChild(div);
+	// document.body.appendChild(div);
 
 	// making fact check button invisible
 	document.getElementById("fact_check").style.display='none'
@@ -114,6 +114,13 @@ chrome.tabs.executeScript( {
 	
 	// sending request to the server
 	var level_data = data.level;
+	if (level_data == 3){
+		document.getElementById("level3experiment").appendChild(div);
+	}
+	else
+	{
+		document.getElementById("experiment").appendChild(div);
+	}
 	console.log("Sending request for level", level_data)
 	var raw = JSON.stringify({"level":level_data});
 	var requestOptions = {
@@ -170,7 +177,7 @@ chrome.tabs.executeScript( {
 			}
 			else{
 			document.getElementById("loader").remove();
-			document.getElementById("evidence_head").style.display='inline-block';
+			document.getElementById("evidence_head").style.display='block';
 			document.getElementById("claim").innerHTML = "Claim: "+data.claim;
 
 			// Populating Evidences List
