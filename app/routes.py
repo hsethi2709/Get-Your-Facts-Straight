@@ -66,6 +66,19 @@ def preExperiment():
 def thankYou():
     return render_template("thankyou.html", title="Get Fact Check")
 
+@app.route("/dashboard.html")
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html", title="Get Fact Check")
+
+@app.route("/profile.html")
+def profile():
+    return render_template("profile.html", title="Get Fact Check")
+
+@app.route("/table.html")
+def table():
+    return render_template("table.html", title="Get Fact Check")
+
 @app.route('/index', methods=['POST'])
 def index():
     sentence = request.args.get('sentence')
@@ -207,5 +220,81 @@ def checkDuplicatePID():
             return {'status': 'false'}
         else:
             return {'status': 'true'}
+    except Exception as e:
+        return (e)
+
+
+# Dashboard API's
+
+@app.route("/getTotalParticipants", methods=['GET'])
+def getTotalPID():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['participants']
+        cursor = collection.find({})
+        if cursor == None:
+            return {'status': '500'}
+        else:
+            count = 0
+            for item in cursor:
+                count += 1
+            return {"count": count}
+    except Exception as e:
+        return (e)
+
+@app.route("/getAverageTrustScore", methods=['GET'])
+def getAverageTrustScore():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['participants']
+        cursor = collection.find({})
+        cursor = list(cursor)
+        if cursor == None:
+            return {'status': '500'}
+        else:
+            response = {}
+            conditions = ["1","2","3","4"]
+            for condition in conditions:
+                print(condition)
+                count = 0
+                sum = 0
+                for item in cursor:
+                    for _,data in item['experiments'][condition].items():
+                        sum += int(data['trustScore'])
+                        count +=1
+                average = sum / count
+                print(average)
+                response[condition] = average
+            return response
+    except Exception as e:
+        return (e)
+
+@app.route("/getAverageSatisfactionScore", methods=['GET'])
+def getAverageSatisfactionScore():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['participants']
+        cursor = collection.find({})
+        cursor = list(cursor)
+        if cursor == None:
+            return {'status': '500'}
+        else:
+            response = {}
+            conditions = ["1","2","3","4"]
+            for condition in conditions:
+                print(condition)
+                count = 0
+                sum = 0
+                for item in cursor:
+                    for _,data in item['experiments'][condition].items():
+                        sum += int(data['satisfaction_value'])
+                        count +=1
+                average = sum / count
+                print(average)
+                response[condition] = average
+            return response
     except Exception as e:
         return (e)
