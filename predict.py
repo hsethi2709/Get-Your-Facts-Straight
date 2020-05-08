@@ -133,7 +133,7 @@ def getResponse(claim,level):
             claim_output['REFUTES'] = [['',3.4, "Medicare says it does not make standard, one-size-fits-all payments to hospitals for patients admitted with COVID-19 diagnoses and placed on ventilators. The $13,000 and $39,000 figures appear to be based on generic industry estimates for admitting and treating patients with similar conditions."]]
             return claim_output
 
-        elif claim == "Wombats are herding animals and inviting them into their burrows in order to escape them from the wildfires in Australia":
+        elif claim == "Wombats are herding other animals and inviting them into their burrows in order to escape them from the wildfires in Australia":
             claim_output = {}
             claim_output['claim'] = claim
             claim_output['SUPPORTS'] = [['', 3.8,'Wombat burrows are extremely large, and it\'s possible that some animals have found refuge in them during the wildfires in Australia.']]
