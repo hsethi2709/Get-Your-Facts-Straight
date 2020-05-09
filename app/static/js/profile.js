@@ -18,6 +18,7 @@ function getProfileInformation(pid){
                 for (var condition in user_data){
                     console.log(condition)
                     table = document.getElementById("table-"+condition)
+                    table.innerHTML = ""
                     for (var sentence in user_data[condition]["pre"]){
                         var row = document.createElement("tr")
                         var td_sentence = document.createElement("td")
