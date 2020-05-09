@@ -326,3 +326,29 @@ def getProfileInfo():
         return {"participant_details": cursor}
     except Exception as e:
         return (e)
+
+@app.route("/getSentenceAverageSatisfactionScore", methods=['POST'])
+def getSentenceAverageSatisfactionScore():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['participants']
+        requestJson = request.json
+        cursor = collection.find({})
+        cursor = list(cursor)
+        if cursor == None:
+            return {'status': '500'}
+        else:
+            response = {}
+            condition = requestJson['condition']
+            count = 0
+            for user in cursor:
+                count += 1
+                for sentence in user['experiments'][condition]:
+                    if sentence not in response:
+                        response[sentence] = {"trust": int(user['experiments'][condition][sentence]['trustScore']) ,"satisfaction": int(user['experiments'][condition][sentence]['satisfaction_value'])}
+                    else:
+                        response[sentence] = {"trust": (response[sentence]['trust']*(count-1) + int(user['experiments'][condition][sentence]['trustScore'])) / count,"satisfaction": (response[sentence]['satisfaction']*(count-1) + int(user['experiments'][condition][sentence]['satisfaction_value'])) / count}
+            return response
+    except Exception as e:
+        return (e)
