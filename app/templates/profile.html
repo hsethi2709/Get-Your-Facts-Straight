@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile - Brand</title>
+    <title>Profile - Get Fact Check</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -72,7 +72,12 @@
                                             <form>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="username"><strong>PID</strong></label></div><label>Label</label></div>
+                                                        <div class="form-group"><label for="username"><strong>PID</strong></label>
+                                                            <div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Select Participant</button>
+                                                                <div id = "dropdown_menu" class="dropdown-menu" role="menu"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -83,7 +88,7 @@
                         </div>
                     </div>
                     <div class="card shadow mb-5"></div>
-                </div><label><strong>Condition 1 - Single Evidence</strong></label>
+                </div><label style="padding: 11px;"><strong>Condition 1 - Single Evidence</strong></label>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -94,40 +99,10 @@
                                 <th>Post-Inclination</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Homeland is an American television spy thriller based on the Israeli television series Prisoners of War.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                            </tr>
-                            <tr>
-                                <td>Liverpool F.C. was valued at $1.55 billion at one point.</td>
-                                <td>Cell 4</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                            </tr>
-                            <tr>
-                                <td>Drinking Corona beer causes the coronavirus in humans</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                            </tr>
-                            <tr>
-                                <td>Lemmy was known for his distinctive playing style and appearance.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                            </tr>
-                            <tr>
-                                <td>Jamie Murray is a three-time Grand Slam doubles loser.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                            </tr>
+                        <tbody id = "table-1">
                         </tbody>
                     </table>
-                </div><label><strong>Condition 2 - Three Evidences</strong></label>
+                </div><label style="padding: 11px;"><strong>Condition 2 - Three Evidences</strong></label>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -138,45 +113,11 @@
                                 <th>Post-Inclination</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Stranger Things is set in Bloomington, Indiana.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>The new coronavirus cannot be transmitted through mosquito bites</td>
-                                <td>Cell 4</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Colin Kaepernick became a starting quarterback during the 49ers 63rd season in the National Football League.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Lizzy Caplan starred in television show like True Blood.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Aaron Burr killed Alexander Hamilton in New Jersey.</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
+                        <tbody id = "table-2">
+
                         </tbody>
                     </table>
-                </div><label><strong>Condition 3 - Both Supporting and Refuting Evidence, No Label</strong></label>
+                </div><label style="padding: 11px;"><strong>Condition 3 - Both Supporting and Refuting Evidence, No Label</strong></label>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -185,102 +126,31 @@
                                 <th>Pre-Inclination</th>
                                 <th>Prior Knowledge</th>
                                 <th>Post-Inclination</th>
-                                
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>COVID-19 virus can be transmitted in areas with hot and humid climates</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Arsonists are responsible for Australia’s Bushfire Crisis</td>
-                                <td>Cell 4</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Medicare is paying hospitals $13,000 for patients admitted with COVID-19 diagnoses and $39,000 if those patients are placed on ventilators</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Scientists have discovered a berry — found in only one region of Australia — that can cure cancer in 48 hours</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Wombats are herding animals and inviting them into their burrows in order to escape them from the wildfires in Australia</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
+                        <tbody  id = "table-3">
+                            
                         </tbody>
                     </table>
-                </div><label>Condition 4 - Only Evidence, No Label</label>
+                </div><label style="margin: 0px;padding: 11px;"><strong>Condition 4 - Only Evidence, No Label</strong></label>
                 <div class="table-responsive">
                     <table class="table">
-                        <thead>
+                        <thead >
                             <tr>
                                 <th>Sentence</th>
                                 <th>Pre-Inclination</th>
                                 <th>Prior Knowledge</th>
                                 <th>Post-Inclination</th>
-                                
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Taking a hot bath does not prevent the new coronavirus disease</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Southampton F.C. came in second in the First Division in 1983 -- 1984.</td>
-                                <td>Cell 4</td>
-                                <td>Cell 3</td>
-                                <td>Cell 3</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Russia released more than 500 lions to make sure that people stay inside during the COVID-19 pandemic</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>A government shutdown in Australia in 1975 ended with the dismissal of the prime minister and all members of Parliament</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Amid a nationwide COVID-19 lockdown, Italians reported seeing wildlife such as swans and dolphins "returning" to newly tranquil waterways, ports, and canals</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                                <td>Cell 4</td>
-                                
-                            </tr>
+                        <tbody id = "table-4">
                         </tbody>
                     </table>
                 </div>
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2020</span></div>
+                    <div class="text-center my-auto copyright"><span>Copyright © Get Fact Check 2020</span></div>
                 </div>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
@@ -288,6 +158,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="static/js/script.min.js"></script>
+    <script src="static/js/profile.js"></script>
 </body>
 
 </html>

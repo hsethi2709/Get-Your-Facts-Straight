@@ -298,3 +298,31 @@ def getAverageSatisfactionScore():
             return response
     except Exception as e:
         return (e)
+
+@app.route("/getListOfParticipants", methods=['GET'])
+def getListofParticipants():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['participants']
+        cursor = collection.find({})
+        participantsList = []
+        cursor = list(cursor)
+        for item in cursor:
+            participantsList.append(item['_id'])
+        return {"participants": participantsList}
+    except Exception as e:
+        return e
+
+@app.route("/getProfileInfo", methods=['POST'])
+def getProfileInfo():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['clientList_Sentences']
+        requestJson = request.json
+        print(requestJson)
+        cursor = collection.find_one({"_id": str(requestJson['pid'])})
+        return {"participant_details": cursor}
+    except Exception as e:
+        return (e)
