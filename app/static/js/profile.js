@@ -3,7 +3,7 @@ function getProfileInformation(pid){
     var payload = {
         'pid': pid,
     };
-    url='http://localhost:5000/getProfileInfo'
+    url='http://www.getfactcheck.me/getProfileInfo'
     fetch(url, {
         method:'post',
         headers: {
@@ -49,7 +49,7 @@ function getProfileInformation(pid){
 
 function getPID(){
 
-    url='http://localhost:5000/getListOfParticipants'
+    url='http://www.getfactcheck.me/getListOfParticipants'
     fetch(url, {
         method:'get',
         headers: {
