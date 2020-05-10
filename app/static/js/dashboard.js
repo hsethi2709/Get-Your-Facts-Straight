@@ -82,7 +82,7 @@ function log_in(){
         }).then(function(response) {
             response.json().then(function (data) {
                 if (data.status == "True"){
-                    document.cookie = "dashboard_login=True; max-age=60";
+                    document.cookie = "dashboard_login=True; max-age=3600";
                     window.location.href = "https://www.getfactcheck.me/dashboard";
                 }
                 else{
