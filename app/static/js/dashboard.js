@@ -72,7 +72,7 @@ function log_in(){
             "username": username,
             "password": password
         };
-        url='https://getfactcheck.me/checkPassword'
+        url='https://www.getfactcheck.me/checkPassword'
         fetch(url, {
             method:'post',
             headers: {
@@ -83,7 +83,7 @@ function log_in(){
             response.json().then(function (data) {
                 if (data.status == "True"){
                     document.cookie = "dashboard_login=True; max-age=60";
-                    window.location.href = "https://getfactcheck.me/dashboard";
+                    window.location.href = "https://www.getfactcheck.me/dashboard";
                 }
                 else{
                     alert("Please try again!");
@@ -105,7 +105,7 @@ function getCookie(name) {
     return null;
 }  
 
-if (window.location.href != "https://getfactcheck.me/dashboard_login"){
+if (window.location.href != "https://www.getfactcheck.me/dashboard_login"){
 login = getCookie("dashboard_login")
 if (login!= null)
 {
@@ -114,6 +114,6 @@ getTrustScore();
 getSatisfactionScore();
 }
 else{
-    window.location.assign("https://getfactcheck.me/dashboard_login");
+    window.location.assign("https://www.getfactcheck.me/dashboard_login");
 }
 }
