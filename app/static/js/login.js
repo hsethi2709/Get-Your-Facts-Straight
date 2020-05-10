@@ -47,7 +47,6 @@ function log_in(){
 	}).then(function(response) {
 		if (response.status == 200) {
             window.location.assign("https://www.getfactcheck.me/pre");
-
 		}    
 		}
 		);

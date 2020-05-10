@@ -131,17 +131,16 @@ document.getElementById('next').addEventListener('click', function(){
 			if (count == 5){
 				console.log('Moving to Feedback Page')
 				if (experiment_level[global_level] == 1){
-					window.open("https://harshitsethi.typeform.com/to/DyauDC?pid="+pid);
+					window.location.replace("https://www.getfactcheck.me/feedback_1");
 				}
 				else if (experiment_level[global_level] == 2){
-					window.open("https://harshitsethi.typeform.com/to/g2wikq?pid="+pid);
+					window.location.replace("https://www.getfactcheck.me/feedback_2");
 				}
 				else if (experiment_level[global_level] == 3){
-					window.open("https://harshitsethi.typeform.com/to/UwkUPV?pid="+pid);
+					window.location.replace("https://www.getfactcheck.me/feedback_3");
 				}
 				else {
-					window.open("https://harshitsethi.typeform.com/to/T5HCPC?pid="+pid);
-
+					window.location.replace("https://www.getfactcheck.me/feedback_4");
 				}
 				console.log("Moving to next level")
 				global_level += 1

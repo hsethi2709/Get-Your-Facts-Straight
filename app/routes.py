@@ -26,6 +26,22 @@ def start():
 def end():
     return render_template("post.html", title="Post-Experiment Questionnaire")
 
+@app.route('/feedback_1')
+def feedback_1():
+    return render_template("condition1_feedback.html", title="Questionnaire")
+
+@app.route('/feedback_2')
+def feedback_2():
+    return render_template("condition2_feedback.html", title="Questionnaire")
+
+@app.route('/feedback_3')
+def feedback_3():
+    return render_template("condition3_feedback.html", title="Questionnaire")
+
+@app.route('/feedback_4')
+def feedback_4():
+    return render_template("condition4_feedback.html", title="Questionnaire")
+
 @app.route("/login")
 def login():
     return render_template("login.html", title="Get Fact Check")
