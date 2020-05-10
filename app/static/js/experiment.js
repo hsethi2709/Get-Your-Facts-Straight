@@ -134,8 +134,7 @@ document.getElementById('next').addEventListener('click', function(){
 			console.log("Count:", count)
 			if (count == 5){
 				console.log('Moving to Feedback Page')
-				global_level += 1
-				document.cookie = "experiment_stage="+global_level;
+				
 				if (experiment_level[global_level] == 1){
 					window.location.replace("https://www.getfactcheck.me/feedback_1");
 				}
@@ -149,6 +148,8 @@ document.getElementById('next').addEventListener('click', function(){
 					window.location.replace("https://www.getfactcheck.me/feedback_4");
 				}
 				console.log("Moving to next level")
+				global_level += 1
+				document.cookie = "experiment_stage="+global_level;
 				
 		}
 		document.getElementById("experimentSentences").innerHTML = sentences[count]+"<br>"

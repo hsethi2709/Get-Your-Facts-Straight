@@ -96,11 +96,9 @@ document.getElementById('true').addEventListener('click', function(){
 				getSentences(global_level)
 				count = 0
 				final_count = 0	
-			}
+				}
 				else{
 				console.log("All levels completed")
-				experiment_level = shuffleArray(experiment_level)
-				console.log(experiment_level)
 				window.location.assign("https://www.getfactcheck.me/training");
 				}
 		}
@@ -144,8 +142,6 @@ document.getElementById('fake').addEventListener('click', function(){
 			}
 				else{
 				console.log("All levels completed")
-				experiment_level = shuffleArray(experiment_level)
-				console.log(experiment_level)
 				window.location.assign("https://www.getfactcheck.me/training");
 
 				}
