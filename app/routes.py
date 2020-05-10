@@ -71,6 +71,10 @@ def thankYou():
 def dashboard():
     return render_template("dashboard.html", title="Get Fact Check")
 
+@app.route("/dashboard_login")
+def dashboard_login():
+    return render_template("dashboard_login.html", title="Get Fact Check")
+
 @app.route("/profile.html")
 def profile():
     return render_template("profile.html", title="Get Fact Check")
@@ -352,3 +356,15 @@ def getSentenceAverageSatisfactionScore():
             return response
     except Exception as e:
         return (e)
+
+@app.route("/checkPassword", methods=['POST'])
+def checkPassword():
+    requestJson = request.json
+    print(requestJson)
+    if requestJson['username'] == "dashboard@getfactcheck.me":
+        if requestJson['password'] == "Unimelb-990198":
+            return {"status":"True"}
+        else:
+            return {"status":"False"}
+    else:
+        return {"status":"False"}
