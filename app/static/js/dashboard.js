@@ -103,7 +103,38 @@ function getCookie(name) {
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
-}  
+} 
+function getTrueOrFalseData(){
+    url='https://www.getfactcheck.me/getTrueFakeData'
+fetch(url, {
+    method:'get',
+    headers: {
+        'Content-Type': 'application/json'
+      }
+}).then(function(response) {
+    if (response.status == 200) {
+        response.json().then(function(data){
+        var ctxP = document.getElementById("pieChart").getContext('2d');
+        var myPieChart = new Chart(ctxP, {
+            type: 'pie',
+            data: {
+            labels: ["True", "Fake"],
+            datasets: [{
+                data: [data.true, 100-(data.true)],
+                backgroundColor: ["#F7464A", "#46BFBD"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
+            }]
+            },
+            options: {
+            responsive: true
+            }
+        });
+
+    }    
+    );
+}}
+);
+}
 
 if (window.location.href != "https://www.getfactcheck.me/dashboard_login"){
 login = getCookie("dashboard_login")
@@ -112,6 +143,7 @@ if (login!= null)
 totalPID();
 getTrustScore();
 getSatisfactionScore();
+getTrueOrFalseData();
 }
 else{
     window.location.assign("https://www.getfactcheck.me/dashboard_login");

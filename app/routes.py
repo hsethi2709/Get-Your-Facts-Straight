@@ -373,6 +373,32 @@ def getSentenceAverageSatisfactionScore():
     except Exception as e:
         return (e)
 
+@app.route("/getTrueFakeData", methods=['GET'])
+def getTrueFakeData():
+    try:
+        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        db = client.afv
+        collection = db['clientList_Sentences']
+        cursor = collection.find({})
+        levels = ['1','2','3','4']
+        true = 0
+        fake = 0
+        total = 0
+        for user in cursor:
+            for level in levels:
+                if 'pre' in user[level]:
+                    for sentence in user[level]['pre']:
+                        if user[level]['pre'][sentence]['unaware'] == True:
+                            total += 1
+                            if user[level]['pre'][sentence]['label'] == 'True':
+                                true += 1
+                            elif user[level]['pre'][sentence]['label'] == 'Fake':
+                                fake += 1
+        true_per = (true/total) * 100
+        return {"true": true_per}
+    except Exception as e:
+        return (e)
+
 @app.route("/checkPassword", methods=['POST'])
 def checkPassword():
     requestJson = request.json
