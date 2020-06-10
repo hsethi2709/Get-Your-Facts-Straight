@@ -126,11 +126,11 @@ def getResponse(claim,level):
             claim_output['SUPPORTS'] = [['',2.5, 'Scientists have isolated a chemical from the berry of a Australian plant endemic only to one region of Australia and have demonstrated promising early results regarding the compound’s ability to destroy tumors in mice, cats, dogs, and horses through direct injections']]
             return claim_output
         
-        elif claim == "Medicare is paying hospitals $13,000 for patients admitted with COVID-19 diagnoses and $39,000 if those patients are placed on ventilators":
+        elif claim == "The CDC issued a stringent set of rules that U.S. schools must follow before reopening amid the COVID-19 coronavirus pandemic":
             claim_output = {}
             claim_output['claim'] = claim
-            claim_output['SUPPORTS'] = [['',2.9,"It is plausible that Medicare is paying hospital fees for some COVID-19 cases in the range of the figures given by Dr. Scott Jensen, a Minnesota state senator, during a Fox News interview."]]
-            claim_output['REFUTES'] = [['',3.4, "Medicare says it does not make standard, one-size-fits-all payments to hospitals for patients admitted with COVID-19 diagnoses and placed on ventilators. The $13,000 and $39,000 figures appear to be based on generic industry estimates for admitting and treating patients with similar conditions."]]
+            claim_output['SUPPORTS'] = [['',2.9,"The CDC published a set of guidelines that schools can adopt when feasible as they consider reopening amid the COVID-19 coronavirus pandemic."]]
+            claim_output['REFUTES'] = [['',3.4, "The guidelines are not mandatory, and they are not meant to be uniformly applied to all schools nationwide. Schools are encouraged to abide by state and local health mandates and apply any recommendations that make sense to them to keep students and staff members safe."]]
             return claim_output
 
         elif claim == "Wombats are herding other animals and inviting them into their burrows in order to escape them from the wildfires in Australia":
@@ -152,11 +152,11 @@ def getResponse(claim,level):
             claim_output['label'] = "REFUTES"
             claim_output['evidence'] = ["According to BBC News, Putin has yet to announce any sort of lockdown or shelter-in-place measures and therefore has no need for this fictional lion brute squad. According to the Russian president, the outbreak of COVID-19 is currently “under control” in the country."]
             return claim_output
-        elif claim == "A government shutdown in Australia in 1975 ended with the dismissal of the prime minister and all members of Parliament":
+        elif claim == "Some 59 people died after a pastor gave them Dettol to drink to supposedly prevent coronavirus":
             claim_output = {}
             claim_output['claim'] = claim
-            claim_output['label'] = "SUPPORTS"
-            claim_output['evidence'] = ["Australia’s government was effectively shutdown due to a budget impasse in October 1975, the prime minister was dismissed, both houses of Parliament were dissolved, and a new election was held. Since then, Australia has not had another government shutdown."]
+            claim_output['label'] = "REFUTES"
+            claim_output['evidence'] = ["The claim that 59 people died after a pastor gave them Dettol to prevent coronavirus is false. This claim is several years old, this news report has dubious origins, and this claim has been disputed by local authorities.", "This claim appears to be a variation of a rumor that has been circulating since 2016. At that time, it was reported that South African pastor Phala had told his congregation to consume cleaning products such as Dettol as a sort of miracle cure."]
             return claim_output
 
         elif claim == "Amid a nationwide COVID-19 lockdown, Italians reported seeing wildlife such as swans and dolphins \"returning\" to newly tranquil waterways, ports, and canals":
