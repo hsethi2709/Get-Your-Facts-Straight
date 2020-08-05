@@ -169,7 +169,7 @@ def addSentenceToClient():
         if cursor == None:
             final = {
                     "_id":requestJson['pid'],
-                    requestJson['level']:{"pre":{requestJson['sentence'].replace('.','_') : {"label": requestJson['label'], "unaware": requestJson['unaware']}}}
+                    requestJson['level']:{"pre":{requestJson['sentence'].replace('.','_') : {"label": requestJson['label'], "unaware": requestJson['unaware'], "confidence_scale": requestJson['confidence_scale']}}}
                     }
             if collection.insert_one(final):
                 return "Inserted Successfully"
@@ -179,7 +179,7 @@ def addSentenceToClient():
             final = copy.deepcopy(cursor)
             if requestJson['level'] not in final:
                 final[requestJson['level']] = {'pre':{}}
-            final[requestJson['level']]['pre'][requestJson['sentence']] = {"label":requestJson['label'], "unaware": requestJson['unaware']}
+            final[requestJson['level']]['pre'][requestJson['sentence']] = {"label":requestJson['label'], "unaware": requestJson['unaware'], "confidence_scale":requestJson['confidence_scale']}
             if collection.update(cursor, final, upsert=False):
                 return {'status':200}
             else:

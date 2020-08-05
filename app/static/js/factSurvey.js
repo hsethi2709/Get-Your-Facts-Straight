@@ -29,6 +29,7 @@ count = 0
 final_count = 0
 global_level = 1
 experiment_level = [1,2,3,4]
+var opinion_choice = null
 function getSentences(level){
 	console.log("Getting Sentences for Level:", level)
 		var payload = {
@@ -65,93 +66,69 @@ function shuffleArray(array) {
 			return (array)
 		}
 
+function submitConfidence(evt){
+	if (opinion_choice == null){
+		document.getElementById("error").style.display = "block";
+	}
+	else{
+		confidence_scale = evt;
+		if (opinion_choice == true) {
+			opinion_choice = "True"
+		}
+		else{
+			opinion_choice = "Fake"
+		}
+		var checked = document.getElementById('noIdea').checked;
+		var payload = {
+			"pid": pid,
+			"sentence":document.getElementById("sentences").innerHTML,
+			"label": opinion_choice,
+			"level": global_level.toString(),
+			"stage": "pre",
+			"unaware": checked,
+			"confidence_scale": confidence_scale
+		};
+
+		url='https://www.getfactcheck.me/addSentenceToClient'
+		fetch(url, {
+			method:'post',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(payload)
+		}).then(function(response) {
+			if (response.status == 200) {
+				count += 1
+				console.log("Count:", count)
+				final_count += 1
+				if (final_count == 5){
+					console.log("Moving to next level")
+					global_level += 1
+					if (global_level<5){
+					getSentences(global_level)
+					count = 0
+					final_count = 0	
+					}
+					else{
+					console.log("All levels completed")
+					window.location.assign("https://www.getfactcheck.me/training");
+					}
+			}
+			document.getElementById("sentences").innerHTML = sentences[count]
+			document.getElementById('noIdea').checked = false;
+			document.getElementById("error").style.display = "none";
+			opinion_choice = null;
+			}}
+			);
+		}
+}
+
 // Button Click Events
 document.getElementById('true').addEventListener('click', function(){
-	var checked = document.getElementById('noIdea').checked;
-	var payload = {
-		"pid": pid,
-		"sentence":document.getElementById("sentences").innerHTML,
-		"label": "True",
-		"level": global_level.toString(),
-		"stage": "pre",
-		"unaware": checked
-	};
-
-	url='https://www.getfactcheck.me/addSentenceToClient'
-	fetch(url, {
-		method:'post',
-		headers: {
-			'Content-Type': 'application/json'
-		  },
-		body: JSON.stringify(payload)
-	}).then(function(response) {
-		if (response.status == 200) {
-			count += 1
-			console.log("Count:", count)
-			final_count += 1
-			if (final_count == 5){
-				console.log("Moving to next level")
-				global_level += 1
-				if (global_level<5){
-				getSentences(global_level)
-				count = 0
-				final_count = 0	
-				}
-				else{
-				console.log("All levels completed")
-				window.location.assign("https://www.getfactcheck.me/training");
-				}
-		}
-		document.getElementById("sentences").innerHTML = sentences[count]
-		document.getElementById('noIdea').checked = false;
-		}}
-		);
-
+	opinion_choice = true;
 });
 
 document.getElementById('fake').addEventListener('click', function(){
-	var checked = document.getElementById('noIdea').checked;
-	var payload = {
-		"pid": pid,
-		"sentence":document.getElementById("sentences").innerHTML,
-		"label": "Fake",
-		"level": global_level.toString(),
-		"stage":"pre",
-		"unaware": checked
-
-	};
-	url='https://www.getfactcheck.me/addSentenceToClient'
-	fetch(url, {
-		method:'post',
-		headers: {
-			'Content-Type': 'application/json'
-		  },
-		body: JSON.stringify(payload)
-	}).then(function(response) {
-		if (response.status == 200) {
-			count += 1
-			console.log("Count:", count)
-			final_count += 1
-			if (final_count == 5){
-				console.log("Moving to next level")
-				global_level += 1
-				if (global_level<5){
-				getSentences(global_level)
-				count = 0
-				final_count = 0	
-			}
-				else{
-				console.log("All levels completed")
-				window.location.assign("https://www.getfactcheck.me/training");
-
-				}
-		}
-		document.getElementById("sentences").innerHTML = sentences[count]
-		document.getElementById('noIdea').checked = false;
-
-			
-		}}
-		);
-
+	opinion_choice = false;
 });
 

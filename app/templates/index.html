@@ -46,8 +46,9 @@
             <!-- End: Intro -->
             <!-- Start: Buttons -->
             <div class="buttons"><div class="form-check"><input type="checkbox" class="form-check-input" id="noIdea"/><label class="form-check-label" for="noIdea">I have no idea about this</label></div><a class="btn btn-primary" role="button" id="true">True</a><a class="btn btn-primary" role="button" id="fake">Fake</a></div>
-            <br><div>How confident are you about your choice?</div>
-            <div class="buttons">Not at all Confident <a class="btn btn-primary" role="button" id="1">1</a> <a class="btn btn-primary" role="button" id="2">2</a> <a class="btn btn-primary" role="button" id="3">3</a> <a class="btn btn-primary" role="button" id="4">4</a> <a class="btn btn-primary" role="button" id="5">5</a> <a class="btn btn-primary" role="button" id="6">6</a> <a class="btn btn-primary" role="button" id="7">7</a> Extremely Confident</div>
+            <br><div class="buttons">How confident are you about your choice?</div>
+            <div class="buttons">Not at all Confident <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="1">1</a> <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="2">2</a> <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="3">3</a> <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="4">4</a> <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="5">5</a> <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="6">6</a> <a class="btn btn-primary" onclick="submitConfidence(this.id);" role="button" id="7">7</a> Extremely Confident</div>
+            <br><div class="buttons"><label id="error" style="display: none; background-color: #f44336;">Please select True or False before choosing confidence level!</label></div>
             <!-- End: Buttons -->
         </div>
     </div>
