@@ -5,7 +5,7 @@ import urllib
 import predict as p1
 import json
 import copy
-
+import traceback
 @app.after_request
 def add_header(r):
     """
@@ -385,6 +385,7 @@ def getTrueFakeData():
         fake = 0
         total = 0
         for user in cursor:
+            print(user['_id'])
             for level in levels:
                 if 'pre' in user[level]:
                     for sentence in user[level]['pre']:
@@ -397,6 +398,7 @@ def getTrueFakeData():
         true_per = (true/total) * 100
         return {"true": true_per}
     except Exception as e:
+        print(traceback.print_exc())
         return (e)
 
 @app.route("/checkPassword", methods=['POST'])
