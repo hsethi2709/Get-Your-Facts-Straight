@@ -126,9 +126,11 @@ function submitConfidence(evt){
 // Button Click Events
 document.getElementById('true').addEventListener('click', function(){
 	opinion_choice = true;
+	document.getElementById("confidence").style.display = "block";
 });
 
 document.getElementById('fake').addEventListener('click', function(){
 	opinion_choice = false;
+	document.getElementById("confidence").style.display = "block";
 });
 
