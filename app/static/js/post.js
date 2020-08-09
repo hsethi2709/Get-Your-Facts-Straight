@@ -147,7 +147,6 @@ function submitConfidence(evt){
 					}
 			}
 			document.getElementById("sentences").innerHTML = sentences[count]
-			document.getElementById('noIdea').checked = false;
 			document.getElementById("error").style.display = "none";
 			document.getElementById("confidence").style.display = "none";
 			opinion_choice = null;
