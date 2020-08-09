@@ -112,14 +112,12 @@ function submitConfidence(evt){
 		else{
 			opinion_choice = "Fake"
 		}
-		var checked = document.getElementById('noIdea').checked;
 		var payload = {
 			"pid": pid,
 			"sentence":document.getElementById("sentences").innerHTML,
 			"label": opinion_choice,
 			"level": global_level.toString(),
 			"stage": "post",
-			"unaware": checked,
 			"confidence_scale": confidence_scale
 		};
 
@@ -151,6 +149,7 @@ function submitConfidence(evt){
 			document.getElementById("sentences").innerHTML = sentences[count]
 			document.getElementById('noIdea').checked = false;
 			document.getElementById("error").style.display = "none";
+			document.getElementById("confidence").style.display = "none";
 			opinion_choice = null;
 			}}
 			);
