@@ -191,7 +191,7 @@ def addSentenceToClient():
                 final[requestJson['level']] = {'post':{}}
             if "post" not in final[requestJson['level']]:
                 final[requestJson['level']]['post'] = {}
-            final[requestJson['level']]['post'][requestJson['sentence']] = requestJson['label']
+            final[requestJson['level']]['post'][requestJson['sentence']] = {"label":requestJson['label'], "confidence_scale": requestJson['confidence_scale']}
             if collection.update(cursor, final, upsert=False):
                 return {'status':200}
             else:
