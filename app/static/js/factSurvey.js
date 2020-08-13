@@ -127,11 +127,15 @@ function submitConfidence(evt){
 // Button Click Events
 document.getElementById('true').addEventListener('click', function(){
 	opinion_choice = true;
+	document.getElementById('true').style.backgroundColor = "red"
+	document.getElementById('fake').style.backgroundColor = "#ffffff00"
 	document.getElementById("confidence").style.display = "block";
 });
 
 document.getElementById('fake').addEventListener('click', function(){
 	opinion_choice = false;
+	document.getElementById('fake').style.backgroundColor = "red"
+	document.getElementById('true').style.backgroundColor = "#ffffff00"
 	document.getElementById("confidence").style.display = "block";
 });
 
