@@ -118,6 +118,8 @@ function submitConfidence(evt){
 			document.getElementById('noIdea').checked = false;
 			document.getElementById("error").style.display = "none";
 			document.getElementById("confidence").style.display = "none";
+			document.getElementById('fake').style.backgroundColor = "#ffffff00"
+			document.getElementById('true').style.backgroundColor = "#ffffff00"
 			opinion_choice = null;
 			}}
 			);
