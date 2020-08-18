@@ -111,7 +111,7 @@ def index():
 
 @app.route('/addUser', methods=['POST'])
 def addUser():
-    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.afv
     myrecord = request.json
     col = db['participants']
@@ -122,7 +122,7 @@ def addUser():
    
 @app.route("/sendFeedback", methods=['POST'])
 def sendFeedback():
-    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.afv
     col = db["participants"]
     requestJson = request.json
@@ -139,7 +139,7 @@ def sendFeedback():
 
 @app.route("/addSentences", methods=['POST'])
 def addSentences():
-    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.afv
     collection = db['MasterList_Sentences']
     requestJson = request.json
@@ -160,7 +160,7 @@ def addSentences():
 
 @app.route("/addSentenceToClient", methods=['POST'])
 def addSentenceToClient():
-    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.afv
     collection = db['clientList_Sentences']
     requestJson = request.json
@@ -199,7 +199,7 @@ def addSentenceToClient():
 
 @app.route("/readClientSentences", methods=['POST'])
 def readSentences():
-    client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+    client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.afv
     collection = db['clientList_Sentences']
     requestJson = request.json
@@ -216,7 +216,7 @@ def readSentences():
 @app.route("/readMasterSentences", methods=['POST'])
 def readMasterSentence():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['MasterList_Sentences']
         requestJson = request.json
@@ -231,7 +231,7 @@ def readMasterSentence():
 @app.route("/checkDuplicatePID", methods=['POST'])
 def checkDuplicatePID():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['participants']
         requestJson = request.json
@@ -249,7 +249,7 @@ def checkDuplicatePID():
 @app.route("/getTotalParticipants", methods=['GET'])
 def getTotalPID():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['participants']
         cursor = collection.find({})
@@ -266,7 +266,7 @@ def getTotalPID():
 @app.route("/getAverageTrustScore", methods=['GET'])
 def getAverageTrustScore():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['participants']
         cursor = collection.find({})
@@ -294,7 +294,7 @@ def getAverageTrustScore():
 @app.route("/getAverageSatisfactionScore", methods=['GET'])
 def getAverageSatisfactionScore():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['participants']
         cursor = collection.find({})
@@ -322,7 +322,7 @@ def getAverageSatisfactionScore():
 @app.route("/getListOfParticipants", methods=['GET'])
 def getListofParticipants():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['participants']
         cursor = collection.find({})
@@ -337,7 +337,7 @@ def getListofParticipants():
 @app.route("/getProfileInfo", methods=['POST'])
 def getProfileInfo():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['clientList_Sentences']
         requestJson = request.json
@@ -350,7 +350,7 @@ def getProfileInfo():
 @app.route("/getSentenceAverageSatisfactionScore", methods=['POST'])
 def getSentenceAverageSatisfactionScore():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['participants']
         requestJson = request.json
@@ -376,7 +376,7 @@ def getSentenceAverageSatisfactionScore():
 @app.route("/getTrueFakeData", methods=['GET'])
 def getTrueFakeData():
     try:
-        client = pymongo.MongoClient("mongodb://harshit:" + urllib.parse.quote("harshit2709") + "@45.113.232.191/afv")
+        client = pymongo.MongoClient("mongodb://hsethi2709:harshit2709@cluster0-shard-00-00.wfcww.mongodb.net:27017,cluster0-shard-00-01.wfcww.mongodb.net:27017,cluster0-shard-00-02.wfcww.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-ofr26q-shard-0&authSource=admin&retryWrites=true&w=majority")
         db = client.afv
         collection = db['clientList_Sentences']
         cursor = collection.find({})
