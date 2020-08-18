@@ -2,7 +2,7 @@ from app import app
 from flask import render_template,request, make_response,jsonify
 import pymongo
 import urllib
-# import predict as p1
+import predict as p1
 import json
 import copy
 import traceback
