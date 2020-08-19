@@ -22,7 +22,7 @@ function checkCookie() {
 	  }
 	}
   }
-
+const spinner = document.getElementById("spinner");
 pid = getCookie('pid')
 sentences = []
 count = 0
@@ -35,7 +35,9 @@ function getSentences(level){
 		var payload = {
 			'level': level
 		};
+		// url='http://localhost:5000/readMasterSentences'
 		url='https://www.getfactcheck.me/readMasterSentences'
+		spinner.removeAttribute("hidden");
 		fetch(url, {
 			method:'post',
 			headers: {
@@ -45,6 +47,7 @@ function getSentences(level){
 		}).then(function(response) {
 			if (response.status == 200) {
 				response.json().then(function(data){
+					spinner.setAttribute("hidden", "");
 					console.log(data)
 					sentences = data
 					document.getElementById("sentences").innerHTML = sentences[count]
@@ -88,7 +91,7 @@ function submitConfidence(evt){
 			"unaware": checked,
 			"confidence_scale": confidence_scale
 		};
-
+		// url='http://localhost:5000/addSentenceToClient' 
 		url='https://www.getfactcheck.me/addSentenceToClient'
 		fetch(url, {
 			method:'post',
