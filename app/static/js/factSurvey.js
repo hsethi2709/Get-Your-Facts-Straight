@@ -92,7 +92,6 @@ function submitConfidence(evt){
 			"confidence_scale": confidence_scale
 		};
 		// url='http://localhost:5000/addSentenceToClient' 
-		spinner.removeAttribute("hidden");
 		url='https://www.getfactcheck.me/addSentenceToClient'
 		fetch(url, {
 			method:'post',
@@ -102,7 +101,6 @@ function submitConfidence(evt){
 			body: JSON.stringify(payload)
 		}).then(function(response) {
 			if (response.status == 200) {
-				spinner.setAttribute("hidden", "");
 				count += 1
 				console.log("Count:", count)
 				final_count += 1
