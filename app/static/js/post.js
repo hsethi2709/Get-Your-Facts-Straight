@@ -140,6 +140,11 @@ function submitConfidence(evt){
 					getSentences(global_level)
 					count = 0
 					final_count = 0	
+					document.getElementById("error").style.display = "none";
+					document.getElementById("confidence").style.display = "none";
+					document.getElementById('fake').style.backgroundColor = "#ffffff00"
+					document.getElementById('true').style.backgroundColor = "#ffffff00"
+					opinion_choice = null;
 					}
 					else{
 					console.log("All levels completed")
@@ -149,12 +154,15 @@ function submitConfidence(evt){
 					window.location.assign("https://www.getfactcheck.me/post");
 					}
 			}
-			document.getElementById("sentences").innerHTML = sentences[count]
-			document.getElementById("error").style.display = "none";
-			document.getElementById("confidence").style.display = "none";
-			document.getElementById('fake').style.backgroundColor = "#ffffff00"
-			document.getElementById('true').style.backgroundColor = "#ffffff00"
-			opinion_choice = null;
+			else{
+				document.getElementById("sentences").innerHTML = sentences[count]
+				document.getElementById("error").style.display = "none";
+				document.getElementById("confidence").style.display = "none";
+				document.getElementById('fake').style.backgroundColor = "#ffffff00"
+				document.getElementById('true').style.backgroundColor = "#ffffff00"
+				opinion_choice = null;
+			}
+
 			}}
 			);
 		}

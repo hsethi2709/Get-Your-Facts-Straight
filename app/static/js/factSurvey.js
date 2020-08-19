@@ -105,22 +105,31 @@ function submitConfidence(evt){
 					console.log("Moving to next level")
 					global_level += 1
 					if (global_level<5){
-					getSentences(global_level)
 					count = 0
 					final_count = 0	
+					getSentences(global_level)
+					document.getElementById('noIdea').checked = false;
+					document.getElementById("error").style.display = "none";
+					document.getElementById("confidence").style.display = "none";
+					document.getElementById('fake').style.backgroundColor = "#ffffff00"
+					document.getElementById('true').style.backgroundColor = "#ffffff00"
+					opinion_choice = null;
 					}
 					else{
 					console.log("All levels completed")
 					window.location.assign("https://www.getfactcheck.me/training");
 					}
 			}
-			document.getElementById("sentences").innerHTML = sentences[count]
-			document.getElementById('noIdea').checked = false;
-			document.getElementById("error").style.display = "none";
-			document.getElementById("confidence").style.display = "none";
-			document.getElementById('fake').style.backgroundColor = "#ffffff00"
-			document.getElementById('true').style.backgroundColor = "#ffffff00"
-			opinion_choice = null;
+			else{
+				document.getElementById("sentences").innerHTML = sentences[count]
+					document.getElementById('noIdea').checked = false;
+					document.getElementById("error").style.display = "none";
+					document.getElementById("confidence").style.display = "none";
+					document.getElementById('fake').style.backgroundColor = "#ffffff00"
+					document.getElementById('true').style.backgroundColor = "#ffffff00"
+					opinion_choice = null;
+			}
+
 			}}
 			);
 		}
