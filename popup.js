@@ -168,7 +168,7 @@ chrome.tabs.executeScript( {
 					var prediction_score = data.REFUTES[i][1];
 					var listItem = document.createElement("li");
 					listItem.style.marginBottom = "6px";
-					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + (Math.exp(prediction_score) / (Math.exp(prediction_score)+1)*100).toFixed(2);
+					listItem.innerHTML = evidence_item + "<br><b>Prediction Score:</b> " + (Math.exp(prediction_score) / (Math.exp(prediction_score)+1)*100).toFixed(2) +"%";
 					ul.appendChild(listItem);
 				}
 				document.getElementById("feedback_3").style.display='inline-block';
