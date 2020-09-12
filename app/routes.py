@@ -6,6 +6,7 @@ import urllib
 import json
 import copy
 import traceback
+import random
 
 client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
 get_client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
@@ -146,20 +147,22 @@ def index():
             claim_output = {}
             claim_output["claim"] = sentence
             claim_output['label'] = 'SUPPORTS'
-            claim_output['SUPPORTS'] = [sentence_data['supporting_evidence'][0]]
-            claim_output['REFUTES'] = sentence_data['supporting_evidence']
+            claim_output['SUPPORTS'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
+            claim_output['REFUTES'] = ['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]
             response = claim_output
         else:
             claim_output = {}
             claim_output["claim"] = sentence
             claim_output['label'] = 'REFUTES'
-            claim_output['SUPPORTS'] = sentence_data['supporting_evidence']
-            claim_output['REFUTES'] = [sentence_data['refuting_evidence'][0]]
+            claim_output['SUPPORTS'] = ['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]
+            claim_output['REFUTES'] = [['',random.uniform(2,4),sentence_data['refuting_evidence'][0]]]
             response = claim_output
             
     # response = p1.predict_label(sentence, data['level'])
+    print(response)
     res = jsonify(response)
     res.status_code = 200
+    print(res)
     return res
 
 @app.route('/addUser', methods=['POST'])
