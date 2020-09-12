@@ -186,9 +186,10 @@ def sendFeedback():
     cursor = col.find_one({'_id':int(requestJson['id'])})
     final = copy.deepcopy(cursor)
     level = str(requestJson['level'])
-    sentence = requestJson['sentence'][6:]
+    sentence = requestJson['sentence'][6:].strip()
     sen_db = db["MasterList_Sentences_2"]
     sentence_data = sen_db.find_one({"sentence":sentence})
+    sentence_data['_id'] = str(sentence_data['_id'])
     final['experiments'][level][sentence_data['_id']] = {}
     final['experiments'][level][sentence_data['_id']]['trustScore'] = requestJson['trust_value'] 
     final["experiments"][level][sentence_data['_id']]['satisfaction_value'] = requestJson['satisfaction_value']
