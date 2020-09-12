@@ -106,8 +106,8 @@ function getClientSentences(level){
 		var payload = {
 			'pid': pid
 		};
-		url='http://localhost:5000/readMasterSentences'
-		// url='https://www.getfactcheck.me/readMasterSentences'
+		// url='http://localhost:5000/readMasterSentences'
+		url='https://www.getfactcheck.me/readMasterSentences'
 		fetch(url, {
 			method:'get',
 			headers: {
@@ -164,10 +164,10 @@ function shuffleArray(array) {
 
 // Button Click Events
 document.getElementById('next').addEventListener('click', function(){
-			// if (getCookie("fact_check") == "false"){
-			// 	document.getElementById("error").style.display = "block";
-			// }
-			// else{
+			if (getCookie("fact_check") == "false"){
+				document.getElementById("error").style.display = "block";
+			}
+			else{
 				document.getElementById("error").style.display = "none";
 				sentence_done.push(randomElement)
 				console.log(sentence_done.length)
@@ -225,5 +225,5 @@ document.getElementById('next').addEventListener('click', function(){
 			document.cookie = "sentence_done="+JSON.stringify(sentence_done)
 
 				
-				}
+				}}
 		);
