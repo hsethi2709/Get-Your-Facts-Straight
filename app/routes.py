@@ -171,7 +171,7 @@ def addUser():
     
     db = insert_client.afv
     myrecord = request.json
-    col = db['participants']
+    col = db['participants_2']
     myrecord['experiments'] = {'1':{},'2':{},'3':{},'4':{}}
     if col.find_one(myrecord) is None:
         col.insert_one(myrecord)
