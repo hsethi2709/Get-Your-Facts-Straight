@@ -110,7 +110,53 @@ def index():
     sentence = request.args.get('sentence')
     data = request.get_json()
     print(data)
-    response = p1.predict_label(sentence, data['level'])
+    db = get_client.afv
+    myrecord = db['MasterList_Sentences_2']
+    sentence_data = myrecord.find_one({"sentence":sentence})
+    print(sentence_data)
+    if data['level'] == 1:
+        if sentence_data['ground_truth']:
+            claim_output = {}
+            claim_output["claim"] = sentence
+            claim_output['label'] = 'SUPPORTS'
+            claim_output['evidence'] = [sentence_data['supporting_evidence'][0]]
+            response = claim_output
+        else:
+            claim_output = {}
+            claim_output["claim"] = sentence
+            claim_output['label'] = 'REFUTES'
+            claim_output['evidence'] = [sentence_data['refuting_evidence'][0]]
+            response = claim_output
+    elif data['level'] == 2 or data['level'] == 4:
+        if sentence_data['ground_truth']:
+            claim_output = {}
+            claim_output["claim"] = sentence
+            claim_output['label'] = 'SUPPORTS'
+            claim_output['evidence'] = [sentence_data['supporting_evidence']]
+            response = claim_output
+        else:
+            claim_output = {}
+            claim_output["claim"] = sentence
+            claim_output['label'] = 'REFUTES'
+            claim_output['evidence'] = [sentence_data['refuting_evidence']]
+            response = claim_output
+    elif data['level'] == 3:
+        if sentence_data['ground_truth']:
+            claim_output = {}
+            claim_output["claim"] = sentence
+            claim_output['label'] = 'SUPPORTS'
+            claim_output['SUPPORTS'] = [sentence_data['supporting_evidence'][0]]
+            claim_output['REFUTES'] = [sentence_data['supporting_evidence']]
+            response = claim_output
+        else:
+            claim_output = {}
+            claim_output["claim"] = sentence
+            claim_output['label'] = 'REFUTES'
+            claim_output['SUPPORTS'] = [sentence_data['supporting_evidence']]
+            claim_output['REFUTES'] = [sentence_data['refuting_evidence'][0]]
+            response = claim_output
+            
+    # response = p1.predict_label(sentence, data['level'])
     res = jsonify(response)
     res.status_code = 200
     return res
@@ -129,7 +175,7 @@ def addUser():
 @app.route("/sendFeedback", methods=['POST'])
 def sendFeedback():
     
-    db = client.afv
+    db = insert_client_1.afv
     col = db["participants_2"]
     requestJson = request.json
     cursor = col.find_one({'_id':int(requestJson['id'])})
@@ -146,7 +192,7 @@ def sendFeedback():
 @app.route("/addSentences", methods=['POST'])
 def addSentences():
     
-    db = client.afv
+    db = insert_client.afv
     collection = db['MasterList_Sentences']
     requestJson = request.json
     cursor = collection.find_one({'_id': requestJson['level']})
@@ -167,7 +213,7 @@ def addSentences():
 @app.route("/addSentenceToClient", methods=['POST'])
 def addSentenceToClient():
     
-    db = client.afv
+    db = insert_client_1.afv
     collection = db['clientList_Sentences_2']
     requestJson = request.json
     cursor = collection.find_one({'_id': requestJson['pid']})
@@ -268,7 +314,7 @@ def getTotalPID():
 def getAverageTrustScore():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['participants']
         cursor = collection.find({})
         cursor = list(cursor)
@@ -296,7 +342,7 @@ def getAverageTrustScore():
 def getAverageSatisfactionScore():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['participants']
         cursor = collection.find({})
         cursor = list(cursor)
@@ -324,7 +370,7 @@ def getAverageSatisfactionScore():
 def getListofParticipants():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['participants']
         cursor = collection.find({})
         participantsList = []
@@ -339,7 +385,7 @@ def getListofParticipants():
 def getProfileInfo():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['clientList_Sentences']
         requestJson = request.json
         print(requestJson)
@@ -352,7 +398,7 @@ def getProfileInfo():
 def getSentenceAverageSatisfactionScore():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['participants']
         requestJson = request.json
         cursor = collection.find({})
@@ -378,7 +424,7 @@ def getSentenceAverageSatisfactionScore():
 def getTrueFakeData():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['clientList_Sentences']
         cursor = collection.find({})
         levels = ['1','2','3','4']
