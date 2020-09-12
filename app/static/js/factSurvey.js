@@ -31,26 +31,22 @@ global_level = 1
 experiment_level = [1,2,3,4]
 var opinion_choice = null
 function getSentences(level){
-	console.log("Getting Sentences for Level:", level)
-		var payload = {
-			'level': level
-		};
+	console.log("Getting all sentences")
 		// url='http://localhost:5000/readMasterSentences'
 		url='https://www.getfactcheck.me/readMasterSentences'
 		spinner.removeAttribute("hidden");
 		fetch(url, {
-			method:'post',
+			method:'get',
 			headers: {
 				'Content-Type': 'application/json'
-			  },
-			body: JSON.stringify(payload)
+			  }
 		}).then(function(response) {
 			if (response.status == 200) {
 				response.json().then(function(data){
 					spinner.setAttribute("hidden", "");
 					console.log(data)
 					sentences = data
-					document.getElementById("sentences").innerHTML = sentences[count]
+					document.getElementById("sentences").innerHTML = sentences[count]['sentence']
 					}
 				);
 	
@@ -86,7 +82,7 @@ function submitConfidence(evt){
 			"pid": pid,
 			"sentence":document.getElementById("sentences").innerHTML,
 			"label": opinion_choice,
-			"level": global_level.toString(),
+			"sentence_id":sentences[count]['_id'].toString(),
 			"stage": "pre",
 			"unaware": checked,
 			"confidence_scale": confidence_scale
@@ -103,28 +99,23 @@ function submitConfidence(evt){
 			if (response.status == 200) {
 				count += 1
 				console.log("Count:", count)
-				final_count += 1
-				if (final_count == 5){
-					console.log("Moving to next level")
-					global_level += 1
-					if (global_level<5){
-					count = 0
-					final_count = 0	
-					getSentences(global_level)
+				if (count == 24)
+					{
+					console.log("All sentences completed")
+					window.location.assign("https://www.getfactcheck.me/training");
+					}
+				else{
+					document.getElementById("sentences").innerHTML = sentences[count]['sentence']
 					document.getElementById('noIdea').checked = false;
 					document.getElementById("error").style.display = "none";
 					document.getElementById("confidence").style.display = "none";
 					document.getElementById('fake').style.backgroundColor = "#ffffff00"
 					document.getElementById('true').style.backgroundColor = "#ffffff00"
 					opinion_choice = null;
-					}
-					else{
-					console.log("All levels completed")
-					window.location.assign("https://www.getfactcheck.me/training");
-					}
+				}
 			}
 			else{
-				document.getElementById("sentences").innerHTML = sentences[count]
+				document.getElementById("sentences").innerHTML = sentences[count]['sentence']
 					document.getElementById('noIdea').checked = false;
 					document.getElementById("error").style.display = "none";
 					document.getElementById("confidence").style.display = "none";
@@ -133,7 +124,7 @@ function submitConfidence(evt){
 					opinion_choice = null;
 			}
 
-			}}
+			}
 			);
 		}
 }

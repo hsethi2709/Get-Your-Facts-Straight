@@ -1,8 +1,14 @@
 var pid = 0
 var fact_check = true;
 var global_level = 0;
-var experiment_level = [1,2,3,4]
-shuffleArray(experiment_level)
+// var experiment_level = [1,2,3,4]
+
+// shuffleArray(experiment_level)
+total_sentences = []
+for (var i = 0; i <= 23; i++) {
+	total_sentences.push(i);
+}
+
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -47,6 +53,35 @@ function checkCookie() {
 		shuffleArray(experiment_level)
 		document.cookie = "experiment_array="+JSON.stringify(experiment_level);
 	}
+	sentence_done = JSON.parse(getCookie('sentence_done'))
+	if (sentence_done == null){
+		sentence_done = []
+		document.cookie = "sentence_done="+JSON.stringify(sentence_done);
+	}
+	count = (getCookie('sentence_count'))
+	if (count == null){
+		count = 0
+		document.cookie = "sentence_count="+0;
+	}
+	else{
+		count = parseInt(count)
+	}
+	truth_count = (getCookie('truth_count'))
+	if (truth_count == null){
+		truth_count = 0
+		document.cookie = "truth_count="+0;
+	}
+	else{
+		truth_count = parseInt(truth_count)
+	}
+	false_count = (getCookie('false_count'))
+	if (false_count == null){
+		false_count = 0
+		document.cookie = "false_count="+0;
+	}
+	else{
+		false_count = parseInt(false_count)
+	}
   }
 checkCookie();
 if (global_level == 4){
@@ -54,32 +89,37 @@ if (global_level == 4){
 	window.location.replace("https://www.getfactcheck.me/postExperimentInstruction");
 }
 sentences = []
-count = 0
+randomElement = null
+block_statement = null
+while(randomElement == null || sentence_done.includes(randomElement))
+{
+randomElement = total_sentences[Math.floor(Math.random() * total_sentences.length)];
+}
 getClientSentences(experiment_level[global_level])
 document.cookie = "level="+experiment_level[global_level];
 changeLevelDisplay()
 
 function getClientSentences(level){
 	document.cookie = "level="+level;
-	console.log("Getting Client Sentences for Level:", level)
+	console.log("Getting Client Sentences")
 	console.log(pid)
 		var payload = {
-			'pid': pid,
-			'level': level.toString()
+			'pid': pid
 		};
-		url='https://www.getfactcheck.me/readClientSentences'
+		url='http://localhost:5000/readMasterSentences'
+		// url='https://www.getfactcheck.me/readMasterSentences'
 		fetch(url, {
-			method:'post',
+			method:'get',
 			headers: {
 				'Content-Type': 'application/json'
 			  },
-			body: JSON.stringify(payload)
+			// body: JSON.stringify(payload)
 		}).then(function(response) {
 			if (response.status == 200) {
 				response.json().then(function(data){
-					console.log(data)
 					sentences = data
-					document.getElementById("experimentSentences").innerHTML = sentences[count]+"<br>"
+					document.getElementById("experimentSentences").innerHTML = sentences[randomElement]['sentence']+"<br>"
+
 					}
 				);
 	
@@ -124,37 +164,66 @@ function shuffleArray(array) {
 
 // Button Click Events
 document.getElementById('next').addEventListener('click', function(){
-			if (getCookie("fact_check") == "false"){
-				document.getElementById("error").style.display = "block";
-			}
-			else{
+			// if (getCookie("fact_check") == "false"){
+			// 	document.getElementById("error").style.display = "block";
+			// }
+			// else{
 				document.getElementById("error").style.display = "none";
-			count += 1
-			document.getElementById("levelInstruction").style.display = "none";
-			console.log("Count:", count)
-			if (count == 5){
-				console.log('Moving to Feedback Page')
-				
-				if (experiment_level[global_level] == 1){
-					window.location.replace("https://www.getfactcheck.me/feedback_1");
+				sentence_done.push(randomElement)
+				console.log(sentence_done.length)
+				if (sentences[randomElement]['ground_truth'] == true)
+				{
+					truth_count += 1
+					document.cookie = "truth_count="+truth_count;
+					console.log("True Statement "+ truth_count)
+					if (truth_count == 3){
+						block_statement = true
+					}
 				}
-				else if (experiment_level[global_level] == 2){
-					window.location.replace("https://www.getfactcheck.me/feedback_2");
+				else
+				{
+					false_count += 1
+					console.log("False Statement "+ false_count)
+					document.cookie = "false_count="+false_count;
+					if (false_count == 3){
+						block_statement = false
+					}
 				}
-				else if (experiment_level[global_level] == 3){
-					window.location.replace("https://www.getfactcheck.me/feedback_3");
-				}
-				else {
-					window.location.replace("https://www.getfactcheck.me/feedback_4");
-				}
-				console.log("Moving to next level")
-				global_level += 1
-				document.cookie = "experiment_stage="+global_level;
-				
-		}
-		document.getElementById("experimentSentences").innerHTML = sentences[count]+"<br>"
-		document.cookie = "fact_check="+false;
+				while ((randomElement == null || sentence_done.includes(randomElement) || sentences[randomElement]['ground_truth'] == block_statement) && sentence_done.length != 24)
+					{
+					randomElement = total_sentences[Math.floor(Math.random() * total_sentences.length)];
+					}
+				count += 1
+				document.getElementById("levelInstruction").style.display = "none";
+				console.log("Count:", count)
+				if (count % 6 == 0){
 
-			
-		}}
+					console.log('Moving to Feedback Page')
+					
+					if (experiment_level[global_level] == 1){
+						window.location.replace("https://www.getfactcheck.me/feedback_1");
+					}
+					else if (experiment_level[global_level] == 2){
+						window.location.replace("https://www.getfactcheck.me/feedback_2");
+					}
+					else if (experiment_level[global_level] == 3){
+						window.location.replace("https://www.getfactcheck.me/feedback_3");
+					}
+					else {
+						window.location.replace("https://www.getfactcheck.me/feedback_4");
+					}
+					console.log("Moving to next level")
+					global_level += 1
+					document.cookie = "experiment_stage="+global_level;
+					document.cookie = "false_count="+0;
+					document.cookie = "truth_count="+0;
+					
+			}
+			document.getElementById("experimentSentences").innerHTML = sentences[randomElement]['sentence']+"<br>"
+			document.cookie = "fact_check="+false;
+			document.cookie = "sentence_count="+count;
+			document.cookie = "sentence_done="+JSON.stringify(sentence_done)
+
+				
+				}
 		);

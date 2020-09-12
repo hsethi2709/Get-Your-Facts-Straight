@@ -61,27 +61,22 @@ sentences = []
 count = 0
 final_count = 0
 global_level = 1
-experiment_level = [1,2,3,4]
 var opinion_choice = null
 function getSentences(level){
-	console.log("Getting Sentences for Level:", level)
-		var payload = {
-            'pid': pid,
-            "level":level.toString()
-		};
-		url='https://www.getfactcheck.me/readClientSentences'
+	console.log("Getting All Sentences")
+		url='http://localhost:5000/readMasterSentences'
+		// url='https://www.getfactcheck.me/readClientSentences'
 		fetch(url, {
-			method:'post',
+			method:'get',
 			headers: {
 				'Content-Type': 'application/json'
-			  },
-			body: JSON.stringify(payload)
+			  }
 		}).then(function(response) {
 			if (response.status == 200) {
 				response.json().then(function(data){
 					console.log(data)
 					sentences = data
-					document.getElementById("sentences").innerHTML = sentences[count]
+					document.getElementById("sentences").innerHTML = sentences[count]['sentence']
 					}
 				);
 	
@@ -116,12 +111,12 @@ function submitConfidence(evt){
 			"pid": pid,
 			"sentence":document.getElementById("sentences").innerHTML,
 			"label": opinion_choice,
-			"level": global_level.toString(),
+			"sentence_id":sentences[count]['_id'].toString(),
 			"stage": "post",
 			"confidence_scale": confidence_scale
 		};
-
-		url='https://www.getfactcheck.me/addSentenceToClient'
+		url='http://localhost:5000/addSentenceToClient' 
+		// url='https://www.getfactcheck.me/addSentenceToClient'
 		fetch(url, {
 			method:'post',
 			headers: {
@@ -132,30 +127,23 @@ function submitConfidence(evt){
 			if (response.status == 200) {
 				count += 1
 				console.log("Count:", count)
-				final_count += 1
-				if (final_count == 5){
-					console.log("Moving to next level")
-					global_level += 1
-					if (global_level<5){
-					getSentences(global_level)
-					count = 0
-					final_count = 0	
+				if (count == 24)
+					{
+						console.log("All levels completed")
+						document.cookie = "experiment_status=1";
+						window.location.assign("https://www.getfactcheck.me/post");
+					}
+				else{
+					document.getElementById("sentences").innerHTML = sentences[count]['sentence']
 					document.getElementById("error").style.display = "none";
 					document.getElementById("confidence").style.display = "none";
 					document.getElementById('fake').style.backgroundColor = "#ffffff00"
 					document.getElementById('true').style.backgroundColor = "#ffffff00"
 					opinion_choice = null;
 					}
-					else{
-					console.log("All levels completed")
-					experiment_level = shuffleArray(experiment_level)
-					console.log(experiment_level)
-					document.cookie = "experiment_status=1";
-					window.location.assign("https://www.getfactcheck.me/post");
-					}
 			}
 			else{
-				document.getElementById("sentences").innerHTML = sentences[count]
+				document.getElementById("sentences").innerHTML = sentences[count]['sentence']
 				document.getElementById("error").style.display = "none";
 				document.getElementById("confidence").style.display = "none";
 				document.getElementById('fake').style.backgroundColor = "#ffffff00"
@@ -163,7 +151,7 @@ function submitConfidence(evt){
 				opinion_choice = null;
 			}
 
-			}}
+			}
 			);
 		}
 }

@@ -2,12 +2,15 @@ from app import app
 from flask import render_template,request, make_response,jsonify
 import pymongo
 import urllib
-import predict as p1
+# import predict as p1
 import json
 import copy
 import traceback
 
 client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
+get_client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
+insert_client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
+insert_client_1 = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
 
 @app.after_request
 def add_header(r):
@@ -115,7 +118,7 @@ def index():
 @app.route('/addUser', methods=['POST'])
 def addUser():
     
-    db = client.afv
+    db = insert_client.afv
     myrecord = request.json
     col = db['participants']
     myrecord['experiments'] = {'1':{},'2':{},'3':{},'4':{}}
@@ -127,14 +130,14 @@ def addUser():
 def sendFeedback():
     
     db = client.afv
-    col = db["participants"]
+    col = db["participants_2"]
     requestJson = request.json
     cursor = col.find_one({'_id':int(requestJson['id'])})
     final = copy.deepcopy(cursor)
     level = str(requestJson['level'])
-    final['experiments'][level][requestJson['sentence']] = {}
-    final['experiments'][level][requestJson['sentence']]['trustScore'] = requestJson['trust_value'] 
-    final["experiments"][level][requestJson['sentence']]['satisfaction_value'] = requestJson['satisfaction_value']
+    final['experiments'][level][requestJson['sentence'][6:]] = {}
+    final['experiments'][level][requestJson['sentence'][6:]]['trustScore'] = requestJson['trust_value'] 
+    final["experiments"][level][requestJson['sentence'][6:]]['satisfaction_value'] = requestJson['satisfaction_value']
     if col.update(cursor, final, upsert=False):
         return {"status": 200}
     else:
@@ -165,14 +168,14 @@ def addSentences():
 def addSentenceToClient():
     
     db = client.afv
-    collection = db['clientList_Sentences']
+    collection = db['clientList_Sentences_2']
     requestJson = request.json
     cursor = collection.find_one({'_id': requestJson['pid']})
     if requestJson['stage'] == 'pre':
         if cursor == None:
             final = {
                     "_id":requestJson['pid'],
-                    requestJson['level']:{"pre":{requestJson['sentence'].replace('.','_') : {"label": requestJson['label'], "unaware": requestJson['unaware'], "confidence_scale": requestJson['confidence_scale']}}}
+                    "pre":{requestJson['sentence_id'] : {"sentence":requestJson['sentence'],"label": requestJson['label'], "unaware": requestJson['unaware'], "confidence_scale": requestJson['confidence_scale']}}
                     }
             if collection.insert_one(final):
                 return "Inserted Successfully"
@@ -180,9 +183,7 @@ def addSentenceToClient():
                 return "Insertion Failed"
         else:
             final = copy.deepcopy(cursor)
-            if requestJson['level'] not in final:
-                final[requestJson['level']] = {'pre':{}}
-            final[requestJson['level']]['pre'][requestJson['sentence']] = {"label":requestJson['label'], "unaware": requestJson['unaware'], "confidence_scale":requestJson['confidence_scale']}
+            final['pre'][requestJson['sentence_id']] = {"sentence":requestJson['sentence'],"label":requestJson['label'], "unaware": requestJson['unaware'], "confidence_scale":requestJson['confidence_scale']}
             if collection.update(cursor, final, upsert=False):
                 return {'status':200}
             else:
@@ -190,11 +191,9 @@ def addSentenceToClient():
     elif requestJson['stage'] == 'post':
 
             final = copy.deepcopy(cursor)
-            if requestJson['level'] not in final:
-                final[requestJson['level']] = {'post':{}}
-            if "post" not in final[requestJson['level']]:
-                final[requestJson['level']]['post'] = {}
-            final[requestJson['level']]['post'][requestJson['sentence']] = {"label":requestJson['label'], "confidence_scale": requestJson['confidence_scale']}
+            if "post" not in final:
+                final['post'] = {}
+            final['post'][requestJson['sentence_id']] = {"sentence":requestJson['sentence'],"label":requestJson['label'], "confidence_scale": requestJson['confidence_scale']}
             if collection.update(cursor, final, upsert=False):
                 return {'status':200}
             else:
@@ -203,31 +202,30 @@ def addSentenceToClient():
 @app.route("/readClientSentences", methods=['POST'])
 def readSentences():
     
-    db = client.afv
-    collection = db['clientList_Sentences']
+    db = get_client.afv
+    collection = db['clientList_Sentences_2']
     requestJson = request.json
     cursor = collection.find_one({"_id":requestJson['pid']})
     if cursor == None:
         return "Error"
     else:
         sentences = []
-        for sentence in cursor[requestJson['level']]['pre'].keys():
-            sentences.append(sentence.replace('_','.'))
+        for sentence in cursor['pre']:
+            sentences.append(cursor['pre'][sentence]['sentence'])
     
         return json.dumps(sentences)
 
-@app.route("/readMasterSentences", methods=['POST'])
+@app.route("/readMasterSentences", methods=['GET'])
 def readMasterSentence():
     try:
         
-        db = client.afv
-        collection = db['MasterList_Sentences']
-        requestJson = request.json
-        cursor = collection.find_one({"_id": requestJson['level']})
+        db = get_client.afv
+        collection = db['MasterList_Sentences_2']
+        cursor = collection.find({},{"supporting_evidence":0,"refuting_evidence":0})
         if cursor == None:
             return "Error"
         else:
-            return json.dumps(cursor['Sentences'])
+            return json.dumps(list(cursor))
     except Exception as e:
         return (e)
 
@@ -235,7 +233,7 @@ def readMasterSentence():
 def checkDuplicatePID():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['participants']
         requestJson = request.json
         cursor = collection.find_one({"_id": requestJson['pid']})
@@ -253,7 +251,7 @@ def checkDuplicatePID():
 def getTotalPID():
     try:
         
-        db = client.afv
+        db = get_client.afv
         collection = db['participants']
         cursor = collection.find({})
         if cursor == None:
