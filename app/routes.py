@@ -133,13 +133,13 @@ def index():
             claim_output = {}
             claim_output["claim"] = sentence
             claim_output['label'] = 'SUPPORTS'
-            claim_output['evidence'] = [sentence_data['supporting_evidence']]
+            claim_output['evidence'] = sentence_data['supporting_evidence']
             response = claim_output
         else:
             claim_output = {}
             claim_output["claim"] = sentence
             claim_output['label'] = 'REFUTES'
-            claim_output['evidence'] = [sentence_data['refuting_evidence']]
+            claim_output['evidence'] = sentence_data['refuting_evidence']
             response = claim_output
     elif data['level'] == 3:
         if sentence_data['ground_truth']:
@@ -147,13 +147,13 @@ def index():
             claim_output["claim"] = sentence
             claim_output['label'] = 'SUPPORTS'
             claim_output['SUPPORTS'] = [sentence_data['supporting_evidence'][0]]
-            claim_output['REFUTES'] = [sentence_data['supporting_evidence']]
+            claim_output['REFUTES'] = sentence_data['supporting_evidence']
             response = claim_output
         else:
             claim_output = {}
             claim_output["claim"] = sentence
             claim_output['label'] = 'REFUTES'
-            claim_output['SUPPORTS'] = [sentence_data['supporting_evidence']]
+            claim_output['SUPPORTS'] = sentence_data['supporting_evidence']
             claim_output['REFUTES'] = [sentence_data['refuting_evidence'][0]]
             response = claim_output
             
