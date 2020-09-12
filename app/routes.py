@@ -114,6 +114,7 @@ def index():
     myrecord = db['MasterList_Sentences_2']
     sentence_data = myrecord.find_one({"sentence":sentence})
     print(sentence_data)
+    response = {}
     if data['level'] == 1:
         if sentence_data['ground_truth']:
             claim_output = {}
