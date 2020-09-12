@@ -186,9 +186,12 @@ def sendFeedback():
     cursor = col.find_one({'_id':int(requestJson['id'])})
     final = copy.deepcopy(cursor)
     level = str(requestJson['level'])
-    final['experiments'][level][requestJson['sentence'][6:]] = {}
-    final['experiments'][level][requestJson['sentence'][6:]]['trustScore'] = requestJson['trust_value'] 
-    final["experiments"][level][requestJson['sentence'][6:]]['satisfaction_value'] = requestJson['satisfaction_value']
+    sentence = requestJson['sentence'][6:]
+    sen_db = db["MasterList_Sentences_2"]
+    sentence_data = sen_db.find_one({"sentence":sentence})
+    final['experiments'][level][sentence_data['_id']] = {}
+    final['experiments'][level][sentence_data['_id']]['trustScore'] = requestJson['trust_value'] 
+    final["experiments"][level][sentence_data['_id']]['satisfaction_value'] = requestJson['satisfaction_value']
     if col.update(cursor, final, upsert=False):
         return {"status": 200}
     else:
