@@ -115,8 +115,8 @@ function submitConfidence(evt){
 			"stage": "post",
 			"confidence_scale": confidence_scale
 		};
-		url='http://localhost:5000/addSentenceToClient' 
-		// url='https://www.getfactcheck.me/addSentenceToClient'
+		// url='http://localhost:5000/addSentenceToClient' 
+		url='https://www.getfactcheck.me/addSentenceToClient'
 		fetch(url, {
 			method:'post',
 			headers: {
