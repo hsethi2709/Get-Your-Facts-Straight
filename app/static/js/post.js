@@ -65,7 +65,7 @@ var opinion_choice = null
 function getSentences(level){
 	console.log("Getting All Sentences")
 		// url='http://localhost:5000/readMasterSentences'
-		url='https://www.getfactcheck.me/readClientSentences'
+		url='https://www.getfactcheck.me/readMasterSentences'
 		fetch(url, {
 			method:'get',
 			headers: {
