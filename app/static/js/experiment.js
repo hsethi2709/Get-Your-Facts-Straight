@@ -91,7 +91,7 @@ if (global_level == 4){
 sentences = []
 randomElement = null
 block_statement = null
-while(randomElement == null || sentence_done.includes(randomElement))
+while((randomElement == null || sentence_done.includes(randomElement)) && sentence_done.length != 24)
 {
 randomElement = total_sentences[Math.floor(Math.random() * total_sentences.length)];
 }
