@@ -109,56 +109,63 @@ def table():
 @app.route('/index', methods=['POST'])
 def index():
     sentence = request.args.get('sentence')
-    data = request.get_json()
-    print(data)
-    db = get_client.afv
-    myrecord = db['MasterList_Sentences_2']
-    sentence_data = myrecord.find_one({"sentence":sentence})
-    print(sentence_data)
-    response = {}
-    data['level'] = int(data['level'])
-    if data['level'] == 1:
-        if sentence_data['ground_truth']:
-            claim_output = {}
-            claim_output["claim"] = sentence
-            claim_output['label'] = 'SUPPORTS'
-            claim_output['evidence'] = [sentence_data['supporting_evidence'][0]]
-            response = claim_output
-        else:
+    if sentence == "Don Bradman retired from soccer.":
             claim_output = {}
             claim_output["claim"] = sentence
             claim_output['label'] = 'REFUTES'
-            claim_output['evidence'] = [sentence_data['refuting_evidence'][0]]
+            claim_output['evidence'] = ["Sir Donald George Bradman, AC (27 August 1908 – 25 February 2001), nicknamed 'The Don', was an Australian international cricketer, widely acknowledged as the greatest batsman of all time.", ]
             response = claim_output
-    elif data['level'] == 2 or data['level'] == 4:
-        if sentence_data['ground_truth']:
-            claim_output = {}
-            claim_output["claim"] = sentence
-            claim_output['label'] = 'SUPPORTS'
-            claim_output['evidence'] = sentence_data['supporting_evidence']
-            response = claim_output
-        else:
-            claim_output = {}
-            claim_output["claim"] = sentence
-            claim_output['label'] = 'REFUTES'
-            claim_output['evidence'] = sentence_data['refuting_evidence']
-            response = claim_output
-    elif data['level'] == 3:
-        if sentence_data['ground_truth']:
-            claim_output = {}
-            claim_output["claim"] = sentence
-            claim_output['label'] = 'SUPPORTS'
-            claim_output['SUPPORTS'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
-            claim_output['REFUTES'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
-            response = claim_output
-        else:
-            claim_output = {}
-            claim_output["claim"] = sentence
-            claim_output['label'] = 'REFUTES'
-            claim_output['SUPPORTS'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
-            claim_output['REFUTES'] = [['',random.uniform(2,4),sentence_data['refuting_evidence'][0]]]
-            response = claim_output
-            
+    else:
+        data = request.get_json()
+        print(data)
+        db = get_client.afv
+        myrecord = db['MasterList_Sentences_2']
+        sentence_data = myrecord.find_one({"sentence":sentence})
+        print(sentence_data)
+        response = {}
+        data['level'] = int(data['level'])
+        if data['level'] == 1:
+            if sentence_data['ground_truth']:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'SUPPORTS'
+                claim_output['evidence'] = [sentence_data['supporting_evidence'][0]]
+                response = claim_output
+            else:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'REFUTES'
+                claim_output['evidence'] = [sentence_data['refuting_evidence'][0]]
+                response = claim_output
+        elif data['level'] == 2 or data['level'] == 4:
+            if sentence_data['ground_truth']:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'SUPPORTS'
+                claim_output['evidence'] = sentence_data['supporting_evidence']
+                response = claim_output
+            else:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'REFUTES'
+                claim_output['evidence'] = sentence_data['refuting_evidence']
+                response = claim_output
+        elif data['level'] == 3:
+            if sentence_data['ground_truth']:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'SUPPORTS'
+                claim_output['SUPPORTS'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
+                claim_output['REFUTES'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
+                response = claim_output
+            else:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'REFUTES'
+                claim_output['SUPPORTS'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
+                claim_output['REFUTES'] = [['',random.uniform(2,4),sentence_data['refuting_evidence'][0]]]
+                response = claim_output
+                
     # response = p1.predict_label(sentence, data['level'])
     print(response)
     res = jsonify(response)
