@@ -7,7 +7,6 @@ import json
 import copy
 import traceback
 import random
-
 client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
 get_client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
 insert_client = pymongo.MongoClient("mongodb+srv://hsethi2709:harshit2709@cluster0.wfcww.mongodb.net/afv?retryWrites=true&w=majority")
@@ -137,18 +136,18 @@ def index():
                 claim_output['label'] = 'REFUTES'
                 claim_output['evidence'] = [sentence_data['refuting_evidence'][0]]
                 response = claim_output
-        elif data['level'] == 2 or data['level'] == 4:
+        elif data['level'] == 5:
             if sentence_data['ground_truth']:
                 claim_output = {}
                 claim_output["claim"] = sentence
                 claim_output['label'] = 'SUPPORTS'
-                claim_output['evidence'] = sentence_data['supporting_evidence']
+                claim_output['evidence'] = [sentence_data['supporting_evidence'][0]+" <br><b>Confidence Score:</b> " + str(round(random.uniform(51,100),2)) +"%"]
                 response = claim_output
             else:
                 claim_output = {}
                 claim_output["claim"] = sentence
                 claim_output['label'] = 'REFUTES'
-                claim_output['evidence'] = sentence_data['refuting_evidence']
+                claim_output['evidence'] = [sentence_data['refuting_evidence'][0]+" <br><b>Confidence Score:</b> " + str(round(random.uniform(51,100),2)) +"%"]
                 response = claim_output
         elif data['level'] == 3:
             if sentence_data['ground_truth']:
@@ -165,6 +164,19 @@ def index():
                 claim_output['SUPPORTS'] = [['',random.uniform(2,4),sentence_data['supporting_evidence'][0]]]
                 claim_output['REFUTES'] = [['',random.uniform(2,4),sentence_data['refuting_evidence'][0]]]
                 response = claim_output
+        elif data['level'] == 4:
+            if sentence_data['ground_truth']:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'SUPPORTS'
+                claim_output['evidence'] = [sentence_data['supporting_evidence'][0]]
+                response = claim_output
+            else:
+                claim_output = {}
+                claim_output["claim"] = sentence
+                claim_output['label'] = 'REFUTES'
+                claim_output['evidence'] = [sentence_data['refuting_evidence'][0]]
+                response = claim_output
                 
     # response = p1.predict_label(sentence, data['level'])
     print(response)
@@ -179,7 +191,7 @@ def addUser():
     db = insert_client.afv
     myrecord = request.json
     col = db['participants_2']
-    myrecord['experiments'] = {'1':{},'2':{},'3':{},'4':{}}
+    myrecord['experiments'] = {'1':{},'5':{},'3':{},'4':{}}
     if col.find_one(myrecord) is None:
         col.insert_one(myrecord)
     return {"status": 200}

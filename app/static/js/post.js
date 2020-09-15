@@ -77,6 +77,7 @@ function getSentences(level){
 					console.log(data)
 					sentences = data
 					document.getElementById("sentences").innerHTML = sentences[count]['sentence']
+					document.getElementById('counter').innerHTML = "Fact Inclination Progress: "+(count+1)+"/12"
 					}
 				);
 	
@@ -127,7 +128,7 @@ function submitConfidence(evt){
 			if (response.status == 200) {
 				count += 1
 				console.log("Count:", count)
-				if (count == 24)
+				if (count == 12)
 					{
 						console.log("All levels completed")
 						document.cookie = "experiment_status=1";
@@ -139,6 +140,7 @@ function submitConfidence(evt){
 					document.getElementById("confidence").style.display = "none";
 					document.getElementById('fake').style.backgroundColor = "#ffffff00"
 					document.getElementById('true').style.backgroundColor = "#ffffff00"
+					document.getElementById('counter').innerHTML = "Fact Inclination Progress: "+(count+1)+"/12"
 					opinion_choice = null;
 					}
 			}
@@ -148,6 +150,7 @@ function submitConfidence(evt){
 				document.getElementById("confidence").style.display = "none";
 				document.getElementById('fake').style.backgroundColor = "#ffffff00"
 				document.getElementById('true').style.backgroundColor = "#ffffff00"
+				document.getElementById('counter').innerHTML = "Fact Inclination Progress: "+(count+1)+"/12"
 				opinion_choice = null;
 			}
 

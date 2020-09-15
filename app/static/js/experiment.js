@@ -5,7 +5,7 @@ var global_level = 0;
 
 // shuffleArray(experiment_level)
 total_sentences = []
-for (var i = 0; i <= 23; i++) {
+for (var i = 0; i <= 11; i++) {
 	total_sentences.push(i);
 }
 
@@ -49,7 +49,7 @@ function checkCookie() {
 	}
 	experiment_level = JSON.parse(getCookie('experiment_array'))
 	if (experiment_level == null){
-		experiment_level = [1,2,3,4]
+		experiment_level = [1,4,5]
 		shuffleArray(experiment_level)
 		document.cookie = "experiment_array="+JSON.stringify(experiment_level);
 	}
@@ -84,19 +84,20 @@ function checkCookie() {
 	}
   }
 checkCookie();
-if (global_level == 4){
+if (global_level == 3){
 	console.log("All levels completed")
 	window.location.replace("https://www.getfactcheck.me/postExperimentInstruction");
 }
 sentences = []
 randomElement = null
 block_statement = null
-while((randomElement == null || sentence_done.includes(randomElement)) && sentence_done.length != 24)
+while((randomElement == null || sentence_done.includes(randomElement)) && sentence_done.length != 12)
 {
 randomElement = total_sentences[Math.floor(Math.random() * total_sentences.length)];
 }
 getClientSentences(experiment_level[global_level])
 document.cookie = "level="+experiment_level[global_level];
+
 changeLevelDisplay()
 
 function getClientSentences(level){
@@ -129,14 +130,14 @@ function getClientSentences(level){
 
 function changeLevelDisplay(){
 	if (experiment_level[global_level] == 1){
-		document.getElementById("levelDisplay").innerHTML = "Single Evidence"
+		document.getElementById("levelDisplay").innerHTML = "With Label, No Confidence Score"
 		document.getElementById("levelInstruction").style.display = "block";
-		document.getElementById("levelInstruction").innerHTML = "You will be shown a single supporting or refuting evidence along with a label in this condition for each claim."
+		document.getElementById("levelInstruction").innerHTML = "You will be shown a piece of evidence along with a label that states whether the evidence confirms or refutes the statement's claim."
 	}
-	else if (experiment_level[global_level] == 2){
-		document.getElementById("levelDisplay").innerHTML = "Three Evidences"
+	else if (experiment_level[global_level] == 5){
+		document.getElementById("levelDisplay").innerHTML = "No label, With Confidence Score"
 		document.getElementById("levelInstruction").style.display = "block";
-		document.getElementById("levelInstruction").innerHTML = "You will be shown three supporting or refuting evidences along with a label in this condition for each claim."
+		document.getElementById("levelInstruction").innerHTML = "You will be shown a piece of evidence along with a score that indicates the confidence of the algorithm about the provided evidence being a fact."
 
 	}
 	else if (experiment_level[global_level] == 3){
@@ -145,9 +146,9 @@ function changeLevelDisplay(){
 		document.getElementById("levelInstruction").innerHTML = "You will be shown both supporting and refuting evidences without a label in this condition for each claim."
 	}
 	else if (experiment_level[global_level] == 4){
-		document.getElementById("levelDisplay").innerHTML = "No Label, Only Evidences"
+		document.getElementById("levelDisplay").innerHTML = "No Label, No Confidence Score"
 		document.getElementById("levelInstruction").style.display = "block";
-		document.getElementById("levelInstruction").innerHTML = "You will be shown only supporting or refuting evidences without a label in this condition for each claim."
+		document.getElementById("levelInstruction").innerHTML = "You will be shown a piece of evidence we found to either confirm or refute the statement made."
 	}	
 }
 
@@ -176,7 +177,7 @@ document.getElementById('next').addEventListener('click', function(){
 					truth_count += 1
 					document.cookie = "truth_count="+truth_count;
 					console.log("True Statement "+ truth_count)
-					if (truth_count == 3){
+					if (truth_count == 2){
 						block_statement = true
 					}
 				}
@@ -185,25 +186,25 @@ document.getElementById('next').addEventListener('click', function(){
 					false_count += 1
 					console.log("False Statement "+ false_count)
 					document.cookie = "false_count="+false_count;
-					if (false_count == 3){
+					if (false_count == 2){
 						block_statement = false
 					}
 				}
-				while ((randomElement == null || sentence_done.includes(randomElement) || sentences[randomElement]['ground_truth'] == block_statement) && sentence_done.length != 24)
+				while ((randomElement == null || sentence_done.includes(randomElement) || sentences[randomElement]['ground_truth'] == block_statement) && sentence_done.length != 12)
 					{
 					randomElement = total_sentences[Math.floor(Math.random() * total_sentences.length)];
 					}
 				count += 1
 				document.getElementById("levelInstruction").style.display = "none";
 				console.log("Count:", count)
-				if (count % 6 == 0){
+				if (count % 4 == 0){
 
 					console.log('Moving to Feedback Page')
 					
 					if (experiment_level[global_level] == 1){
 						window.location.replace("https://www.getfactcheck.me/feedback_1");
 					}
-					else if (experiment_level[global_level] == 2){
+					else if (experiment_level[global_level] == 5){
 						window.location.replace("https://www.getfactcheck.me/feedback_2");
 					}
 					else if (experiment_level[global_level] == 3){
