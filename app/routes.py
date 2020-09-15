@@ -195,8 +195,12 @@ def sendFeedback():
     level = str(requestJson['level'])
     sentence = requestJson['sentence'][6:].strip()
     sen_db = db["MasterList_Sentences_2"]
-    sentence_data = sen_db.find_one({"sentence":sentence})
-    sentence_data['_id'] = str(sentence_data['_id'])
+    sentence_data = {}
+    if sentence == "Don Bradman retired from soccer.":
+        semtence_data['_id'] = "0"
+    else:
+        sentence_data = sen_db.find_one({"sentence":sentence})
+        sentence_data['_id'] = str(sentence_data['_id'])
     final['experiments'][level][sentence_data['_id']] = {}
     final['experiments'][level][sentence_data['_id']]['trustScore'] = requestJson['trust_value'] 
     final["experiments"][level][sentence_data['_id']]['satisfaction_value'] = requestJson['satisfaction_value']
