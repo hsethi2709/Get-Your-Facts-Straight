@@ -130,12 +130,12 @@ function getClientSentences(level){
 
 function changeLevelDisplay(){
 	if (experiment_level[global_level] == 1){
-		document.getElementById("levelDisplay").innerHTML = "With Label, No Confidence Score"
+		document.getElementById("levelDisplay").innerHTML = "Labelled Evidence"
 		document.getElementById("levelInstruction").style.display = "block";
 		document.getElementById("levelInstruction").innerHTML = "You will be shown a piece of evidence along with a label that states whether the evidence confirms or refutes the statement's claim."
 	}
 	else if (experiment_level[global_level] == 5){
-		document.getElementById("levelDisplay").innerHTML = "No label, With Confidence Score"
+		document.getElementById("levelDisplay").innerHTML = "With Confidence Score"
 		document.getElementById("levelInstruction").style.display = "block";
 		document.getElementById("levelInstruction").innerHTML = "You will be shown a piece of evidence along with a score that indicates the confidence of the algorithm about the provided evidence being a fact."
 
@@ -146,7 +146,7 @@ function changeLevelDisplay(){
 		document.getElementById("levelInstruction").innerHTML = "You will be shown both supporting and refuting evidences without a label in this condition for each claim."
 	}
 	else if (experiment_level[global_level] == 4){
-		document.getElementById("levelDisplay").innerHTML = "No Label, No Confidence Score"
+		document.getElementById("levelDisplay").innerHTML = "No labels"
 		document.getElementById("levelInstruction").style.display = "block";
 		document.getElementById("levelInstruction").innerHTML = "You will be shown a piece of evidence we found to either confirm or refute the statement made."
 	}	
