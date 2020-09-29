@@ -220,11 +220,12 @@ document.getElementById('next').addEventListener('click', function(){
 					document.cookie = "truth_count="+0;
 					
 			}
+			else{
 			document.getElementById("experimentSentences").innerHTML = sentences[randomElement]['sentence']+"<br>"
 			document.cookie = "fact_check="+false;
 			document.cookie = "sentence_count="+count;
 			document.cookie = "sentence_done="+JSON.stringify(sentence_done)
-
+			}
 				
 				}}
 		);
