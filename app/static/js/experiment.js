@@ -218,6 +218,9 @@ document.getElementById('next').addEventListener('click', function(){
 					document.cookie = "experiment_stage="+global_level;
 					document.cookie = "false_count="+0;
 					document.cookie = "truth_count="+0;
+					document.cookie = "sentence_done="+JSON.stringify(sentence_done)
+					document.cookie = "sentence_count="+count;
+					document.cookie = "fact_check="+false;
 					
 			}
 			else{
