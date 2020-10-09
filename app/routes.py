@@ -312,7 +312,7 @@ def checkDuplicatePID():
     try:
         
         db = get_client.afv
-        collection = db['participants']
+        collection = db['participants_2']
         requestJson = request.json
         cursor = collection.find_one({"_id": requestJson['pid']})
         if cursor == None:
