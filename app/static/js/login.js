@@ -3,7 +3,7 @@ checkPID();
 function checkPID(){
 	console.log("PID", pid)
 	var payload = {
-		pid: pid
+		"pid": pid
 	};
 	url='https://www.getfactcheck.me/checkDuplicatePID'
 	fetch(url, {
